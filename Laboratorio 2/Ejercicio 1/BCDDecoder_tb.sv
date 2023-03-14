@@ -1,9 +1,6 @@
 module BCDDecoder_tb();
-
-    logic [3:0] w, reg [0:4] y;
-
+    logic w, y;
     BCDDecoder modulo(w,y);
-
     initial begin
     $display("Inciando Simulacion");
     w = 4'b0001;
@@ -25,7 +22,5 @@ module BCDDecoder_tb();
     #40
     w = 4'b1111;
     #40
-
     end
-
 endmodule
