@@ -5,7 +5,7 @@
 -------------------------------------------------------------------------
 
 library IEEE;
-USE IEEE.STd_logic_1164.ALL;
+use IEEE.STd_logic_1164.all;
 
 entity sumador_completo_1bit is
 	
