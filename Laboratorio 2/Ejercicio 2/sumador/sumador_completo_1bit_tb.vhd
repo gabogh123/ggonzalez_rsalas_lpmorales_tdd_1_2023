@@ -33,7 +33,7 @@ architecture behavior of sumador_completo_1bit_tb is
 	
 begin
 
-	-- Instanciamiento
+	-- Instanciamiento de la unidad por probar
 	uut : sumador_completo_1bit port map (			
 				A => A,
 				B => B,
@@ -42,7 +42,7 @@ begin
 				C => C			
 			);
 			
-	-- Estimulos
+	-- Proceso de estimulos
 	stim_proc: process
 	
 	begin
@@ -105,10 +105,7 @@ begin
 		
 		wait for 100 ns;
 		
-
-		
 		wait;
 	end process;
-	
 	
 end behavior;
