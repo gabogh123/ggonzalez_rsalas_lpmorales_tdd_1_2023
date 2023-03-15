@@ -4,7 +4,7 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(5CSEMA5F31) Path("D:/Documents - HDD/GitHub/ggonzalez_rsalas_tdd_1_2023/Laboratorio 2/Ejercicio 1/output_files/") File("BCDDecoder.sof") MfrSpec(OpMask(1));
+		Device PartName(5CSEMA5F31) Path("D:/Documents - HDD/GitHub/ggonzalez_rsalas_tdd_1_2023/Laboratorio 2/Ejercicio 3/output_files/") File("ContadorReg.sof") MfrSpec(OpMask(1));
 	P ActionCode(Ign)
 		Device PartName(SOCVHPS) MfrSpec(OpMask(0));
 

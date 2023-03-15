@@ -1,5 +1,6 @@
 
-module BCDDecoder_to_sseg(a, b, c, d, sseg_hex4, sseg_hex3, sseg_hex2, sseg_hex1, sseg_hex0);
+module BCDDecoder_to_sseg(a, b, c, d, 
+								  sseg_hex4, sseg_hex3, sseg_hex2, sseg_hex1, sseg_hex0);
 
 	input a, b, c, d;
 
