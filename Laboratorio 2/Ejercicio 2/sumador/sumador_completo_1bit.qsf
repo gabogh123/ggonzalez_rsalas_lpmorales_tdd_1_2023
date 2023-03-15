@@ -1,0 +1,102 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2022  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and any partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel FPGA IP License Agreement, or other applicable license
+# agreement, including, without limitation, that your use is for
+# the sole purpose of programming logic devices manufactured by
+# Intel and sold by Intel or its authorized distributors.  Please
+# refer to the applicable agreement for further details, at
+# https://fpgasoftware.intel.com/eula.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
+# Date created = 23:16:00  March 13, 2023
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		sumador_completo_1bit_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Intel recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSEMA5F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY sumador_completo_4bits_to_sseg
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.1STD.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "23:16:00  MARCH 13, 2023"
+set_global_assignment -name LAST_QUARTUS_VERSION "22.1std.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name BOARD "DE1-SoC Board"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (VHDL)"
+set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY ON -section_id eda_simulation
+set_global_assignment -name EDA_OUTPUT_DATA_FORMAT VHDL -section_id eda_simulation
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_signal_integrity
+set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
+set_global_assignment -name VHDL_FILE sumador_completo_1bit.vhd
+set_global_assignment -name VHDL_FILE sumador_completo_1bit_tb.vhd
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH sumador_completo_4bits_tb -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME sumador_completo_1bit_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id sumador_completo_1bit_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME sumador_completo_1bit_tb -section_id sumador_completo_1bit_tb
+set_global_assignment -name VHDL_FILE sumador_completo_4bits.vhd
+set_global_assignment -name VHDL_FILE sumador_completo_4bits_tb.vhd
+set_global_assignment -name EDA_TEST_BENCH_FILE sumador_completo_1bit_tb.vhd -section_id sumador_completo_1bit_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME sumador_completo_4bits_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id sumador_completo_4bits_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME sumador_completo_4bits_tb -section_id sumador_completo_4bits_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE sumador_completo_4bits_tb.vhd -section_id sumador_completo_4bits_tb
+set_global_assignment -name VHDL_FILE hex_to_sseg.vhd
+set_global_assignment -name VHDL_FILE sumador_completo_4bits_to_sseg.vhd
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AE12 -to A[3]
+set_location_assignment PIN_AD10 -to A[2]
+set_location_assignment PIN_AC9 -to A[1]
+set_location_assignment PIN_AE11 -to A[0]
+set_location_assignment PIN_AD12 -to B[3]
+set_location_assignment PIN_AD11 -to B[2]
+set_location_assignment PIN_AF10 -to B[1]
+set_location_assignment PIN_AF9 -to B[0]
+set_location_assignment PIN_AC12 -to I
+set_location_assignment PIN_AJ29 -to C_sseg[0]
+set_location_assignment PIN_AH29 -to C_sseg[1]
+set_location_assignment PIN_AH30 -to C_sseg[2]
+set_location_assignment PIN_AG30 -to C_sseg[3]
+set_location_assignment PIN_AF29 -to C_sseg[4]
+set_location_assignment PIN_AF30 -to C_sseg[5]
+set_location_assignment PIN_AD27 -to C_sseg[6]
+set_location_assignment PIN_AE26 -to S_sseg[0]
+set_location_assignment PIN_AE27 -to S_sseg[1]
+set_location_assignment PIN_AE28 -to S_sseg[2]
+set_location_assignment PIN_AG27 -to S_sseg[3]
+set_location_assignment PIN_AF28 -to S_sseg[4]
+set_location_assignment PIN_AG28 -to S_sseg[5]
+set_location_assignment PIN_AH28 -to S_sseg[6]
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
