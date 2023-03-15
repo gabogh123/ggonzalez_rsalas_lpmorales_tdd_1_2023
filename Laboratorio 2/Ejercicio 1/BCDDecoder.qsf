@@ -19,7 +19,7 @@
 #
 # Quartus Prime
 # Version 22.1std.0 Build 915 10/25/2022 SC Lite Edition
-# Date created = 01:10:06  March 14, 2023
+# Date created = 16:15:11  March 14, 2023
 #
 # -------------------------------------------------------------------------- #
 #
@@ -39,14 +39,15 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSEMA5F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY BCDDecoder
+set_global_assignment -name TOP_LEVEL_ENTITY BCDDecoder_to_sseg
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 22.1STD.0
-set_global_assignment -name PROJECT_CREATION_TIME_DATE "01:10:06  MARCH 14, 2023"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:15:11  MARCH 14, 2023"
 set_global_assignment -name LAST_QUARTUS_VERSION "22.1std.0 Lite Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name BOARD "DE1-SoC Board"
-set_global_assignment -name EDA_SIMULATION_TOOL "Questa Intel FPGA (Verilog)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (Verilog)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
+set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_symbol
@@ -54,7 +55,64 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_boundary_scan
 set_global_assignment -name SYSTEMVERILOG_FILE BCDDecoder.sv
 set_global_assignment -name SYSTEMVERILOG_FILE BCDDecoder_tb.sv
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS NOT_USED -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH myModule_tb -section_id eda_simulation
+set_global_assignment -name EDA_TEST_BENCH_NAME BCDDecoder_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id BCDDecoder_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME BCDDecoder_tb -section_id BCDDecoder_tb
+set_global_assignment -name VERILOG_INPUT_VERSION SYSTEMVERILOG_2005
+set_global_assignment -name VERILOG_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name EDA_TEST_BENCH_FILE BCDDecoder_tb.sv -section_id BCDDecoder_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME myModule_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id myModule_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME myModule_tb -section_id myModule_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE myModule_tb.sv -section_id myModule_tb
+set_global_assignment -name SYSTEMVERILOG_FILE hex_to_sseg.sv
+set_global_assignment -name SYSTEMVERILOG_FILE BCDDecoder_to_sseg.sv
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AE26 -to sseg_hex0[0]
+set_location_assignment PIN_AE27 -to sseg_hex0[1]
+set_location_assignment PIN_AE28 -to sseg_hex0[2]
+set_location_assignment PIN_AG27 -to sseg_hex0[3]
+set_location_assignment PIN_AF28 -to sseg_hex0[4]
+set_location_assignment PIN_AG28 -to sseg_hex0[5]
+set_location_assignment PIN_AH28 -to sseg_hex0[6]
+set_location_assignment PIN_AB12 -to d
+set_location_assignment PIN_AC12 -to c
+set_location_assignment PIN_AF9 -to b
+set_location_assignment PIN_AF10 -to a
+set_location_assignment PIN_AJ29 -to sseg_hex1[0]
+set_location_assignment PIN_AH29 -to sseg_hex1[1]
+set_location_assignment PIN_AH30 -to sseg_hex1[2]
+set_location_assignment PIN_AG30 -to sseg_hex1[3]
+set_location_assignment PIN_AF29 -to sseg_hex1[4]
+set_location_assignment PIN_AF30 -to sseg_hex1[5]
+set_location_assignment PIN_AD27 -to sseg_hex1[6]
+set_location_assignment PIN_AB23 -to sseg_hex2[0]
+set_location_assignment PIN_AE29 -to sseg_hex2[1]
+set_location_assignment PIN_AD29 -to sseg_hex2[2]
+set_location_assignment PIN_AC28 -to sseg_hex2[3]
+set_location_assignment PIN_AD30 -to sseg_hex2[4]
+set_location_assignment PIN_AC29 -to sseg_hex2[5]
+set_location_assignment PIN_AC30 -to sseg_hex2[6]
+set_location_assignment PIN_AD26 -to sseg_hex3[0]
+set_location_assignment PIN_AC27 -to sseg_hex3[1]
+set_location_assignment PIN_AD25 -to sseg_hex3[2]
+set_location_assignment PIN_AC25 -to sseg_hex3[3]
+set_location_assignment PIN_AB28 -to sseg_hex3[4]
+set_location_assignment PIN_AB25 -to sseg_hex3[5]
+set_location_assignment PIN_AB22 -to sseg_hex3[6]
+set_location_assignment PIN_AA24 -to sseg_hex4[0]
+set_location_assignment PIN_Y23 -to sseg_hex4[1]
+set_location_assignment PIN_Y24 -to sseg_hex4[2]
+set_location_assignment PIN_W22 -to sseg_hex4[3]
+set_location_assignment PIN_W24 -to sseg_hex4[4]
+set_location_assignment PIN_V23 -to sseg_hex4[5]
+set_location_assignment PIN_W25 -to sseg_hex4[6]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
