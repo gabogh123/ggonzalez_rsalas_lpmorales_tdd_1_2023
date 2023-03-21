@@ -16,12 +16,12 @@ module ALU(Y, C, V, N, Z, A, B, Op);
 	
 	// Operations
 	
-	carry_select_adder_substractor addsub(AS, Cas, Vas, A, B, Op[0]);
+	
 	andOp aluand(And, A, B);
-	orop aluor(Or, A, B);
-	xorop aluxor(Xor, A, B);
-	notop alunot(Not, A, B);
-	multiplexer_8_1 muxy(Y, AS, AS, And, Or, Xor, Not, 16'b0, 16'b0, Op);
+	orOp aluor(Or, A, B);
+	xorOp aluxor(Xor, A, B);
+
+	
 	
 	nor(s, Op[1], Op[2]);   // s == 0 => a logical operation, otherwise and arithmetic operation.
    and(C, Cas, s);
