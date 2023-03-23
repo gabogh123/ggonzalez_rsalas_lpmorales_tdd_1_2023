@@ -8,6 +8,6 @@ module suma_param
 	output   [BITS-1:0] 	S;
 	
 	
-	assign S = A & B; // Obvio hay que corregir, es por el ejemplo
+	assign S = A  B; // Obvio hay que corregir, es por el ejemplo
 	
 endmodule

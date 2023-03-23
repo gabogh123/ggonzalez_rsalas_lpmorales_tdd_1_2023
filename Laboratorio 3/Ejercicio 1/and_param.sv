@@ -7,8 +7,6 @@ module and_param
 	
 	output [BITS-1:0] Y;
 	
-	always @(A, B, Y)
-	
 		begin
 		
 			for (int i = 0; i < $size(A); i++)
