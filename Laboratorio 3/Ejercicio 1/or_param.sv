@@ -1,4 +1,4 @@
-module and_param 
+module or_param 
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	
@@ -11,7 +11,7 @@ module and_param
 		
 			for (int i = 0; i < $size(A); i++) begin
 			
-					Y[i] = A[i] && B[i];
+					Y[i] = A[i] || B[i];
 			end
 		end
 		
