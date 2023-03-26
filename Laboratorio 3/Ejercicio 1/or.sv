@@ -1,4 +1,4 @@
-module or 
+module or_f 
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	

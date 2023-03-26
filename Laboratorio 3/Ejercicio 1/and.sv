@@ -1,4 +1,4 @@
-module and
+module and_f
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	
