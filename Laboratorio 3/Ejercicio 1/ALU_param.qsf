@@ -77,3 +77,4 @@ set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_
 set_location_assignment PIN_AA14 -to F[1]
 set_location_assignment PIN_AA15 -to F[0]
 set_location_assignment PIN_AB12 -to F[2]
+set_global_assignment -name SYSTEMVERILOG_FILE half_subtractor.sv
