@@ -1,4 +1,4 @@
-module or_param 
+module or 
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	

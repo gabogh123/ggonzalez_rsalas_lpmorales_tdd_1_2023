@@ -1,4 +1,4 @@
-module shiftl_param 
+module shiftl
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	

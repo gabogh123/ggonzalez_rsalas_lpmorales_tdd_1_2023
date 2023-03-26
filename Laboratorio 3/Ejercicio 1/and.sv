@@ -1,4 +1,4 @@
-module and_param 
+module and
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	

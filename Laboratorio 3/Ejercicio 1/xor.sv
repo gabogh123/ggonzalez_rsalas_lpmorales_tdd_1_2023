@@ -1,4 +1,4 @@
-module xor_param 
+module xor
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	

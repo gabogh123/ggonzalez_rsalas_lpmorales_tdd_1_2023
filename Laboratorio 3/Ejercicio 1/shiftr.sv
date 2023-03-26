@@ -1,4 +1,4 @@
-module shiftr_param 
+module shiftr
 			# (parameter BITS = 4)
 			  (A, B, Y);
 	
