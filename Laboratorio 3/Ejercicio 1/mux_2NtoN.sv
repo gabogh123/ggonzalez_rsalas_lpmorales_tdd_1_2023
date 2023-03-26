@@ -8,17 +8,14 @@ module mux_2NtoN
 	
 	output logic [N-1:0]  O;
 	
-	// Variable para el generate
-	genvar j;
+	initial begin
 	
-	generate
-	
-		for (int j = 0; j < $size(I); j++) begin
+		for (int j = 0; j < $size(I0); j++) begin
 			
 			O[j] = (I0[j] & ~S) | (I1[j] & S);
 			
 		end
 	
-	endgenerate  
+	end 
 	  
 endmodule
