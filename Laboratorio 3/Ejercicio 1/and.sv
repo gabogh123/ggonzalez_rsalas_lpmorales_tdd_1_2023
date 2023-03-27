@@ -1,18 +1,19 @@
 module and_f
-			# (parameter M = 4)
-			  (A, B, Y);
+	# (parameter M = 4)
+	  (A, B, R);
 	
-	input [M-1:0] A;
-	input [M-1:0] B;
+	input  [M-1:0] A;
+	input  [M-1:0] B;
 	
-	output [M-1:0] Y;
+	output [M-1:0] R;
 	
-		initial begin
+	always @ (A or B) begin
+	
+		for (int i = 0; i < $size(A); i++) begin
 		
-			for (int i = 0; i < $size(A); i++) begin
-			
-					Y[i] = A[i] && B[i];
-			end
+				R[i] = A[i] && B[i];
 		end
+		
+	end
 		
 endmodule

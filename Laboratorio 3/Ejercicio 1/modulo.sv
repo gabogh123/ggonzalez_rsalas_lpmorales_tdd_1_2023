@@ -1,4 +1,4 @@
-module mult
+module modulo
 	#(parameter M = 4)
 	 (A, B, R);
 	 

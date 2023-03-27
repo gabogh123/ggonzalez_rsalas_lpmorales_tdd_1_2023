@@ -1,9 +1,6 @@
 /*
 
-Se podrían usar los 2 switches que faltan como bits mas significativos para
-escoger la operacion. (SW1 y SW0)
-Los otros dos bits menos significativos podríamos usar dos push buttons grandes.
-(PB3 y PB2)
+ALU
 
 // |-----------------------|
 // | SW1 | SW0 | PB3 | PB2 |
@@ -29,58 +26,73 @@ Los otros dos bits menos significativos podríamos usar dos push buttons grandes
 //	|	1	|	1	|	1	|	1	| -> 	 x
 // |-----------------------|
 
-Para que esto se cumpla creo que deberiamos usar varios MUX para hacerlo con
-un modelo de estructura
-
 */
 
 module ALU_param 
-			# (parameter M = 4) // Se define un valor para el parametro pero este puede cambiar al compilar
-			  (A, B, F, R, C, N, V, Z);
+	# (parameter M = 4)
+	  (A, B, F, R, C, N, V, Z);
 	
-	input 	[M-1:0] 	A; // Operand
-	input 	[M-1:0] 	B; // Operand
-	input 	[3:0]	   F; //Operation
+	input  [M-1:0] 	A; // Operand
+	input  [M-1:0] 	B; // Operand
+	input  [3:0]	   F; // Operation
 	
-	output	[M-1:0]	R; //Result
-	output				C; //Carry
-	output				N; //Negative
-	output				V; //Overflow
-	output				Z; //Zero
+	output [M-1:0]	   R; // Result
+	output				C; // Carry
+	output				N; // Negative
+	output				V; // Overflow
+	output				Z; // Zero
 	
 	// Variables para los resultados
 	logic [M-1:0] R_suma;
 	logic [M-1:0] R_resta;
+	
 	logic [M-1:0] R_multiplicacion;
 	logic [M-1:0] R_division;
 	logic [M-1:0] R_modulo;
+	
 	logic [M-1:0] R_and;
 	logic [M-1:0] R_or;
 	logic [M-1:0] R_xor;
+	
 	logic [M-1:0] R_shiftr;
 	logic [M-1:0] R_shiftl;
 	
-	assign R_suma = 4'b0000;
-	assign R_resta = 4'b0001;
+	//assign R_suma = 4'b0000;
+	//assign R_resta = 4'b0001;
 	
-	assign R_multiplicacion = 4'b0100;
-	assign R_division = 4'b0101;
-	assign R_modulo = 4'b0110;
+	//assign R_multiplicacion = 4'b0100;
+	//assign R_division = 4'b0101;
+	//assign R_modulo = 4'b0110;
 	
-	assign R_and = 4'b1000;
-	assign R_or = 4'b1001;
-	assign R_xor = 4'b1010;
+	//assign R_and = 4'b1000;
+	//assign R_or = 4'b1001;
+	//assign R_xor = 4'b1010;
 	
-	assign R_shiftr = 4'b1100;
-	assign R_shiftl = 4'b1101;
+	//assign R_shiftr = 4'b1100;
+	//assign R_shiftl = 4'b1101;
 	
-	// Variables para las operaciones
+	
+	// Intanciacion de los modulos de las operaciones
+	suma   # (.M(M)) suma_funcion 			 (.A(A), .B(B), .R(R_suma));
+	resta  # (.M(M)) resta_funcion 			 (.A(A), .B(B), .R(R_resta));
+	
+	mult   # (.M(M)) multiplicacion_funcion (.A(A), .B(B), .R(R_multiplicacion));
+	div    # (.M(M)) division_funcion		 (.A(A), .B(B), .R(R_division));
+	modulo # (.M(M)) modulo_funcion 			 (.A(A), .B(B), .R(R_modulo));
+	
+	and_f  # (.M(M)) and_funcion 				 (.A(A), .B(B), .R(R_and));
+	or_f   # (.M(M)) or_funcion 				 (.A(A), .B(B), .R(R_or));
+	xor_f  # (.M(M)) xor_funcion 				 (.A(A), .B(B), .R(R_xor));
+	
+	shiftr # (.M(M)) shiftr_funcion 			 (.A(A), .R(R_shiftr));
+	shiftl # (.M(M)) shiftl_funcion 			 (.A(A), .R(R_shiftl));
+	
+	
+	// Variables para los resultados de las operaciones
 	logic [M-1:0] R_mux_aritmetico1;
 	logic [M-1:0] R_mux_aritmetico2;
 	logic [M-1:0] R_mux_logico;
 	logic [M-1:0] R_mux_shift;
-	
-	// Variable vacia
 	
 	
 	// Mux para los Results

@@ -1,13 +1,17 @@
 module shiftr
-			# (parameter BITS = 4)
-			  (A, B, Y);
+	# (parameter M = 4)
+	  (A, R);
 	
-	input [BITS-1:0] A;
-	input [BITS-1:0] B;
+	input  [M-1:0] A;
 	
-	output [BITS-1:0] Y;
+	output [M-1:0] R;
+	
+	
 			
 			
-		assign Y = A >>> 1;
+	assign R = A >>> 1; // lol
+	
+	
+		
 		
 endmodule

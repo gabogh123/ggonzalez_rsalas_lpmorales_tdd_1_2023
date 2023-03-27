@@ -1,14 +1,14 @@
-module half_subtractor(a,b,y,z)
+module half_subtractor(a,b,y,z);
 
-input a,b;
-output y,z;
+	input a,b;
+	output y,z;
 
-wire x;
+	wire x;
 
-assign y = a ^ b;
+	assign y = a ^ b;
 
-assign z = x & b
+	assign z = x & b;
 
-assign x = ~a;
+	assign x = ~a;
 
 endmodule
