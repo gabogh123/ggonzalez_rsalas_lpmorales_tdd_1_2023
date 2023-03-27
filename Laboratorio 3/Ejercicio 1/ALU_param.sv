@@ -57,20 +57,6 @@ module ALU_param
 	logic [M-1:0] R_shiftr;
 	logic [M-1:0] R_shiftl;
 	
-	//assign R_suma = 4'b0000;
-	//assign R_resta = 4'b0001;
-	
-	//assign R_multiplicacion = 4'b0100;
-	//assign R_division = 4'b0101;
-	//assign R_modulo = 4'b0110;
-	
-	//assign R_and = 4'b1000;
-	//assign R_or = 4'b1001;
-	//assign R_xor = 4'b1010;
-	
-	//assign R_shiftr = 4'b1100;
-	//assign R_shiftl = 4'b1101;
-	
 	
 	// Intanciacion de los modulos de las operaciones
 	suma   # (.M(M)) suma_funcion 			 (.A(A), .B(B), .R(R_suma));
@@ -96,10 +82,10 @@ module ALU_param
 	
 	
 	// Mux para los Results
-	mux_4NtoN # (.M(M)) mux_aritmetico1 (R_suma, R_resta, 4'b1111, 4'b1111, F[1:0], R_mux_aritmetico1);
-	mux_4NtoN # (.M(M)) mux_aritmetico2 (R_multiplicacion, R_division, R_modulo, 4'b1111, F[1:0], R_mux_aritmetico2);
-	mux_4NtoN # (.M(M)) mux_logico (R_and, R_or, R_xor, 4'b1111, F[1:0], R_mux_logico);
-	mux_4NtoN # (.M(M)) mux_shift (R_shiftr, R_shiftl, 4'b1111, 4'b1111, F[1:0], R_mux_shift);
+	mux_4NtoN # (.M(M)) mux_aritmetico1 (R_suma, R_resta, 4'b1111, 4'b1111, ~F[1:0], R_mux_aritmetico1);
+	mux_4NtoN # (.M(M)) mux_aritmetico2 (R_multiplicacion, R_division, R_modulo, 4'b1111, ~F[1:0], R_mux_aritmetico2);
+	mux_4NtoN # (.M(M)) mux_logico (R_and, R_or, R_xor, 4'b1111, ~F[1:0], R_mux_logico);
+	mux_4NtoN # (.M(M)) mux_shift (R_shiftr, R_shiftl, 4'b1111, 4'b1111, ~F[1:0], R_mux_shift);
 	
 	// Mux para el Result
 	mux_4NtoN # (.M(M)) mux_result (R_mux_aritmetico1,
