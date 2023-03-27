@@ -13,9 +13,9 @@ module mux_4NtoN
 	logic [M-1:0] O0;
 	logic [M-1:0] O1;
 	
-	mux_2NtoN m2NtoN_0 (I0, I1, S[1], O0);
-	mux_2NtoN m2NtoN_1 (I2, I3, S[1], O1);
+	mux_2NtoN # (.M(M)) m2NtoN_0 (I0, I1, S[0], O0);
+	mux_2NtoN # (.M(M)) m2NtoN_1 (I2, I3, S[0], O1);
 
-	mux_2NtoN m2NtoN_S (O0, O1, S[0], O);
+	mux_2NtoN # (.M(M)) m2NtoN_S (O0, O1, S[1], O);
 	
 endmodule

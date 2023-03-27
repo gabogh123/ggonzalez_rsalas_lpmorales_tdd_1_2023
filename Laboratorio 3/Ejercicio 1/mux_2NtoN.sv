@@ -2,17 +2,22 @@ module mux_2NtoN
 	# (parameter M = 4)
 	  (I0, I1, S, O);
 	  
-	input  logic [M-1:0] I0;
-	input  logic [M-1:0] I1;
-	input  logic          S; 
+	input wire [M-1:0] I0;
+	input wire [M-1:0] I1;
+	input wire          S;
 	
-	output logic [M-1:0]  O;
+	output reg [M-1:0]  O;
 	
-	initial begin
+	always @ (I0 or I1 or S) begin
 	
-		for (int j = 0; j < $size(I0); j++) begin
+		$display("I0 = %b", I0);
+		$display("I1 = %b", I1);
+	
+		for (int i = 0; i < $size(I0); i++) begin
 			
-			O[j] = (I0[j] & ~S) | (I1[j] & S);
+			O[i] = (I0[i] & ~S) | (I1[i] & S);
+			
+			$display("O[%d] = %b", i, O[i]);
 			
 		end
 	

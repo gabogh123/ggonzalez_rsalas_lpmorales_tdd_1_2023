@@ -1,11 +1,11 @@
 module and_f
-			# (parameter BITS = 4)
+			# (parameter M = 4)
 			  (A, B, Y);
 	
-	input [BITS-1:0] A;
-	input [BITS-1:0] B;
+	input [M-1:0] A;
+	input [M-1:0] B;
 	
-	output [BITS-1:0] Y;
+	output [M-1:0] Y;
 	
 		initial begin
 		
