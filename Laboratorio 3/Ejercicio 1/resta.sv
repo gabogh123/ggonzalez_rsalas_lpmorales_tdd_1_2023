@@ -11,38 +11,23 @@ module resta
 	output					V;
 	output					Z;
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
-	
-	always @ (A or B) begin
-	
-		for (int i = 0; i < $size(A); i++) begin
-		
-				R[i] = A[i] && B[i];
-		end
-		
-	end
-		
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
-		
-		
-		
-		
-		
-		
-		
 
-endmodule
+	wire [M-1:0] A_comp;
+	wire [M-1:0] B_comp;
+	wire [M:0] carry;
+
+	assign A_comp = ~A;
+	assign B_comp = ~B;
+
+	assign carry[0] = 1'b1;
+
+	genvar i;
+	generate
+		 for (i = 0; i < M; i++) begin : subtractor
+			  assign carry[i+1] = ((A_comp[i] & carry[i]) | (B[i] & carry[i]) | (A_comp[i] & B[i]));
+			  assign R[i] = (A_comp[i] ^ B[i] ^ carry[i]);
+		 end
+	endgenerate
+
+endmodule	 
+	 
