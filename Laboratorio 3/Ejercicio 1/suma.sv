@@ -1,18 +1,17 @@
 module suma
-	#(parameter M = 4)
-	 (A, B, R, C, N, V, Z);
+	# (parameter M = 4)
+	  (A, B, R, C, N, V, Z);
   
-	 input  logic [M-1:0] A;
-	 input  logic [M-1:0] B;
+	input  logic [M-1:0] A;
+	input  logic [M-1:0] B;
 	
-	 output logic [M-1:0] R;
-	 output				    C;
-	 output					 N;
-	 output					 V;
-	 output					 Z;
+	output logic [M-1:0] R;
+	output				   C;
+	output					N;
+	output					V;
+	output					Z;
 	
     wire [M-1:0] carry;
-    wire carry_out;
     genvar i;
  
     generate

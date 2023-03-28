@@ -1,6 +1,15 @@
 module div
-	#(parameter M = 4)
-	 (A, B, R);
+	# (parameter M = 4)
+	  (A, B, R, C, N, V, Z);
+  
+	input  logic [M-1:0] A;
+	input  logic [M-1:0] B;
+	
+	output logic [M-1:0] R;
+	output				   C;
+	output					N;
+	output					V;
+	output					Z;
 	 
 	 
 	 
@@ -13,11 +22,6 @@ module div
 //	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
 //																   //
 /////////////////////////////////////////////////////
-	 
-	 input  logic [M-1:0] A;
-	 input  logic [M-1:0] B;
-	
-	 output logic [M-1:0] R;
 	
 	always @ (A or B) begin
 	

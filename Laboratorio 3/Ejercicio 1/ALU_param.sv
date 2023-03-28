@@ -119,19 +119,19 @@ module ALU_param
 	
 	
 	// Intanciacion de los modulos de las operaciones
-	suma   # (.M(M)) suma_funcion 			 (.A(A), .B(B), .R(R_suma));
-	resta  # (.M(M)) resta_funcion 			 (.A(A), .B(B), .R(R_resta));
+	suma   # (.M(M)) suma_funcion 			 (.A(A), .B(B), .R(R_suma), .C(C_suma), .N(N_suma), .V(V_suma), .Z(Z_suma));
+	resta  # (.M(M)) resta_funcion 			 (.A(A), .B(B), .R(R_resta), .C(C_resta), .N(N_resta), .V(V_resta), .Z(Z_resta));
 	
-	mult   # (.M(M)) multiplicacion_funcion (.A(A), .B(B), .R(R_multiplicacion));
-	div    # (.M(M)) division_funcion		 (.A(A), .B(B), .R(R_division));
-	modulo # (.M(M)) modulo_funcion 			 (.A(A), .B(B), .R(R_modulo));
+	mult   # (.M(M)) multiplicacion_funcion (.A(A), .B(B), .R(R_multiplicacion), .C(C_multiplicacion), .N(N_multiplicacion), .V(V_multiplicacion), .Z(Z_multiplicacion));
+	div    # (.M(M)) division_funcion		 (.A(A), .B(B), .R(R_division), .C(C_division), .N(N_division), .V(V_division), .Z(Z_division));
+	modulo # (.M(M)) modulo_funcion 			 (.A(A), .B(B), .R(R_modulo), .C(C_modulo), .N(N_modulo), .V(V_modulo), .Z(Z_modulo));
 	
-	and_f  # (.M(M)) and_funcion 				 (.A(A), .B(B), .R(R_and));
-	or_f   # (.M(M)) or_funcion 				 (.A(A), .B(B), .R(R_or));
-	xor_f  # (.M(M)) xor_funcion 				 (.A(A), .B(B), .R(R_xor));
+	and_f  # (.M(M)) and_funcion 				 (.A(A), .B(B), .R(R_and), .C(C_and), .N(N_and), .V(V_and), .Z(Z_and));
+	or_f   # (.M(M)) or_funcion 				 (.A(A), .B(B), .R(R_or), .C(C_or), .N(N_or), .V(V_or), .Z(Z_or));
+	xor_f  # (.M(M)) xor_funcion 				 (.A(A), .B(B), .R(R_xor), .C(C_xor), .N(N_xor), .V(V_xor), .Z(Z_xor));
 	
-	shiftr # (.M(M)) shiftr_funcion 			 (.A(A), .R(R_shiftr));
-	shiftl # (.M(M)) shiftl_funcion 			 (.A(A), .R(R_shiftl));
+	shiftr # (.M(M)) shiftr_funcion 			 (.A(A), .R(R_shiftr), .C(C_shiftr), .N(N_shiftr), .V(V_shiftr), .Z(Z_shiftr));
+	shiftl # (.M(M)) shiftl_funcion 			 (.A(A), .R(R_shiftl), .C(C_shiftl), .N(N_shiftl), .V(V_shiftl), .Z(Z_shiftl));
 	
 	
 	// Variables para MUX de Result
