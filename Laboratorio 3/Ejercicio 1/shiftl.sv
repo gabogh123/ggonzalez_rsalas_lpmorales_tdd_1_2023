@@ -1,8 +1,9 @@
 module shiftl
 	# (parameter M = 4)
-	  (A, R, C, N, V, Z);
+	  (A, B, R, C, N, V, Z);
   
 	input  logic [M-1:0] A;
+	input  logic [M-1:0] B;
 	
 	output logic [M-1:0] R;
 	output				   C;

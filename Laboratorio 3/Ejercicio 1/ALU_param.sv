@@ -130,8 +130,8 @@ module ALU_param
 	or_f   # (.M(M)) or_funcion 				 (.A(A), .B(B), .R(R_or), .C(C_or), .N(N_or), .V(V_or), .Z(Z_or));
 	xor_f  # (.M(M)) xor_funcion 				 (.A(A), .B(B), .R(R_xor), .C(C_xor), .N(N_xor), .V(V_xor), .Z(Z_xor));
 	
-	shiftr # (.M(M)) shiftr_funcion 			 (.A(A), .R(R_shiftr), .C(C_shiftr), .N(N_shiftr), .V(V_shiftr), .Z(Z_shiftr));
-	shiftl # (.M(M)) shiftl_funcion 			 (.A(A), .R(R_shiftl), .C(C_shiftl), .N(N_shiftl), .V(V_shiftl), .Z(Z_shiftl));
+	shiftl # (.M(M)) shiftl_funcion 			 (.A(A), .B(B), .R(R_shiftl), .C(C_shiftl), .N(N_shiftl), .V(V_shiftl), .Z(Z_shiftl));
+	shiftr # (.M(M)) shiftr_funcion 			 (.A(A), .B(B), .R(R_shiftr), .C(C_shiftr), .N(N_shiftr), .V(V_shiftr), .Z(Z_shiftr));	
 	
 	
 	// Variables para MUX de Result
@@ -144,7 +144,7 @@ module ALU_param
 	mux_4NtoN # (.M(M)) mux_aritmetico1_result (R_suma, R_resta, 4'b1111, 4'b1111, ~F[1:0], R_mux_aritmetico1);
 	mux_4NtoN # (.M(M)) mux_aritmetico2_result (R_multiplicacion, R_division, R_modulo, 4'b1111, ~F[1:0], R_mux_aritmetico2);
 	mux_4NtoN # (.M(M)) mux_logico_result 		 (R_and, R_or, R_xor, 4'b1111, ~F[1:0], R_mux_logico);
-	mux_4NtoN # (.M(M)) mux_shift_result 		 (R_shiftr, R_shiftl, 4'b1111, 4'b1111, ~F[1:0], R_mux_shift);
+	mux_4NtoN # (.M(M)) mux_shift_result 		 (R_shiftl, R_shiftr, 4'b1111, 4'b1111, ~F[1:0], R_mux_shift);
 	
 	// Mux para el Result
 	mux_4NtoN # (.M(M)) mux_result (R_mux_aritmetico1, 
@@ -164,7 +164,7 @@ module ALU_param
 	mux_4NtoN # (.M(1)) mux_aritmetico1_carry (C_suma, C_resta, 1'b0, 1'b0, ~F[1:0], C_mux_aritmetico1);
 	mux_4NtoN # (.M(1)) mux_aritmetico2_carry (C_multiplicacion, C_division, C_modulo, 1'b0, ~F[1:0], C_mux_aritmetico2);
 	mux_4NtoN # (.M(1)) mux_logic_carry (C_and, C_or, C_xor, 1'b0, ~F[1:0], C_mux_logico);
-	mux_4NtoN # (.M(1)) mux_shift_carry (C_shiftr, C_shiftl, 1'b0, 1'b0, ~F[1:0], C_mux_shift);
+	mux_4NtoN # (.M(1)) mux_shift_carry (C_shiftl, C_shiftr, 1'b0, 1'b0, ~F[1:0], C_mux_shift);
 	
 	// Mux para el Carry
 	mux_4NtoN # (.M(1)) mux_carry (C_mux_aritmetico1,
@@ -184,7 +184,7 @@ module ALU_param
 	mux_4NtoN # (.M(1)) mux_aritmetico1_negative (N_suma, N_resta, 1'b0, 1'b0, ~F[1:0], N_mux_aritmetico1);
 	mux_4NtoN # (.M(1)) mux_aritmetico2_negative (N_multiplicacion, N_division, N_modulo, 1'b0, ~F[1:0], N_mux_aritmetico2);
 	mux_4NtoN # (.M(1)) mux_logic_negative (N_and, N_or, N_xor, 1'b0, ~F[1:0], N_mux_logico);
-	mux_4NtoN # (.M(1)) mux_shift_negative (N_shiftr, N_shiftl, 1'b0, 1'b0, ~F[1:0], N_mux_shift);
+	mux_4NtoN # (.M(1)) mux_shift_negative (N_shiftl, N_shiftr, 1'b0, 1'b0, ~F[1:0], N_mux_shift);
 	
 	// Mux para el Negative
 	mux_4NtoN # (.M(1)) mux_negative (N_mux_aritmetico1,
@@ -204,7 +204,7 @@ module ALU_param
 	mux_4NtoN # (.M(1)) mux_aritmetico1_overflow (V_suma, V_resta, 1'b0, 1'b0, ~F[1:0], V_mux_aritmetico1);
 	mux_4NtoN # (.M(1)) mux_aritmetico2_overflow (V_multiplicacion, V_division, V_modulo, 1'b0, ~F[1:0], V_mux_aritmetico2);
 	mux_4NtoN # (.M(1)) mux_logic_overflow (V_and, V_or, V_xor, 1'b0, ~F[1:0], V_mux_logico);
-	mux_4NtoN # (.M(1)) mux_shift_overflow (V_shiftr, V_shiftl, 1'b0, 1'b0, ~F[1:0], V_mux_shift);
+	mux_4NtoN # (.M(1)) mux_shift_overflow (V_shiftl, V_shiftr, 1'b0, 1'b0, ~F[1:0], V_mux_shift);
 	
 	// Mux para el Overflow
 	mux_4NtoN # (.M(1)) mux_overflow (V_mux_aritmetico1,
@@ -224,7 +224,7 @@ module ALU_param
 	mux_4NtoN # (.M(1)) mux_aritmetico1_zero (Z_suma, Z_resta, 1'b0, 1'b0, ~F[1:0], Z_mux_aritmetico1);
 	mux_4NtoN # (.M(1)) mux_aritmetico2_zero (Z_multiplicacion, Z_division, Z_modulo, 1'b0, ~F[1:0], Z_mux_aritmetico2);
 	mux_4NtoN # (.M(1)) mux_logic_zero (Z_and, Z_or, Z_xor, 1'b0, ~F[1:0], Z_mux_logico);
-	mux_4NtoN # (.M(1)) mux_shift_zero (Z_shiftr, Z_shiftl,  1'b0, 1'b0, ~F[1:0], Z_mux_shift);
+	mux_4NtoN # (.M(1)) mux_shift_zero (Z_shiftl, Z_shiftr,  1'b0, 1'b0, ~F[1:0], Z_mux_shift);
 	
 	// Mux para el Zero
 	mux_4NtoN # (.M(1)) mux_zero (Z_mux_aritmetico1,
