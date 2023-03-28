@@ -2,10 +2,9 @@ module shiftr
 	# (parameter M = 4)
 	  (A, R);
 	
-	input  [M-1:0] A;
+	input  logic [M-1:0] A;
 	
-	output [M-1:0] R;
-	
+   output logic [M-1:0] R;
 	
 			
 			

@@ -1,8 +1,8 @@
 module hex_to_sseg(hex, sseg);
 
-	input  [3:0] hex;
+	input  logic [3:0] hex;
 	
-	output [6:0] sseg;
+	output logic [6:0] sseg;
 	
 	always @ (hex)
 	

@@ -2,10 +2,10 @@ module xor_f
 	# (parameter M = 4)
 	  (A, B, R);
 	
-	input  [M-1:0] A;
-	input  [M-1:0] B;
+	input  logic [M-1:0] A;
+	input  logic [M-1:0] B;
 	
-	output [M-1:0] R;
+	output logic [M-1:0] R;
 	
 	always @ (A or B) begin
 	
