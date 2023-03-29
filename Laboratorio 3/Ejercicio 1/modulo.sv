@@ -10,13 +10,13 @@ module modulo
 	output					N;
 	output					V;
 	output					Z;
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	
+	
+	
+	
+	
+	
+	
 /////////////////////////////////////////////////////
 //																	//
 //	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //

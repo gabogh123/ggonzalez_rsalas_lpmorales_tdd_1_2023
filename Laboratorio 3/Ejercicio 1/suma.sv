@@ -8,7 +8,7 @@ module suma
 	output logic [M-1:0] R;
 	output				   C;
 	output					N;
-	output					V;
+	output					V = 0;
 	output					Z;
 	
     wire [M-1:0] carry;
@@ -23,7 +23,7 @@ module suma
         else 
           full_adder fa (A[i], B[i], carry[i-1], R[i], carry[i]);
 			 
-      end  
+      end
  
       assign C = carry[M-1];
 		  

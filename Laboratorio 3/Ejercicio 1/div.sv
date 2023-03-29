@@ -5,44 +5,28 @@ module div
 	input  logic [M-1:0] A;
 	input  logic [M-1:0] B;
 	
-	output logic [M-1:0] R;
+	output logic [M-1:0] R; // Cociente
 	output				   C;
 	output					N;
 	output					V;
 	output					Z;
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
 	
-	always @ (A or B) begin
+	wire [M-1:0] remainder;
+	 
+	genvar i, j;
 	
-		for (int i = 0; i < $size(A); i++) begin
-		
-				R[i] = A[i] && B[i];
+	generate
+	
+		for (i = 0; i < $size(A); i++) begin : generate_divider_1		
+	
+			//for (j = 0; i < $size(B); j++) begin : generate_divider_2
+			
+				assign R[i] = A[i] || B[i]; // OR Logic
+			
+			//end
+	
 		end
-		
-	end
-		
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
-		
-		
-		
-		
-		
-		
-		
+	
+	endgenerate
 
 endmodule
