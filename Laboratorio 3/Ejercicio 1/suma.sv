@@ -8,7 +8,7 @@ module suma
 	output logic [M-1:0] R;
 	output				   C;
 	output					N;
-	output					V = 0;
+	output					V;
 	output					Z;
 	
     wire [M-1:0] carry;

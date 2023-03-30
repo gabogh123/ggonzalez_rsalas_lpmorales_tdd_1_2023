@@ -6,8 +6,8 @@ module shiftr
 	input  logic [M-1:0] B; // shift amount
  	
 	output logic [M-1:0] R;
-	output				   C = 0;
-	output					N = 0;
+	output				   C;
+	output					N;
 	output					V;
 	output					Z;
 		

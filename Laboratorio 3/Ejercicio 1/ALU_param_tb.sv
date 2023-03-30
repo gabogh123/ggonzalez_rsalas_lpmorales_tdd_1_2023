@@ -2,9 +2,9 @@ module ALU_param_tb;
 
 	parameter integer M = 4;
 	
-	reg  [M-1:0]  A;
-	reg  [M-1:0]  B;
-	reg    [3:0]  F; 
+	reg  [M-1:0]   A;
+	reg  [M-1:0]   B;
+	reg    [3:0]   F; 
 	
 	wire [M-1:0]   R;
 	wire 			   C;

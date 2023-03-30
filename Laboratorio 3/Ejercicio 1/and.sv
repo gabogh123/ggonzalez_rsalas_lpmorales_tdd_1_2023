@@ -6,16 +6,17 @@ module and_f
 	input  logic [M-1:0] B;
 	
 	output logic [M-1:0] R;
-	output				   C = 0;
-	output					N = 0;
-	output					V = 0;
+	output				   C;
+	output					N;
+	output					V;
 	output					Z;
 	
 	always @ (A or B) begin
 	
 		for (int i = 0; i < $size(A); i++) begin
 		
-				R[i] = A[i] && B[i];
+			R[i] = A[i] && B[i];
+		
 		end
 		
 	end

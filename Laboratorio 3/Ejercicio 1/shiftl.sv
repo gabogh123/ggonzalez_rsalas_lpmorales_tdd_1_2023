@@ -6,8 +6,8 @@ module shiftl
 	input  logic [M-1:0] B; // shift amount
 	
 	output logic [M-1:0] R;
-	output				   C = 0;
-	output					N = 0;
+	output				   C;
+	output					N;
 	output					V;
 	output					Z;
 				
@@ -31,11 +31,11 @@ module shiftl
 			
 			end else if (i == 0) begin
 			
-				mux_2NtoN # (.M(M)) m2NtoN_S0 (A, {A[M-(2**i):0], si}, B[i], s0);
+				mux_2NtoN # (.M(M)) m2NtoN_S0 (A, {A[M-(1+(2**i)):0], si}, B[i], s0);
 			
 			end else begin
 			
-				mux_2NtoN # (.M(M)) m2NtoN_Si (s0, {s0[M-(2**i):0], si}, B[i], sn);
+				mux_2NtoN # (.M(M)) m2NtoN_Si (s0, {s0[M-(1+(2**i)):0], si}, B[i], sn);
 			
 			end
 	

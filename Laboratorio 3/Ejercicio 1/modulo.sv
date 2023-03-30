@@ -1,7 +1,7 @@
 module modulo
 	# (parameter M = 4)
 	  (A, B, R, C, N, V, Z);
-  
+
 	input  logic [M-1:0] A;
 	input  logic [M-1:0] B;
 	
