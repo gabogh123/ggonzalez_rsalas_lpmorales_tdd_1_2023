@@ -17,11 +17,15 @@ module div
 	
 	generate
 	
-		for (i = 0; i < $size(A); i++) begin : generate_divider_1		
+		for (i = 0; i < $size(A); i++) begin : generate_divider_1
+
+			wire [M-1:0] minuendo;
 	
-			//for (j = 0; i < $size(B); j++) begin : generate_divider_2
+			//for (j = 0; j < $size(B); j++) begin : generate_divider_2
 			
-				assign R[i] = A[i] || B[i]; // OR Logic
+				
+				assign R[i] = A[i] ^ B[i];
+
 			
 			//end
 	
