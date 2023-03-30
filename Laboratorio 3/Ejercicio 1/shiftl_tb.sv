@@ -1,6 +1,6 @@
 /*
 
-Testbech para la operacion Shift R
+Testbech para la operacion Shift L
 
 */
 
