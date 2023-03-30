@@ -11,38 +11,16 @@ module modulo
 	output					V;
 	output					Z;
 	
-	
-	
-	
-	
-	
-	
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
-	
 	always @ (A or B) begin
 	
-		for (int i = 0; i < $size(A); i++) begin
+		//for (int i = 0; i < $size(A); i++) begin
 		
-				R[i] = A[i] && B[i];
-		end
+			R = A % B;
+			
+			Z = ~(R || '0);
 		
-	end
-		
-/////////////////////////////////////////////////////
-//																	//
-//	 	 LOGICA DE AND PARA PRUEBAS -> ELIMINAR      //
-//																   //
-/////////////////////////////////////////////////////
-		
-		
-		
-		
-		
-		
-		
+		//end
+			
+	end		
 
 endmodule

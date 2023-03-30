@@ -1,16 +1,15 @@
 module mult
-# (parameter M = 4)
-(
-  input logic signed [M-1:0] A,
-  input logic signed [M-1:0] B,
-  output logic signed [2*M-1:0] R,
-  output				   C,
-  output					N,
-  output					V,
-  output					Z
-);
+	# (parameter M = 4)
+     (input logic signed [M-1:0] A,
+	   input logic signed [M-1:0] B,
+	   output logic signed [2*M-1:0] R,
+	   output				   C,
+	   output					N,
+	   output					V,
+	   output					Z);
 
   logic signed [2*M-1:0] temp_R;
+  
   integer i, j;
 
   always_comb begin
@@ -21,6 +20,9 @@ module mult
       end
     end
     R = temp_R;
+	 
+	 Z = ~(R || '0) && ~C;
+	 
   end
 
 endmodule

@@ -26,6 +26,8 @@ module suma
       end
  
       assign C = carry[M-1];
+		
+		assign Z = ~(R || '0) && ~C;
 		  
     endgenerate
 	 

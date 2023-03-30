@@ -1,14 +1,14 @@
 module div
-#(parameter M = 4)(
-  input logic [2*M-1:0] A,
-  input logic [M-1:0] B,
-  output logic [M-1:0] R,
-  output logic [M-1:0] Res,
-  output				   C,
-  output					N,
-  output					V,
-  output					Z
-);
+	#(parameter M = 4)(
+	  input 	logic [2*M-1:0] A,
+	  input 	logic [M-1:0] 	 B,
+	  output logic [M-1:0] 	 R,
+	  output logic [M-1:0] 	 Res,
+	  output				   	 C,
+	  output						 N,
+	  output						 V,
+	  output						 Z);
+	  
   logic [2*M-1:0] temp;
   logic [M-1:0] shift;
   
@@ -25,5 +25,8 @@ module div
       end
     end
     Res = shift;
+	 
+	 Z = ~(R || '0) && ~C;
+	 
   end
 endmodule
