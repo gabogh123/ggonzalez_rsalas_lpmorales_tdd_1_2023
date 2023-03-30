@@ -19,6 +19,8 @@ module and_f
 		
 		end
 		
+		Z = ~(R || '0);
+		
 	end
 		
 endmodule

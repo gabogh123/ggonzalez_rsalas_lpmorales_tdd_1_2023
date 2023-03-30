@@ -44,6 +44,8 @@ module shiftl
 			end
 		
 		end
+		
+		assign Z = ~(R || '0);
 	
 	endgenerate
 		

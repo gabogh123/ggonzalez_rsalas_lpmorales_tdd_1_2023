@@ -18,6 +18,8 @@ module or_f
 				R[i] = A[i] || B[i];
 		end
 		
+		Z = ~(R || '0);
+		
 	end
 		
 endmodule
