@@ -1,4 +1,4 @@
-module movement_tb();
+module movement_tb;
 
    logic [3:0] goal;
 	logic [3:0] direction;
@@ -11,16 +11,16 @@ module movement_tb();
 	
 	initial begin
 	 
-		 direction = 4'b1000;
+		 goal = 4'b1000;
 		 #10
 		 
-		 direction = 4'b0100;
+		 goal = 4'b0100;
 		 #10
 		 
-		 direction = 4'b0010;
+		 goal = 4'b0010;
 		 #10
 		 
-		 direction = 4'b0001;
+		 goal = 4'b0001;
 		 #10;
 	 
 	 end
