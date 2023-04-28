@@ -13,12 +13,13 @@ output:
 */
 
 
-module movement(direction, matrix, moved_matrix, ready);
+module movement(direction, matrix, for_sum, moved_matrix, ready);
 
-	input  reg [3:0] direction;
-	input  reg [11:0] matrix 		[3:0][3:0];
-	output reg [11:0] moved_matrix [3:0][3:0];
-	output logic ready;
+	input  logic [3:0]  direction;
+	input  logic [11:0] matrix 		 [3:0][3:0];
+	input  logic 		  for_sum;
+	output logic [11:0] moved_matrix [3:0][3:0];
+	output logic 		  ready;
 	
 	logic [11:0] temp_matrix [3:0][3:0];
 	
