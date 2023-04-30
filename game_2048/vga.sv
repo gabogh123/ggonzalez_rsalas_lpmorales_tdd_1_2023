@@ -7,6 +7,15 @@ module vga(
 	); 
 	
 	logic [9:0] x, y;
+	// logic [3:0] w_LFSR_Data;
+	// logic w_LFSR_Done;
+
+	logic [11:0] matrix [3:0][3:0] = '{'{12'd4, 12'd16, 12'd0, 12'd0}, 
+								  '{12'd2, 12'd0, 12'd0, 12'd0},
+								  '{12'd0, 12'd0, 12'd0, 12'd0},
+								  '{12'd2, 12'd0, 12'd0, 12'd0}};
+
+	logic [3:0] state = 3'b011;
 	
 	// Use a PLL to create the 25.175 MHz VGA pixel clock
 	// 25.175 MHz clk period = 39.772 ns
@@ -19,7 +28,15 @@ module vga(
 	// Generate monitor timing signals
 	vga_controller vgaCont(vgaclk, hsync, vsync, sync_b, blank_b, x, y);
 	// User-defined module to determine pixel color
-	video_gen videoGen(x, y, r, g, b);
+	video_gen videoGen(x, y, state, matrix, r, g, b);
+	
+	// lfsr #(4) random_gen(.i_Clk(Clk),
+    //       .i_Enable(1'b1),
+    //       .i_Seed_DV(1'b0),
+    //       .i_Seed_Data(1'b0), // Replication
+    //       .o_LFSR_Data(w_LFSR_Data),
+    //       .o_LFSR_Done(w_LFSR_Done)
+    //       );
 
 endmodule
 
