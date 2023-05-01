@@ -6,29 +6,31 @@ module game_2048(
 		output logic hsync, vsync,
 		output logic sync_b, blank_b, // To monitor & DAC
 		output logic [7:0] r, g, b, // To video DAC,
-		output logic [0:6] disp_0
+		output logic [0:6] disp_0, disp_2
 	);
-	logic done_random_tile, any_button, won, lost;
-	logic [2:0] D;
-	logic [2:0] Q;
-	logic [3:0] rand_pos;
-	logic [11:0] matrix [3:0][3:0] = '{'{12'd4, 12'd16, 12'd0, 12'd0}, 
-						'{12'd2, 12'd0, 12'd0, 12'd0},
-						'{12'd0, 12'd0, 12'd0, 12'd0},
-						'{12'd2, 12'd0, 12'd0, 12'd0}};
-
+	logic any_button, won, lost;
+	logic [2:0] D; // next state
+	logic [2:0] Q; // current state
+	logic [11:0] matrix_D [3:0][3:0]; // next state matrix
+	logic [11:0] matrix_Q [3:0][3:0]; // current state matrix
+	
 	assign won = 0;
 	assign lost = 0;
 
+	// senses for any button to be pushed
     or_n_inputs #(4) or_buttons (~buttons, any_button);
+	
+	// handle FSM's current and next state logic 
+	current_state current_state (clk, rst_game, D, matrix_D, Q, matrix_Q);
+	next_state next_state(Q , any_button, won, lost, rst_game, D);
 
-	lfsr random_position(Q[0], rst_game, 4'b1111, rand_pos);
+	// handle matrix changes
+	update_matrix update_mat(clk, rst_game, Q, any_button, matrix_Q, matrix_D);
 
-	current_state current_state (clk, rst_game, D, Q);
-	next_state next_state(Q, any_button, won, lost, rst_game, D);
-
-	vga vga_display(clk, rst_vga, matrix, Q, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);
+	// display game on screen depending on the current state 
+	vga vga_display(clk, rst_vga, matrix_Q, Q, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);
 
 	seven_seg_decoder display_state(Q, disp_0);
+	seven_seg_decoder display_rand(4'b0, disp_2);
 
 endmodule

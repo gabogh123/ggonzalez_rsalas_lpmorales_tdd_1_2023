@@ -23,8 +23,8 @@ module video_gen(
 				in_grid = 0; 
 			end 
 			3'b001: begin 
-				pixel = pixel_1;
-				in_grid = in_grid_temp;
+				pixel = pixel_0;
+				in_grid = 0;
 			end 
 			3'b010: begin 
 				pixel = pixel_1;
@@ -35,14 +35,10 @@ module video_gen(
 				in_grid = in_grid_temp;
 			end  
 			3'b100: begin 
-				pixel = pixel_1;
-				in_grid = in_grid_temp; 
-			end
-			3'b101: begin 
 				pixel = pixel_2;
 				in_grid = 0;
 			end
-			3'b110: begin 
+			3'b101: begin 
 				pixel = pixel_3;
 				in_grid = 0; 
 			end
