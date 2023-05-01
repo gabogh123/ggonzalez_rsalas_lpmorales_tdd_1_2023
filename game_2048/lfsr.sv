@@ -1,14 +1,14 @@
 module lfsr (
-  input logic clk,
-  input logic reset,
+  input logic trigger, reset,
+  input logic [3:0] seed,
   output logic [3:0] rand_lfsr
 );
 
   logic [3:0] lfsr_reg;
 
-  always @(posedge clk) begin
+  always @(posedge trigger) begin
     if (reset) begin
-      lfsr_reg <= 4'hF;
+      lfsr_reg <= seed;
     end else begin
       lfsr_reg <= {lfsr_reg[2:0], lfsr_reg[3] ^ lfsr_reg[2]};
     end

@@ -1,6 +1,6 @@
 module video_gen(
 		input logic [9:0] x, y,
-		input logic [3:0] state,
+		input logic [2:0] state,
 		input logic [11:0] matrix [3:0][3:0],  
 		output logic [7:0] r, g, b
 	);
@@ -35,14 +35,21 @@ module video_gen(
 				in_grid = in_grid_temp;
 			end  
 			3'b100: begin 
-				pixel = pixel_2;
-				in_grid = 0; 
+				pixel = pixel_1;
+				in_grid = in_grid_temp; 
 			end
 			3'b101: begin 
+				pixel = pixel_2;
+				in_grid = 0;
+			end
+			3'b110: begin 
 				pixel = pixel_3;
 				in_grid = 0; 
 			end
-			default: pixel = pixel_0;
+			default: begin 
+				pixel = pixel_0;
+				in_grid = 0; 
+			end
 		endcase
 	end
 	
