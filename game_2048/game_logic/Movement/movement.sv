@@ -23,14 +23,14 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 	
 	logic [11:0] temp_matrix [3:0][3:0];
 	
-	// direction_adjuster dir_adjust (.direction(direction), .matrix(matrix), .adjusted_matrix(moved_matrix));
-	
 	logic [11:0] adjusted_matrix [3:0][3:0];
 	
 	
 	initial begin
 	
 		$display("\n\ndirection: %b", direction);
+		
+	/***********************************************Initial Direction Adjust***********************************************************/
 		
 		/*
 		Se acomodara la matriz para hacer los movimientos correspondientes con
@@ -93,14 +93,18 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 		end else begin
 			adjusted_matrix = matrix;
 		end
+		
+	/***********************************************Initial Direction Adjust***********************************************************/
 
 		
 		// Flag para saber si se tiene que volver a acomodar
 		ready = 1;
 		
-		temp_matrix = adjusted_matrix;	
+		temp_matrix = adjusted_matrix;
 		
-
+		
+	/***************************************************Matrix Movement***************************************************************/
+		
 		for (int i = 0; i < 4; i++) begin
 			
 			for (int j = 0; j < 4; j++) begin
@@ -133,7 +137,11 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 			end
 			
 		end
+		
+	/***************************************************Matrix Movement***************************************************************/
 
+	
+	/**********************************************Reverse Direction Adjust***********************************************************/
 		
 		/*
 		Se reacomodara la matriz a la direccion inicial que tenia:
@@ -201,6 +209,8 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 			$display("%p", moved_matrix[i][3:0]);
 			
 		end
+		
+	/**********************************************Reverse Direction Adjust***********************************************************/
 		
 		
 		$display("ready: %b", ready);

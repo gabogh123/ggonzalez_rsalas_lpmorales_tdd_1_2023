@@ -20,7 +20,7 @@ module movement_fsm(clk, rst, direction, matrix, moved_matrix);
 	
 	logic ready_0, ready_1, ready_2, ready_3;
 	
-	movement m00 (direction, matrix, 				1'b0, 	pre_moved_matrix_0, ready_0);
+	movement m00 (direction, matrix, 			 1'b0, 	  pre_moved_matrix_0, ready_0);
 	movement m01 (direction, pre_moved_matrix_0, ready_0, pre_moved_matrix_1, ready_1);
 	movement m10 (direction, pre_moved_matrix_1, ready_1, pre_moved_matrix_2, ready_2);
 	movement m11 (direction, pre_moved_matrix_2, ready_2, pre_moved_matrix_3, ready_3);
@@ -40,6 +40,11 @@ module movement_fsm(clk, rst, direction, matrix, moved_matrix);
 	next_state_movement next (Q2, Q1, Q0, r, D2, D1, D0);
 	outputs_movement salidas(Q2, Q1, Q0, M1, M0);
 	
-	mux_4MtoM m4MtoM (pre_moved_matrix_0, pre_moved_matrix_1, pre_moved_matrix_2, pre_moved_matrix_3, {M1, M0}, moved_matrix);
+	mux_4MtoM m4MtoM (pre_moved_matrix_0,
+					  pre_moved_matrix_1,
+					  pre_moved_matrix_2,
+					  pre_moved_matrix_3,
+					  {M1, M0},
+					  moved_matrix);
 
 endmodule
