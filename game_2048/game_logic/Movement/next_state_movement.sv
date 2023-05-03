@@ -1,5 +1,5 @@
 /*
-Next State
+Next State for Movement's FSM
 */
 module next_state_movement(input Q2, Q1, Q0, r, output D2, D1, D0);
 
