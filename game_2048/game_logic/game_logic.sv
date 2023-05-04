@@ -42,7 +42,7 @@ module game_logic(clk, rst, goal, direction, matrix_Q, matrix_D, W, L);
 	// Summation ready, testbench to go
 	summation_fsm sum   (clk, rst, direction, matrix_Q, summed_matrix, S);
 	
-	// Make
+	// Make, maybe not FSM
 	//check_fsm     check (clk, rst, goal, matrix_Q, checked_matrix, W, L);
 	
 	mux_4MtoM m4MtoM (moved_matrix,

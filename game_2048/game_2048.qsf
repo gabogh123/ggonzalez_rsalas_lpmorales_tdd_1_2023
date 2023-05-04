@@ -141,4 +141,9 @@ set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/current_state_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/next_state_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/goal_checker.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_checker.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_4to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_by_side.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
