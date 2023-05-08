@@ -8,17 +8,9 @@ module current_state (
 	logic [2:0] regs;
 	logic [11:0] regs_matrix [3:0][3:0];
 
-	always_ff @( posedge clk, posedge rst ) begin : ff_registers
-		if (rst) begin 
-			regs = 3'b000;
-			regs_matrix = '{'{12'd0, 12'd0, 12'd0, 12'd0}, 
-						'{12'd0, 12'd0, 12'd0, 12'd0},
-						'{12'd0, 12'd0, 12'd0, 12'd0},
-						'{12'd2, 12'd0, 12'd0, 12'd0}};
-		end else begin
-			regs = D;
-			regs_matrix = matrix_D;
-		end
+	always_ff @( posedge clk) begin : ff_registers
+		regs = D;
+		regs_matrix = matrix_D;
 	end
 
 	assign Q = regs;
