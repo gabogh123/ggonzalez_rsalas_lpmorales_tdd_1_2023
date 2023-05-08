@@ -23,7 +23,7 @@ module summation(direction, matrix, summed_matrix, ready);
 	
 	initial begin
 	
-		$display("\n\ndirection: %b", direction);
+		$display("\n\ndirection @ summation: %b", direction);
 		
 	/***********************************************Initial Direction Adjust***********************************************************/
 		
@@ -32,7 +32,7 @@ module summation(direction, matrix, summed_matrix, ready);
 		los casos propuestos para una matriz que se mueve hacia abajo:
 		*/
 		
-		$display("\nmatrix:");
+		$display("\nmatrix @ summation:");
 		for (int i = 3; i > -1; i--) begin
 			$display("%p", matrix[i][3:0]);
 		end
@@ -202,7 +202,7 @@ module summation(direction, matrix, summed_matrix, ready);
 		end
 		
 
-		$display("\nsummed_matrix:");
+		$display("\nsummed_matrix @ summation:");
 		for (int i = 3; i > -1; i--) begin
 			
 			$display("%p", summed_matrix[i][3:0]);
@@ -212,7 +212,7 @@ module summation(direction, matrix, summed_matrix, ready);
 	/**********************************************Reverse Direction Adjust***********************************************************/
 		
 		
-		$display("ready: %b", ready);
+		$display("ready @ summation: %b", ready);
 	
 	end
 

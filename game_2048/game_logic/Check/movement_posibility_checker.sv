@@ -10,22 +10,13 @@ module movement_posibility_checker(matrix, L);
 	logic LD;
 	logic LU;
 	logic LR;
-	
-	// current_state
-	
-	// next_state
-	
+
 	movement_posibility_by_side  left_check (4'b1000, matrix, LL);
 	movement_posibility_by_side  down_check (4'b0100, matrix, LD);
-	movement_posibility_by_side 	 up_check (4'b0010, matrix, LU);
+	movement_posibility_by_side 	p_check (4'b0010, matrix, LU);
 	movement_posibility_by_side right_check (4'b0001, matrix, LR);
-	
-	mux_4to1 m4to1 (LL,
-						 LD,
-						 LU,
-						 LR,
-						 Q,
-						 L);
+						 
+	assign L = LL | LD | LU | LR;
 	
 	
 

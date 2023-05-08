@@ -5,20 +5,24 @@ module goal_checker(goal, matrix, W);
 	output logic 		  W;
 	
 	initial begin
+	// always @ (matrix) begin
 	
 		W = 0;
 	
-		for (int i = 0; i < $size(matrix); i++) begin
-				for (int j = 0; j < $size(matrix); j++) begin
-					
-					if (goal == matrix[i][j]) begin
-						W = 1;
-						break;
-					end
-					
+		for (int i = 0; i < 4; i++) begin
+			$display("%p", matrix[i][3:0]);
+			for (int j = 0; j < 4; j++) begin
+				
+				if ((2 ** (goal + 4'b0010)) == matrix[i][j]) begin
+					W = 1;
+					break;
 				end
+				
 			end
-	
+		end
+		
+		$display("\ngoal @ goal_checker: %d", (2 ** (goal + 4'b0010)));
+
 	end
 
 endmodule

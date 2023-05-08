@@ -10,9 +10,8 @@ module movement_posibility_by_side(direction, matrix, L);
 	logic [11:0] adjusted_matrix [3:0][3:0];
 	
 	initial begin
-	
-		$display("\n\ndirection: %b", direction);
-		
+	// always @ (matrix) begin
+
 	/***********************************************Initial Direction Adjust***********************************************************/
 		
 		/*
@@ -174,6 +173,9 @@ module movement_posibility_by_side(direction, matrix, L);
 		
 	/******************************************Movement Posibility Checker by Side*****************************************************/
 
+		
+	$display("\nL(%b): %b", direction, L);
+		
 		
 	end
 	
