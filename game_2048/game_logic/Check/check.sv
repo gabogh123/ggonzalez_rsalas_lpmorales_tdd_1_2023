@@ -1,3 +1,4 @@
+
 module check (goal, matrix, checked_matrix, W, L);
 
 	input  logic [3:0]  goal;

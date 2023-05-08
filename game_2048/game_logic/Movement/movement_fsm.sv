@@ -24,10 +24,10 @@ module movement_fsm(clk, rst, direction, matrix, matrix_D, r);
 	logic ready_0, ready_1, ready_2, ready_3;
 	
 
-	movement m00 (direction, matrix, 			   1'b0, 	pre_moved_matrix_0, ready_0);
-	movement m01 (direction, pre_moved_matrix_0, ready_0, pre_moved_matrix_1, ready_1);
-	movement m10 (direction, pre_moved_matrix_1, ready_1, pre_moved_matrix_2, ready_2);
-	movement m11 (direction, pre_moved_matrix_2, ready_2, pre_moved_matrix_3, ready_3);
+	movement m00 (direction, matrix, pre_moved_matrix_0, ready_0);
+	movement m01 (direction, pre_moved_matrix_0, pre_moved_matrix_1, ready_1);
+	movement m10 (direction, pre_moved_matrix_1, pre_moved_matrix_2, ready_2);
+	movement m11 (direction, pre_moved_matrix_2, pre_moved_matrix_3, ready_3);
 
 	
 	always_comb

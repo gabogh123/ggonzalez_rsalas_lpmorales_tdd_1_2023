@@ -43,7 +43,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .S(S),
 									   .D(D));
 										
-	// Fix			  
+	// Movement		  
 	movement_fsm  move (.clk(clk),
 						.rst(rst),
 						.direction(direction),
@@ -51,7 +51,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 						.matrix_D(moved_matrix),
 						.r(M));
 	
-	// Summation ready, testbench to go
+	// Summation
 	summation_fsm  sum (.clk(clk),
 						.rst(rst),
 						.enable(enable),
@@ -60,7 +60,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 						.matrix_D(summed_matrix),
 						.r(S));
 	
-	// Check maybe ready, testbench to go
+	// Check
 	check          cck (goal,
 						matrix_Q,
 						checked_matrix,
@@ -82,6 +82,8 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 					{W, L},
 					Q[1],
 					wl);
+
+	/* OUTPUTS_GAME_LOGIC ? */
 	
 
 endmodule

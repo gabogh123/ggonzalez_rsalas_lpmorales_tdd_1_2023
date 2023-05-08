@@ -7,7 +7,7 @@ module logic_manager_check (goal, matrix, W, L);
 	
 	/* Test #1 : */
 	
-	logic [3:0]  test_goal_1 = 4'b1010;
+	logic [3:0]  test_goal_1 = 4'b1001;
 	logic [11:0] test_matrix_1 [3:0][3:0] = '{ '{  12'd0,   12'd2,    12'd4,    12'd8},
 											   '{12'd256, 12'd512, 12'd1024, 12'd2048},
 											   '{  12'd0,   12'd8,   12'd32,  12'd512},
@@ -22,7 +22,7 @@ module logic_manager_check (goal, matrix, W, L);
 	
 	/* Test #2 : */
 	
-	logic [3:0]  test_goal_2 = 4'b1010;
+	logic [3:0]  test_goal_2 = 4'b1001;
 	logic [11:0] test_matrix_2 [3:0][3:0] = '{ '{  12'd0,   12'd2,    12'd4,    12'd8},
 											   '{12'd256, 12'd512, 12'd1024, 12'd2048},
 											   '{  12'd0,   12'd8,   12'd32,  12'd512},

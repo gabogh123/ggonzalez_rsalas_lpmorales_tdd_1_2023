@@ -57,7 +57,7 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH game_2048_tb -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH summation_fsm_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME clock_divider_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id clock_divider_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME clock_divider_tb -section_id clock_divider_tb
@@ -100,6 +100,67 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME count_zeros_tb -section_i
 set_global_assignment -name EDA_TEST_BENCH_NAME new_tile_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id new_tile_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME new_tile_tb -section_id new_tile_tb
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_location_assignment PIN_AB12 -to switches[0]
+set_location_assignment PIN_AC12 -to switches[1]
+set_location_assignment PIN_AF9 -to switches[2]
+set_location_assignment PIN_AF10 -to switches[3]
+set_location_assignment PIN_AA14 -to buttons[0]
+set_location_assignment PIN_AA15 -to buttons[1]
+set_location_assignment PIN_W15 -to buttons[2]
+set_location_assignment PIN_Y16 -to buttons[3]
+set_location_assignment PIN_AE12 -to rst_game
+set_location_assignment PIN_AD10 -to rst_vga
+set_location_assignment PIN_AE26 -to disp_0[0]
+set_location_assignment PIN_AE27 -to disp_0[1]
+set_location_assignment PIN_AE28 -to disp_0[2]
+set_location_assignment PIN_AG27 -to disp_0[3]
+set_location_assignment PIN_AF28 -to disp_0[4]
+set_location_assignment PIN_AG28 -to disp_0[5]
+set_location_assignment PIN_AH28 -to disp_0[6]
+set_global_assignment -name EDA_TEST_BENCH_NAME game_2048_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_2048_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_2048_tb -section_id game_2048_tb
+set_location_assignment PIN_AB23 -to disp_2[0]
+set_location_assignment PIN_AE29 -to disp_2[1]
+set_location_assignment PIN_AD29 -to disp_2[2]
+set_location_assignment PIN_AC28 -to disp_2[3]
+set_location_assignment PIN_AD30 -to disp_2[4]
+set_location_assignment PIN_AC29 -to disp_2[5]
+set_location_assignment PIN_AC30 -to disp_2[6]
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_checker.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_by_side.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/goal_checker.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/check_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/summation_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/summation_fsm_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/summation_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/summation.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/outputs_summation.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/next_state_summation.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/current_state_summation.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/outputs_movement.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/next_state_movement.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/movement_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/movement_fsm_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/movement_fsm.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/movement.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Movement/actual_state_movement.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/next_state_logic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_4to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_4MtoM.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2to1.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2MtoM.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/logic_manager_sum.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/logic_manager_check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/logic_manager_2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/logic_manager.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/direction_adjuster.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/current_state_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_2048.sv
 set_global_assignment -name TEXT_FILE numbers.txt
 set_global_assignment -name TEXT_FILE charrom.txt
@@ -128,44 +189,22 @@ set_global_assignment -name SYSTEMVERILOG_FILE new_tile.sv
 set_global_assignment -name SYSTEMVERILOG_FILE new_tile_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE current_state.sv
 set_global_assignment -name SYSTEMVERILOG_FILE next_state.sv
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_location_assignment PIN_AB12 -to switches[0]
-set_location_assignment PIN_AC12 -to switches[1]
-set_location_assignment PIN_AF9 -to switches[2]
-set_location_assignment PIN_AF10 -to switches[3]
-set_location_assignment PIN_AA14 -to buttons[0]
-set_location_assignment PIN_AA15 -to buttons[1]
-set_location_assignment PIN_W15 -to buttons[2]
-set_location_assignment PIN_Y16 -to buttons[3]
-set_location_assignment PIN_AE12 -to rst_game
-set_location_assignment PIN_AD10 -to rst_vga
 set_global_assignment -name SYSTEMVERILOG_FILE seven_seg_decoder.sv
-set_location_assignment PIN_AE26 -to disp_0[0]
-set_location_assignment PIN_AE27 -to disp_0[1]
-set_location_assignment PIN_AE28 -to disp_0[2]
-set_location_assignment PIN_AG27 -to disp_0[3]
-set_location_assignment PIN_AF28 -to disp_0[4]
-set_location_assignment PIN_AG28 -to disp_0[5]
-set_location_assignment PIN_AH28 -to disp_0[6]
 set_global_assignment -name SYSTEMVERILOG_FILE game_2048_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE new_tile_gen.sv
+set_global_assignment -name SYSTEMVERILOG_FILE update_matrix.sv
+set_global_assignment -name SYSTEMVERILOG_FILE counter_4_bits.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME summation_fsm_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id summation_fsm_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME summation_fsm_tb -section_id summation_fsm_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME summation_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id summation_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME summation_tb -section_id summation_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE clock_divider_tb.sv -section_id clock_divider_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE lfsr_tb.sv -section_id lfsr_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE count_zeros_tb.sv -section_id count_zeros_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE new_tile_tb.sv -section_id new_tile_tb
-set_global_assignment -name EDA_TEST_BENCH_NAME game_2048_tb -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_2048_tb
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_2048_tb -section_id game_2048_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE game_2048_tb.sv -section_id game_2048_tb
-set_location_assignment PIN_AB23 -to disp_2[0]
-set_location_assignment PIN_AE29 -to disp_2[1]
-set_location_assignment PIN_AD29 -to disp_2[2]
-set_location_assignment PIN_AC28 -to disp_2[3]
-set_location_assignment PIN_AD30 -to disp_2[4]
-set_location_assignment PIN_AC29 -to disp_2[5]
-set_location_assignment PIN_AC30 -to disp_2[6]
-set_global_assignment -name SYSTEMVERILOG_FILE new_tile_gen.sv
-set_global_assignment -name SYSTEMVERILOG_FILE update_matrix.sv
-set_global_assignment -name SYSTEMVERILOG_FILE counter_4_bits.sv
+set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/Summation/summation_fsm_tb.sv -section_id summation_fsm_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/Summation/summation_tb.sv -section_id summation_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

@@ -10,20 +10,21 @@ output:
 	- flag para saber si esta lista o se tiene que reacomodar
 		(ready sera la variable que entra en for_sum de 'movement' si es igual a 0)
 */
-module summation(direction, matrix, summed_matrix, ready);
+module summation(clk, direction, matrix, summed_matrix, ready);
 
+	input  logic 		clk;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix 		 [3:0][3:0];
 	output logic [11:0] summed_matrix [3:0][3:0];
-	output logic		  ready;
+	output logic		ready;
 	
+
+	logic [11:0] adjusted_matrix [3:0][3:0];
 	logic [11:0] temp_matrix [3:0][3:0];
+										
 	
-	logic [11:0] adjusted_matrix [3:0][3:0];								
-	
-	initial begin
-	
-		$display("\n\ndirection @ summation: %b", direction);
+	// initial begin
+	always_ff @ (posedge clk) begin
 		
 	/***********************************************Initial Direction Adjust***********************************************************/
 		
@@ -32,10 +33,6 @@ module summation(direction, matrix, summed_matrix, ready);
 		los casos propuestos para una matriz que se mueve hacia abajo:
 		*/
 		
-		$display("\nmatrix @ summation:");
-		for (int i = 3; i > -1; i--) begin
-			$display("%p", matrix[i][3:0]);
-		end
 		
 		/*
 		Como la matriz se quiere mover hacia la izquierda,
@@ -59,7 +56,6 @@ module summation(direction, matrix, summed_matrix, ready);
 			adjusted_matrix = matrix;
 			
 
-			
 		/*
 		Como la matriz se quiere mover hacia arriba,
 		su lado de arriba ahora es la fila de mas abajo
@@ -200,19 +196,10 @@ module summation(direction, matrix, summed_matrix, ready);
 		end else begin
 			summed_matrix = temp_matrix;
 		end
-		
 
-		$display("\nsummed_matrix @ summation:");
-		for (int i = 3; i > -1; i--) begin
-			
-			$display("%p", summed_matrix[i][3:0]);
-			
-		end
 		
 	/**********************************************Reverse Direction Adjust***********************************************************/
-		
-		
-		$display("ready @ summation: %b", ready);
+
 	
 	end
 

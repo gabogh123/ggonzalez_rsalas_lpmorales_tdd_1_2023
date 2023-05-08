@@ -11,21 +11,26 @@ module game_2048(
 	logic any_button, won, lost;
 	logic [2:0] D; // next state
 	logic [2:0] Q; // current state
-	logic [11:0] matrix_D [3:0][3:0]; // next state matrix
 	logic [11:0] matrix_Q [3:0][3:0]; // current state matrix
+	logic [11:0] matrix_D [3:0][3:0]; // next state matrix
 	
-	assign won = 0;
-	assign lost = 0;
+	logic [1:0] wl;
+	// assign won = 0;
+	// assign lost = 0;
 
 	// senses for any button to be pushed
     or_n_inputs #(4) or_buttons (~buttons, any_button);
 	
 	// handle FSM's current and next state logic 
 	current_state current_state (clk, rst_game, D, matrix_D, Q, matrix_Q);
-	next_state next_state(Q , any_button, won, lost, rst_game, D);
+	next_state next_state(Q , any_button, wl[0], wl[1], rst_game, D);
+	/* Aqui entran el won, lost que viene de update_matrix*/
 
 	// handle matrix changes
-	update_matrix update_mat(clk, rst_game, Q, any_button, matrix_Q, matrix_D);
+	update_matrix update_mat(clk, rst_game, Q, switches, buttons, any_button, matrix_Q, matrix_D, wl);
+	/* se agregaron switches y buttons, necesarios para game_logic*/
+	/* podriamos meter el or_n_inputs dentro para no enviar aqui any_button*/
+	/* won, lost salen de aqui no? */
 
 	// display game on screen depending on the current state 
 	vga vga_display(clk, rst_vga, matrix_Q, Q, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);

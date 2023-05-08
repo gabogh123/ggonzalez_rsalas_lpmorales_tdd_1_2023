@@ -13,11 +13,11 @@ output:
 */
 
 
-module movement(direction, matrix, for_sum, moved_matrix, ready);
+module movement(clk, direction, matrix, moved_matrix, ready);
 
+	input  logic 		clk;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix 		 [3:0][3:0];
-	input  logic 		  for_sum;
 	output logic [11:0] moved_matrix [3:0][3:0];
 	output logic 		  ready;
 	
@@ -26,9 +26,9 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 	logic [11:0] adjusted_matrix [3:0][3:0];
 	
 	
-	initial begin
-	
-		$display("\n\ndirection: %b", direction);
+	// initial begin
+	always_ff @ (posedge clk) begin
+
 		
 	/***********************************************Initial Direction Adjust***********************************************************/
 		
@@ -36,11 +36,6 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 		Se acomodara la matriz para hacer los movimientos correspondientes con
 		los casos propuestos para una matriz que se mueve hacia abajo:
 		*/
-		
-		$display("\nmatrix:");
-		for (int i = 3; i > -1; i--) begin
-			$display("%p", matrix[i][3:0]);
-		end
 		
 		/*
 		Como la matriz se quiere mover hacia la izquierda,
@@ -201,19 +196,10 @@ module movement(direction, matrix, for_sum, moved_matrix, ready);
 		end else begin
 			moved_matrix = temp_matrix;
 		end
-		
 
-		$display("\nmoved_matrix:");
-		for (int i = 3; i > -1; i--) begin
-			
-			$display("%p", moved_matrix[i][3:0]);
-			
-		end
 		
 	/**********************************************Reverse Direction Adjust***********************************************************/
 		
-		
-		$display("ready: %b", ready);
 	
 	end
 

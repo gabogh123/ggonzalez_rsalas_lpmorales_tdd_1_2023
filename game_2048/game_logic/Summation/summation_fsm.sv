@@ -20,7 +20,8 @@ module summation_fsm (clk, rst, enable, direction, matrix, matrix_D, r);
 	logic summed_r;
 	logic moved_r;
 	
-	
+	logic mux_sel;
+
 	// Current State logic 
 	current_state_summation  current_state(.clk(clk),
 										   .rst(rst),
@@ -31,36 +32,41 @@ module summation_fsm (clk, rst, enable, direction, matrix, matrix_D, r);
 							  			   .Q(Q),
 										   .matrix_Q(matrix_Q));
 												
+	
+		// Next State Logic
+	next_state_summation next_state (.Q(Q),
+									 .r(r),
+									 .D(D));
+
 								
-	summation sum_sum (direction,
+	summation sum_sum (clk,
+					   direction,
 					   matrix_Q,
 					   summed_matrix,
 				       summed_r);
 	
-	movement move_sum (direction,
+	movement move_sum (clk,
+					   direction,
 					   matrix_Q,
-					   0,
 					   moved_matrix,
 					   moved_r);
 	
 	
-	mux_2MtoM m2mtom_sum (summed_matrix,
+	mux_2MtoM m2mtom_sum (clk,
+						  summed_matrix,
 						  moved_matrix,
-						  Q[0],
+						  mux_sel,
 						  matrix_D);
 
 	mux_2to1  m2to1_sum  (summed_r,
 						  moved_r,
-						  Q[0],
+						  mux_sel,
 						  r);
 
 
-	// Next State Logic
-	next_state_summation next_state (/*.clk(clk),
-									 .enable(enable),*/
-									 .Q(Q),
-									 .r(r),
-									 .D(D));
+	// Outputs Logic
+	outputs_summation outputs_sum (.Q(Q),
+								   .ms(mux_sel));
 
 
 endmodule
