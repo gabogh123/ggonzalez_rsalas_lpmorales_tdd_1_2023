@@ -1,16 +1,17 @@
 /*
 Verifies if there's any posibility to move the matrix to a specific side
 */
-module movement_posibility_by_side(direction, matrix, L);
+module movement_posibility_by_side(clk, direction, matrix, L);
 
+	input  logic clk;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix [3:0][3:0];
 	output logic L;
 	
 	logic [11:0] adjusted_matrix [3:0][3:0];
 	
-	initial begin
-	// always @ (matrix) begin
+	// initial begin
+	always @ (posedge clk) begin
 
 	/***********************************************Initial Direction Adjust***********************************************************/
 		
@@ -18,11 +19,6 @@ module movement_posibility_by_side(direction, matrix, L);
 		Se acomodara la matriz para hacer los movimientos correspondientes con
 		los casos propuestos para una matriz que se mueve hacia abajo:
 		*/
-		
-		$display("\nmatrix:");
-		for (int i = 3; i > -1; i--) begin
-			$display("%p", matrix[i][3:0]);
-		end
 		
 		/*
 		Como la matriz se quiere mover hacia la izquierda,
@@ -172,9 +168,6 @@ module movement_posibility_by_side(direction, matrix, L);
 		end
 		
 	/******************************************Movement Posibility Checker by Side*****************************************************/
-
-		
-	$display("\nL(%b): %b", direction, L);
 		
 		
 	end

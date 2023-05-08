@@ -45,8 +45,6 @@ module summation_fsm_tb();
 		
 	initial begin
 
-		$display("Inicio again ..");
-
 		#40 rst = 1;
 		#20 rst = 0;
 		

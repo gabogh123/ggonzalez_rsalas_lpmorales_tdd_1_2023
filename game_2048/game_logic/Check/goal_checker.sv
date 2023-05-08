@@ -1,16 +1,16 @@
-module goal_checker(goal, matrix, W);
+module goal_checker(clk, goal, matrix, W);
 
+	input  logic 		clk;
 	input  logic [3:0]  goal;
 	input  logic [11:0] matrix [3:0][3:0];
-	output logic 		  W;
+	output logic 		W;
 	
-	initial begin
-	// always @ (matrix) begin
+	// initial begin
+	always_ff @ (posedge clk) begin
 	
 		W = 0;
 	
 		for (int i = 0; i < 4; i++) begin
-			$display("%p", matrix[i][3:0]);
 			for (int j = 0; j < 4; j++) begin
 				
 				if ((2 ** (goal + 4'b0010)) == matrix[i][j]) begin
@@ -20,8 +20,6 @@ module goal_checker(goal, matrix, W);
 				
 			end
 		end
-		
-		$display("\ngoal @ goal_checker: %d", (2 ** (goal + 4'b0010)));
 
 	end
 

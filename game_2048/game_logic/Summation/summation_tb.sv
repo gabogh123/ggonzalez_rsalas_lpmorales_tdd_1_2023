@@ -35,8 +35,6 @@ module summation_tb();
 	end
 		
 	initial begin
-
-		$display("Inicio again ..");
 		
 		#100
 		matrix = '{'{12'd2, 12'd2, 12'd0, 12'd0},

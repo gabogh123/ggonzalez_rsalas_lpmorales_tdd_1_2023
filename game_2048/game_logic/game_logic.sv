@@ -26,11 +26,13 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	logic W;
 	logic L;
 
+	logic mux_sel;
+
 	
 	/* Current State */
 	current_state_logic current_state (.clk(clk),
 									   .rst(rst),
-									   //.enable(enable),
+									   .enable(enable),
 									   .initial_matrix(matrix),
 									   .D(D),
 									   .matrix_D(matrix_D),
@@ -43,6 +45,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .S(S),
 									   .D(D));
 										
+
 	// Movement
 	movement_fsm  move (.clk(clk),
 						.rst(rst),
@@ -62,12 +65,14 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 						.r(S));
 	
 	// Check
-	check          cck (goal,
-						matrix_Q,
-						checked_matrix,
-						W,
-						L);
+	check          cck (.clk(clk),
+						.goal(goal),
+						.matrix(matrix_Q),
+						.checked_matrix(checked_matrix),
+						.W(W),
+						.L(L));
 	
+
 	/* Outputs */
 	
 	// matrix
@@ -82,10 +87,13 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	// WL state
 	mux_2to1 m2to1 (2'b11,
 					{W, L},
-					Q[1],
+					mux_sel,
 					wl);
 
-	/* OUTPUTS_GAME_LOGIC ? */
+
+	// Output mux select
+	outputs_summation outputs (.Q(Q),
+							   .ms(mux_sel));
 	
 
 endmodule
