@@ -7,7 +7,7 @@ module game_2048(
 		output logic hsync, vsync,
 		output logic sync_b, blank_b, // To monitor & DAC
 		output logic [7:0] r, g, b, // To video DAC,
-		output logic [0:6] disp_0, disp_2
+		output logic [0:6] disp_0, disp_1, disp_2, disp_3
 	);
 	logic any_button;
 	logic [2:0] D; // next state
@@ -28,7 +28,7 @@ module game_2048(
 	// display game on screen depending on the current state 
 	vga vga_display(clk, rst_vga, matrix_Q, Q, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);
 
-	seven_seg_decoder display_state(Q, disp_0);
-	seven_seg_decoder display_rand(4'b0, disp_2);
+	// set 7 segments displays to show current score or the goal settings
+	set_displays set_displays(D, switches, matrix_Q, disp_0, disp_1, disp_2, disp_3);
 
 endmodule

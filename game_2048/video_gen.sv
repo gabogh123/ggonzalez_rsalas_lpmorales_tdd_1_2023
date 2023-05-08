@@ -4,17 +4,18 @@ module video_gen(
 		input logic [11:0] matrix [3:0][3:0],  
 		output logic [7:0] r, g, b
 	);
-	logic pixel_0, pixel_1, pixel_2, pixel_3, in_grid_temp, in_grid, pixel;
+	logic pixel_0, pixel_1, pixel_2, pixel_3, pixel_4, in_grid_temp, in_grid, pixel;
 
 
 	start_text start_text(x, y, pixel_0);
+	settings_text settings_text(x, y, pixel_1);
 
-	display_matrix disp_matrix(x, y, matrix, pixel_1);
+	display_matrix disp_matrix(x, y, matrix, pixel_2);
 	display_grid grid(x, y, in_grid_temp);
 
-	victory_text victory_text(x, y, pixel_2);
+	victory_text victory_text(x, y, pixel_3);
 
-	defeat_text defeat_text(x, y, pixel_3);
+	defeat_text defeat_text(x, y, pixel_4);
 
 	always @(state) begin
 		case (state)
@@ -23,23 +24,23 @@ module video_gen(
 				in_grid = 0; 
 			end 
 			3'b001: begin 
-				pixel = pixel_0;
+				pixel = pixel_1;
 				in_grid = 0;
 			end 
 			3'b010: begin 
-				pixel = pixel_1;
+				pixel = pixel_2;
 				in_grid = in_grid_temp;
 			end 
 			3'b011: begin 
-				pixel = pixel_1;
+				pixel = pixel_2;
 				in_grid = in_grid_temp;
 			end  
 			3'b100: begin 
-				pixel = pixel_2;
+				pixel = pixel_3;
 				in_grid = 0;
 			end
 			3'b101: begin 
-				pixel = pixel_3;
+				pixel = pixel_4;
 				in_grid = 0; 
 			end
 			default: begin 

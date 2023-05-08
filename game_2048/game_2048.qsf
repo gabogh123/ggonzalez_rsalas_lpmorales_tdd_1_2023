@@ -170,4 +170,22 @@ set_global_assignment -name SYSTEMVERILOG_FILE update_matrix.sv
 set_global_assignment -name SYSTEMVERILOG_FILE counter_4_bits.sv
 set_location_assignment PIN_AE11 -to lost
 set_location_assignment PIN_AC9 -to won
+set_global_assignment -name SYSTEMVERILOG_FILE set_displays.sv
+set_global_assignment -name SYSTEMVERILOG_FILE switches_deco.sv
+set_global_assignment -name SYSTEMVERILOG_FILE score_deco.sv
+set_location_assignment PIN_AJ29 -to disp_1[0]
+set_location_assignment PIN_AH29 -to disp_1[1]
+set_location_assignment PIN_AH30 -to disp_1[2]
+set_location_assignment PIN_AG30 -to disp_1[3]
+set_location_assignment PIN_AF29 -to disp_1[4]
+set_location_assignment PIN_AF30 -to disp_1[5]
+set_location_assignment PIN_AD27 -to disp_1[6]
+set_location_assignment PIN_AD26 -to disp_3[0]
+set_location_assignment PIN_AC27 -to disp_3[1]
+set_location_assignment PIN_AD25 -to disp_3[2]
+set_location_assignment PIN_AC25 -to disp_3[3]
+set_location_assignment PIN_AB28 -to disp_3[4]
+set_location_assignment PIN_AB25 -to disp_3[5]
+set_location_assignment PIN_AB22 -to disp_3[6]
+set_global_assignment -name SYSTEMVERILOG_FILE settings_text.sv
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
