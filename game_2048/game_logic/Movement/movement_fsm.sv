@@ -1,37 +1,70 @@
 /*
 Movement Logic FSM
 */
-module movement_fsm(clk, rst, direction, matrix, matrix_D, r);
+module movement_fsm(clk, rst, enable, direction, matrix, matrix_D, r);
 
-	input  logic 		clk, rst;
+	input  logic 		clk, rst, enable;
 	input  logic  [3:0] direction;
 	input  logic [11:0] matrix 	 [3:0][3:0];
 	output logic [11:0] matrix_D [3:0][3:0];
 	output logic 		r;
 	
 
-	logic Q2, Q1, Q0, D2, D1, D0;
-	
+	logic [1:0]  D;
+	logic [1:0]  Q;
 
-	actual_state_movement actual (clk, rst, D2, D1, D0, Q2, Q1, Q0);
-	
-	
+	logic [11:0] matrix_Q [3:0][3:0];
+
 	logic [11:0] pre_moved_matrix_0 [3:0][3:0];
 	logic [11:0] pre_moved_matrix_1 [3:0][3:0];
 	logic [11:0] pre_moved_matrix_2 [3:0][3:0];
 	logic [11:0] pre_moved_matrix_3 [3:0][3:0];
 	
 	logic ready_0, ready_1, ready_2, ready_3;
+
+	logic [1:0] mux_sel;
 	
 
-	movement m00 (direction, matrix, pre_moved_matrix_0, ready_0);
-	movement m01 (direction, pre_moved_matrix_0, pre_moved_matrix_1, ready_1);
-	movement m10 (direction, pre_moved_matrix_1, pre_moved_matrix_2, ready_2);
-	movement m11 (direction, pre_moved_matrix_2, pre_moved_matrix_3, ready_3);
+	actual_state_movement current_state(.clk(clk),
+										.rst(rst),
+										.enable(enable),
+										.initial_matrix(matrix),
+										.D(D),
+										.matrix_D(matrix_D),
+										.Q(Q),
+										.matrix_Q(matrix_Q));
 
-	
+
+	next_state_movement next_state (.Q(Q),
+									.r(r),
+									.D(D));
+
+
+	movement m00 (clk, direction, matrix_Q, pre_moved_matrix_0, ready_0);
+	movement m01 (clk, direction, matrix_Q, pre_moved_matrix_1, ready_1);
+	movement m10 (clk, direction, matrix_Q, pre_moved_matrix_2, ready_2);
+	movement m11 (clk, direction, matrix_Q, pre_moved_matrix_3, ready_3);
+
+
+	mux_4MtoM m4MtoM (clk,
+					  pre_moved_matrix_0,
+					  pre_moved_matrix_1,
+					  pre_moved_matrix_2,
+					  pre_moved_matrix_3,
+					  mux_sel,
+					  matrix_D);
+
+
+	mux_4to1 m4to1 (ready_0,
+					ready_1,
+					ready_2,
+					ready_3,
+					mux_sel,
+					r);
+
+	/*
 	always_comb
-		case ({Q2, Q1, Q0})
+		case (Q)
 		
 			3'b000:  r = ready_0;
 			3'b001:  r = ready_1;
@@ -39,20 +72,9 @@ module movement_fsm(clk, rst, direction, matrix, matrix_D, r);
 			3'b011:  r = ready_3;
 			default: r = 1'b1;
 			
-		endcase
-	
+		endcase*/
 
-	next_state_movement next (Q2, Q1, Q0, r, D2, D1, D0);
-	outputs_movement salidas (Q2, Q1, Q0, M1, M0);
-	
-
-	mux_4MtoM m4MtoM (pre_moved_matrix_0,
-					  pre_moved_matrix_1,
-					  pre_moved_matrix_2,
-					  pre_moved_matrix_3,
-					  {M1, M0},
-					  matrix_D);
-
-	// mux 4:1 para el ready
+	outputs_movement outputs (.Q(Q),
+							  .ms(mux_sel));
 
 endmodule

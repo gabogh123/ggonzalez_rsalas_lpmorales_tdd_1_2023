@@ -2,9 +2,12 @@
 Outputs for Movement's FSM
 */
 
-module outputs_movement(input Q2, Q1, Q0, output M1, M0);
+module outputs_movement(Q, ms);
 
-	assign M0 = Q0;
-	assign M1 = Q1;
+	input  logic [1:0] Q;
+	output logic [1:0] ms;
+
+	assign ms[0] = Q[0];
+	assign ms[1] = Q[1];
 
 endmodule

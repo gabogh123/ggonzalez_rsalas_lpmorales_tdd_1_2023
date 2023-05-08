@@ -40,8 +40,8 @@ module summation(clk, direction, matrix, summed_matrix, ready);
 		*/
 		if (direction == 4'b1000) begin // LEFT
 			
-			for (int i = 0; i < $size(matrix); i++) begin
-				for (int j = 0; j < $size(matrix); j++) begin
+			for (int i = 0; i < 4; i++) begin
+				for (int j = 0; j < 4; j++) begin
 					adjusted_matrix[i][j] = matrix[j][3-i];
 				end
 			end

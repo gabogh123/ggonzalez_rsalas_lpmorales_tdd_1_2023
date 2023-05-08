@@ -11,15 +11,13 @@ output:
 	- flag para saber si esta lista o se tiene que reacomodar
 
 */
-
-
 module movement(clk, direction, matrix, moved_matrix, ready);
 
 	input  logic 		clk;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix 		 [3:0][3:0];
 	output logic [11:0] moved_matrix [3:0][3:0];
-	output logic 		  ready;
+	output logic 		ready;
 	
 	logic [11:0] temp_matrix [3:0][3:0];
 	

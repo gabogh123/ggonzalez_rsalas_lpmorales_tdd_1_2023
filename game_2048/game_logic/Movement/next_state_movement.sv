@@ -1,10 +1,13 @@
 /*
 Next State for Movement's FSM
 */
-module next_state_movement(input Q2, Q1, Q0, r, output D2, D1, D0);
+module next_state_movement(Q, r, D);
 
-	assign D0 = !Q0 & !r;
-	assign D1 = (Q0 & !r) | (Q1 & !r) | (Q1 & Q0);
-	assign D2 = (!Q2 & !Q1 & r) | (!Q2 & !Q0 & r);
+	input  logic [1:0] Q;
+	input  logic 	   r;
+	output logic [1:0] D;
+
+	assign D[0] = (!Q[0] & !r) | (Q[0] & r) | (Q[1] & !r);
+	assign D[1] = Q[1] | (Q[0] & !r);
 
 endmodule

@@ -17,8 +17,6 @@ module current_state_summation(clk, rst, enable, initial_matrix, D, matrix_D, Q,
 
 	always_ff @ (posedge clk or posedge rst) begin
 
-		//$display("(current_state_summation) D = %b", {D[1], D[0]});
-
 		if (rst) begin
 			
 			regs = 2'b00;

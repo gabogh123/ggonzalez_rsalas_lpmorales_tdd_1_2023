@@ -43,9 +43,10 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .S(S),
 									   .D(D));
 										
-	// Movement		  
+	// Movement
 	movement_fsm  move (.clk(clk),
 						.rst(rst),
+						.enable(enable),
 						.direction(direction),
 						.matrix(matrix_Q),
 						.matrix_D(moved_matrix),
@@ -70,7 +71,8 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	/* Outputs */
 	
 	// matrix
-	mux_4MtoM m4MtoM (moved_matrix,
+	mux_4MtoM m4MtoM (clk,
+					  moved_matrix,
 					  summed_matrix,
 					  checked_matrix,
 					  empty_matrix,

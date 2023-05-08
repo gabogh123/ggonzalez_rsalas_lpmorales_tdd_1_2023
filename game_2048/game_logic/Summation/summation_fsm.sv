@@ -65,7 +65,7 @@ module summation_fsm (clk, rst, enable, direction, matrix, matrix_D, r);
 
 
 	// Outputs Logic
-	outputs_summation outputs_sum (.Q(Q),
+	outputs_summation outputs (.Q(Q),
 								   .ms(mux_sel));
 
 
