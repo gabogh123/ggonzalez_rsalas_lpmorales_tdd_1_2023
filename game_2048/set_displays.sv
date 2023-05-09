@@ -8,11 +8,12 @@ module set_displays(
 	logic [11:0] score, w_score_0, w_score_1;
 	logic sel;
 	
-	assign sel = ~Q[2] & ~Q[1] & Q[0];
+	assign sel = (~Q[2] & ~Q[1] & ~Q[0]) | (~Q[2] & ~Q[1] & Q[0]);
 
 	switches_deco switches_deco(switches, w_score_0);
 
-	assign w_score_1 = 12'd0;
+	// assign w_score_1 = 12'd0;
+	score max_tile(matrix, w_score_1);
 
 	assign score = sel ? w_score_0 : w_score_1;
 

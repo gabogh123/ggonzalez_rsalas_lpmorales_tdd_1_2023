@@ -47,7 +47,7 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
-set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim (SystemVerilog)"
+set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (SystemVerilog)"
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "SYSTEMVERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_board_design_timing
@@ -57,7 +57,7 @@ set_global_assignment -name EDA_GENERATE_FUNCTIONAL_NETLIST OFF -section_id eda_
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name EDA_TEST_BENCH_ENABLE_STATUS TEST_BENCH_MODE -section_id eda_simulation
-set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH game_2048_tb -section_id eda_simulation
+set_global_assignment -name EDA_NATIVELINK_SIMULATION_TEST_BENCH score_tb -section_id eda_simulation
 set_global_assignment -name EDA_TEST_BENCH_NAME clock_divider_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id clock_divider_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME clock_divider_tb -section_id clock_divider_tb
@@ -128,9 +128,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE new_tile.sv
 set_global_assignment -name SYSTEMVERILOG_FILE new_tile_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE current_state.sv
 set_global_assignment -name SYSTEMVERILOG_FILE next_state.sv
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_location_assignment PIN_AB12 -to switches[0]
 set_location_assignment PIN_AC12 -to switches[1]
 set_location_assignment PIN_AF9 -to switches[2]
@@ -150,14 +147,9 @@ set_location_assignment PIN_AF28 -to disp_0[4]
 set_location_assignment PIN_AG28 -to disp_0[5]
 set_location_assignment PIN_AH28 -to disp_0[6]
 set_global_assignment -name SYSTEMVERILOG_FILE game_2048_tb.sv
-set_global_assignment -name EDA_TEST_BENCH_FILE clock_divider_tb.sv -section_id clock_divider_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE lfsr_tb.sv -section_id lfsr_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE count_zeros_tb.sv -section_id count_zeros_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE new_tile_tb.sv -section_id new_tile_tb
 set_global_assignment -name EDA_TEST_BENCH_NAME game_2048_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_2048_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_2048_tb -section_id game_2048_tb
-set_global_assignment -name EDA_TEST_BENCH_FILE game_2048_tb.sv -section_id game_2048_tb
 set_location_assignment PIN_AB23 -to disp_2[0]
 set_location_assignment PIN_AE29 -to disp_2[1]
 set_location_assignment PIN_AD29 -to disp_2[2]
@@ -188,4 +180,24 @@ set_location_assignment PIN_AB28 -to disp_3[4]
 set_location_assignment PIN_AB25 -to disp_3[5]
 set_location_assignment PIN_AB22 -to disp_3[6]
 set_global_assignment -name SYSTEMVERILOG_FILE settings_text.sv
+set_global_assignment -name SYSTEMVERILOG_FILE score.sv
+set_global_assignment -name SYSTEMVERILOG_FILE greater.sv
+set_global_assignment -name SYSTEMVERILOG_FILE greater_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME greater_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id greater_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME greater_tb -section_id greater_tb
+set_global_assignment -name SYSTEMVERILOG_FILE score_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME score_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id score_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME score_tb -section_id score_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE clock_divider_tb.sv -section_id clock_divider_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE lfsr_tb.sv -section_id lfsr_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE count_zeros_tb.sv -section_id count_zeros_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE new_tile_tb.sv -section_id new_tile_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE game_2048_tb.sv -section_id game_2048_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE greater_tb.sv -section_id greater_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE score_tb.sv -section_id score_tb
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
