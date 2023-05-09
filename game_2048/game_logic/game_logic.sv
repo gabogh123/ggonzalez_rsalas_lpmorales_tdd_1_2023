@@ -35,30 +35,40 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .enable(enable),
 									   .initial_matrix(matrix),
 									   .D(D),
-									   .matrix_D(matrix_D),
+									   .matrix_D(matrix_D), //borrar
 									   .Q(Q),
-									   .matrix_Q(matrix_Q));
+									   .matrix_Q(matrix_Q)); // borrar
 	
 	/* Next State */
-	next_state_logic 	   next_state (.Q(Q),
+	next_state_logic 	   next_state (.clk(clk),
+									   .enable(enable),
+									   .Q(Q),
 									   .M(M),
 									   .S(S),
 									   .D(D));
-										
+
 
 	// Movement
+	/*
 	movement_fsm  move (.clk(clk),
 						.rst(rst),
 						.enable(enable),
 						.direction(direction),
 						.matrix(matrix_Q),
 						.matrix_D(moved_matrix),
-						.r(M));
+						.r(M));*/
+	movement move (.clk(clk),
+				   .enable(enable),
+				   .direction(direction),
+				   .matrix(matrix_Q), 
+				   .moved_matrix(moved_matrix), 
+				   .ready(M));
 	
 	// Summation
 	summation_fsm  sum (.clk(clk),
 						.rst(rst),
 						.enable(enable),
+						.outer_state(Q),
 						.direction(direction),
 						.matrix(matrix_Q),
 						.matrix_D(summed_matrix),
@@ -76,6 +86,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	/* Outputs */
 	
 	// matrix
+	
 	mux_4MtoM m4MtoM (clk,
 					  moved_matrix,
 					  summed_matrix,
@@ -85,10 +96,11 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 					  matrix_D);
 							
 	// WL state
-	mux_2to1 m2to1 (2'b11,
-					{W, L},
-					mux_sel,
-					wl);
+	mux_2NtoN m2NtoN (.clk(clk),
+					  .I0(2'b11),
+					  .I1({W, L}),
+					  .S(mux_sel),
+					  .O(wl));
 
 
 	// Output mux select

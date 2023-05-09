@@ -17,8 +17,8 @@ module update_matrix (
 
 
 	// generate random position for new tile
-	counter_4_bits counter(clk, rst, seed); //dynamic seed
-	lfsr random_position(buttons, Q, seed, rand_pos);
+	counter_4_bits counter (clk, rst, seed); //dynamic seed
+	lfsr random_position (buttons, Q, seed, rand_pos);
 
 
     // new tile where next state is 001 or 010

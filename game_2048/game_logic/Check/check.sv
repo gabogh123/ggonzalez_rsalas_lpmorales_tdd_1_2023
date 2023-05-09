@@ -10,5 +10,7 @@ module check (clk, goal, matrix, checked_matrix, W, L);
 	
 	goal_checker g_check (clk, goal, matrix, W);
 	movement_posibility_checker mp_check (clk, matrix, L);
+
+	assign checked_matrix = matrix;
 	
 endmodule

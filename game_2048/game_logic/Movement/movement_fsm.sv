@@ -23,6 +23,8 @@ module movement_fsm(clk, rst, enable, direction, matrix, matrix_D, r);
 	logic ready_0, ready_1, ready_2, ready_3;
 
 	logic [1:0] mux_sel;
+
+	// logic move_enable(Q, r, move_enable);
 	
 
 	actual_state_movement current_state(.clk(clk),
@@ -74,7 +76,7 @@ module movement_fsm(clk, rst, enable, direction, matrix, matrix_D, r);
 			
 		endcase*/
 
-	outputs_movement outputs (.Q(Q),
+	outputs_movement outputs (.Q(D),
 							  .ms(mux_sel));
 
 endmodule

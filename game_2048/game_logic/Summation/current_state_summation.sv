@@ -1,9 +1,9 @@
 /*
 Current State for Summation FSM
 */
-module current_state_summation(clk, rst, enable, initial_matrix, D, matrix_D, Q, matrix_Q);
+module current_state_summation(clk, rst, enable, module_enable, initial_matrix, D, matrix_D, Q, matrix_Q);
 
-	input  logic 		clk, rst, enable;
+	input  logic 		clk, rst, enable, module_enable;
 	input  logic [11:0] initial_matrix [3:0][3:0];
 	input  logic [1:0]  D;
 	input  logic [11:0] matrix_D [3:0][3:0];
@@ -27,10 +27,15 @@ module current_state_summation(clk, rst, enable, initial_matrix, D, matrix_D, Q,
 			regs = 2'b00;
 			regs_matrix = initial_matrix;
 		
-		end else begin
-			
+		end else if (module_enable) begin
+
 			regs = D;
 			regs_matrix = matrix_D;
+		
+		end else begin
+			
+			regs = Q;
+			regs_matrix = matrix_Q;
 			
 		end
 
