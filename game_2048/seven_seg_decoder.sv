@@ -1,5 +1,5 @@
 module seven_seg_decoder(
-		input logic [2:0] data,
+		input logic [3:0] data,
 		output logic [0:6] segments
 	);
 								 
@@ -15,12 +15,6 @@ module seven_seg_decoder(
 			'h7:			segments = 7'b000_1111;
 			'h8:			segments = 7'b000_0000;
 			'h9:			segments = 7'b000_1100;
-			'hA:			segments = 7'b000_1000;
-			'hB:			segments = 7'b110_0000;
-			'hC:			segments = 7'b011_0001;
-			'hD:			segments = 7'b100_0010;
-			'hE:			segments = 7'b011_0000;
-			'hF:			segments = 7'b011_1000;
 			default: segments = 7'b111_1111;
 		endcase
 endmodule
