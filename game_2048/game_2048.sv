@@ -15,12 +15,18 @@ module game_2048(
 	logic [11:0] matrix_D [3:0][3:0]; // next state matrix
 	logic [11:0] matrix_Q [3:0][3:0]; // current state matrix
 	
+	logic trigger;
+
 	// senses for any button to be pushed
     or_n_inputs #(4) or_buttons (~buttons, any_button);
+
+	always_comb begin
+        trigger = any_button | ~won | ~lost;
+    end
 	
 	// handle FSM's current and next state logic 
 	current_state current_state (clk, rst_game, D, matrix_D, Q, matrix_Q);
-	next_state next_state(Q, any_button, won, lost, rst_game, D);
+	next_state next_state(Q, trigger, won, lost, rst_game, D);
 
 	// handle matrix changes
 	update_matrix update_mat(clk, Q, any_button, matrix_Q, matrix_D);
