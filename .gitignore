@@ -9,15 +9,22 @@
 # ignore files and sub dirs in the directory
 /game_2048/*
 
-# but do not ignore .qpf and .sv files
+# but do not ignore .sv and .txt files
 !/game_2048/*.sv
-!/game_2048/*.qpf
+!/game_2048/*.txt
 
-# do not ignore ALU dir (needed due to the above bullet point)
+# do not ignore dir (needed due to the above bullet point)
 !/'Laboratorio 2'/*
-# ignore files and sub dirs in the /ALU directory
+# ignore files and sub dirs in the directory
 /'Laboratorio 2'/*/*
 
-# but do not ignore .qpf and .sv files
+# but do not ignore .sv files
 !/'Laboratorio 2'/*/*.sv
-!/'Laboratorio 2'/*/*.qpf
+
+# do not ignore dir (needed due to the above bullet point)
+!/'Laboratorio 3'/*
+# ignore files and sub dirs in the directory
+/'Laboratorio 3'/*/*
+
+# but do not ignore .sv files
+!/'Laboratorio 3'/*/*.sv
