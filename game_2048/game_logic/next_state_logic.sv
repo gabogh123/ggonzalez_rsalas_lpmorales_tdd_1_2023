@@ -9,7 +9,7 @@ module next_state_logic(clk, enable, Q, M, S, D);
 	input  logic 	   S;
 	output logic [1:0] D;
 
-	always_ff @ (posedge clk) begin
+	always_ff @ (posedge clk) begin //posedge clk) begin
 	
 		if (enable) begin
 			//D[1] = Q[1] | (Q[0] & S);
@@ -19,6 +19,7 @@ module next_state_logic(clk, enable, Q, M, S, D);
 		end else begin
 			D = Q;
 		end
+
 	end
 
 

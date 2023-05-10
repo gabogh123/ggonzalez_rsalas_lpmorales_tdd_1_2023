@@ -1,7 +1,8 @@
 /*
 Current State for Game Logic FSM
 */
-module current_state_logic(clk, rst, enable, initial_matrix, matrix_D, D, matrix_Q, Q);
+module current_state_logic(clk, rst, enable, initial_matrix, 
+						   matrix_D, D, matrix_Q, Q);
 
 	input  logic 		clk, rst, enable;
 	input  logic [11:0] initial_matrix [3:0][3:0];
@@ -28,9 +29,11 @@ module current_state_logic(clk, rst, enable, initial_matrix, matrix_D, D, matrix
 			regs_matrix = initial_matrix;
 		
 		end else begin
-			
+
 			regs = D;
 			regs_matrix = matrix_D;
+			
+			
 			
 		end
 

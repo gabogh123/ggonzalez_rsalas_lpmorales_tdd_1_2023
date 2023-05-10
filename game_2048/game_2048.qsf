@@ -142,6 +142,40 @@ set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME movement_tb -section_id m
 set_global_assignment -name EDA_TEST_BENCH_NAME movement_fsm_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id movement_fsm_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME movement_fsm_tb -section_id movement_fsm_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME check_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id check_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME check_tb -section_id check_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME game_logic_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_logic_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_logic_tb -section_id game_logic_tb
+set_global_assignment -name EDA_TEST_BENCH_NAME update_matrix_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id update_matrix_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME update_matrix_tb -section_id update_matrix_tb
+set_location_assignment PIN_AJ29 -to disp_1[0]
+set_location_assignment PIN_AH29 -to disp_1[1]
+set_location_assignment PIN_AH30 -to disp_1[2]
+set_location_assignment PIN_AG30 -to disp_1[3]
+set_location_assignment PIN_AF29 -to disp_1[4]
+set_location_assignment PIN_AF30 -to disp_1[5]
+set_location_assignment PIN_AD27 -to disp_1[6]
+set_location_assignment PIN_AD26 -to disp_3[0]
+set_location_assignment PIN_AC27 -to disp_3[1]
+set_location_assignment PIN_AD25 -to disp_3[2]
+set_location_assignment PIN_AC25 -to disp_3[3]
+set_location_assignment PIN_AB28 -to disp_3[4]
+set_location_assignment PIN_AB25 -to disp_3[5]
+set_location_assignment PIN_AB22 -to disp_3[6]
+set_global_assignment -name EDA_TEST_BENCH_NAME game_2048_tb2 -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_2048_tb2
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_2048_tb2 -section_id game_2048_tb2
+set_global_assignment -name SYSTEMVERILOG_FILE switches_deco.sv
+set_global_assignment -name SYSTEMVERILOG_FILE settings_text.sv
+set_global_assignment -name SYSTEMVERILOG_FILE set_displays.sv
+set_global_assignment -name SYSTEMVERILOG_FILE score_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE score_deco.sv
+set_global_assignment -name SYSTEMVERILOG_FILE score.sv
+set_global_assignment -name SYSTEMVERILOG_FILE greater_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE greater.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_checker.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/movement_posibility_by_side.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Check/goal_checker.sv
@@ -206,16 +240,26 @@ set_global_assignment -name SYSTEMVERILOG_FILE game_2048_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE new_tile_gen.sv
 set_global_assignment -name SYSTEMVERILOG_FILE update_matrix.sv
 set_global_assignment -name SYSTEMVERILOG_FILE counter_4_bits.sv
-set_global_assignment -name EDA_TEST_BENCH_NAME check_tb -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id check_tb
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME check_tb -section_id check_tb
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/outputs_logic.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic_tb.sv
-set_global_assignment -name EDA_TEST_BENCH_NAME game_logic_tb -section_id eda_simulation
-set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id game_logic_tb
-set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME game_logic_tb -section_id game_logic_tb
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2NtoN.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/Summation/module_enable_summation.sv
+set_global_assignment -name SYSTEMVERILOG_FILE update_matrix_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_2048_tb2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic_2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE update_matrix_2.sv
+set_global_assignment -name SYSTEMVERILOG_FILE new_tile_check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE new_tile_check_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE next_state_new_tile_check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE current_state_new_tile_check.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2MtoM_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME mux_2MtoM_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id mux_2MtoM_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME mux_2MtoM_tb -section_id mux_2MtoM_tb
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_4MtoM_tb.sv
+set_global_assignment -name EDA_TEST_BENCH_NAME mux_4MtoM_tb -section_id eda_simulation
+set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id mux_4MtoM_tb
+set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME mux_4MtoM_tb -section_id mux_4MtoM_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE clock_divider_tb.sv -section_id clock_divider_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE lfsr_tb.sv -section_id lfsr_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE count_zeros_tb.sv -section_id count_zeros_tb
@@ -227,4 +271,8 @@ set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/Movement/movement_tb.
 set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/Movement/movement_fsm_tb.sv -section_id movement_fsm_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/Check/check_tb.sv -section_id check_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/game_logic_tb.sv -section_id game_logic_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE update_matrix_tb.sv -section_id update_matrix_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE game_2048_tb2.sv -section_id game_2048_tb2
+set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/mux_2MtoM_tb.sv -section_id mux_2MtoM_tb
+set_global_assignment -name EDA_TEST_BENCH_FILE game_logic/mux_4MtoM_tb.sv -section_id mux_4MtoM_tb
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

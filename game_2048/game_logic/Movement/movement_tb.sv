@@ -12,14 +12,8 @@ module movement_tb();
 	movement uut (clk, direction, matrix, moved_matrix, ready);
 	
 	initial begin
-		$display("Inicia sistema");/*
-		$monitor("direction: %b\nmatrix:\n%p\n%p\n%p\n%p\nmoved_matrix:\n%p\n%p\n%p\n%p\nready: %b",
-					uut.direction,
-					uut.matrix[0][3:0], uut.matrix[1][3:0],
-					uut.matrix[2][3:0], uut.matrix[3][3:0],
-					uut.moved_matrix[0][3:0], uut.moved_matrix[1][3:0],
-					uut.moved_matrix[2][3:0], uut.moved_matrix[3][3:0],
-					uut.ready);*/
+		$display("Inicia sistema");
+
 		
 		clk = 0;
 		direction = 4'b0000;
@@ -36,25 +30,17 @@ module movement_tb();
 	initial begin
 
 		$display("Inicio again ..");
-		
-		
-		#100
-		
-
-		matrix = '{'{12'd2, 12'd2, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0}};
+	
+		#20
+		matrix = '{'{12'd0, 12'd0, 12'd0, 12'd0},
+				   '{12'd0, 12'd4, 12'd2, 12'd0},
+				   '{12'd0, 12'd8, 12'd8, 12'd0},
+				   '{12'd0, 12'd0, 12'd0, 12'd0}};
 		
 
 
 		#80
 
-		$display("\nmatrix:\n%p\n%p\n%p\n%p",
-				matrix[0][3:0], matrix[1][3:0],
-				matrix[2][3:0], matrix[3][3:0],);
-
-		#20;
 
 
 
@@ -64,34 +50,18 @@ module movement_tb();
 
 		#80
 
-		$display("\moved_matrix:\n%p\n%p\n%p\n%p",
-				moved_matrix[0][3:0], moved_matrix[1][3:0],
-				moved_matrix[2][3:0], moved_matrix[3][3:0]);
 
-		#20
 
-		matrix = '{'{12'd2, 12'd2, 12'd0, 12'd1},
-				   '{12'd4, 12'd0, 12'd2, 12'd0},
-				   '{12'd4, 12'd8, 12'd8, 12'd8},
-				   '{12'd4, 12'd0, 12'd0, 12'd0}};
+		
 		
 		#80
 
-		$display("\nmatrix:\n%p\n%p\n%p\n%p",
-				matrix[0][3:0], matrix[1][3:0],
-				matrix[2][3:0], matrix[3][3:0]);
 
-		#20;
 
 		direction = 4'b0100;
 
-		#80
+		#80;
 
-		$display("\nmoved_matrix:\n%p\n%p\n%p\n%p",
-				moved_matrix[0][3:0], moved_matrix[1][3:0],
-				moved_matrix[2][3:0], moved_matrix[3][3:0]);
-
-		#20;
 
 	end
 

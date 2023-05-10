@@ -13,7 +13,7 @@ module new_tile(
     //asssign 2 or 4 to n (position) zero in the matrix
     // if n is odd -> 4
     // else -> 2
-    always_ff @( posedge buttons) begin
+    always_ff @(posedge buttons) begin
         if (buttons) begin
             if (enable) begin
                 zero_count = 0;

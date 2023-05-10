@@ -5,6 +5,6 @@ module mux_2to1(I0, I1, S, O);
 	input  logic  S; 
 	output logic  O;
 				
-	assign O = (I0 & ~S) | (I1 & S);
+	assign O = (I0 & !S) | (I1 & S);
 	  
 endmodule

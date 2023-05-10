@@ -1,6 +1,6 @@
 module next_state(
-        input logic [2:0] Q,
-        input logic buttons, won, lost, rst,
+        input  logic [2:0] Q,
+        input  logic buttons, won, lost, rst,
         output logic [2:0] D
     );
 

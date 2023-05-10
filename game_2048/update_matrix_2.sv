@@ -1,4 +1,4 @@
-module update_matrix (
+module update_matrix_2 (
 		input  logic        clk,
 		input  logic [2:0]  Q,
 		input  logic [3:0]  goal,
@@ -12,6 +12,7 @@ module update_matrix (
 
 	logic [3:0] rand_pos, seed;
     logic en_new_tile; //enable new tile generation
+
 	logic [11:0] zero_mat [3:0][3:0] = '{'{12'd0, 12'd0, 12'd0, 12'd0}, 
 										 '{12'd0, 12'd0, 12'd0, 12'd0},
 										 '{12'd0, 12'd0, 12'd0, 12'd0},
@@ -27,32 +28,41 @@ module update_matrix (
 	counter_4_bits counter (clk, rst, seed); //dynamic seed
 	lfsr random_position (buttons, Q, seed, rand_pos);
 
-	logic [1:0] other_wl;
-	logic [1:0] game_logic_wl;
+	logic [1:0] checked_wl;
+	logic [1:0] shift_sum_wl;
 
     // new tile where next state is 001 or 010
-	assign en_new_tile = !Q[1] | !Q[0];
-	new_tile_gen new_tile(en_new_tile, buttons, rand_pos, matrix_Q, matrix_D_0);
+	assign en_new_tile_check = !Q[1] | !Q[0];
+	new_tile_check n_t_c (.clk(clk),
+						  .enable(en_new_tile_check),
+						  .button_press(buttons),
+						  .position(rand_pos),
+						  .goal(goal),
+						  .matrix_Q(matrix_Q),
+						  .matrix_D(matrix_D_0),
+						  .wl(checked_wl));
+	/* Aqui esta el modulo de new_tile y check */
 
-	assign other_wl = 2'b11;
+	logic game_logic_flag;
 	
-	// game logic where movements, summations and win-lose checks is 011
+	// game logic where movements & summations is 011
 	assign en_game_logic = ~Q[2] & Q[1] & Q[0];
-	game_logic g_logic (.clk(clk),
-						.rst(rst),
-						.enable(en_game_logic),
-						.goal(goal),
-						.direction(direction),
-						.matrix(matrix_Q),
-						.matrix_D(matrix_D_1),
-						.wl(game_logic_wl)); /* Aqui saldrian won, lost */
+	//  game_logic_2 (clk, rst, enable,  direction, matrix, matrix_D, ready);
+	game_logic_2 g_logic (.clk(clk),
+						  .rst(rst),
+						  .enable(en_game_logic),
+						  .direction(direction),
+						  .matrix(matrix_Q),
+						  .matrix_DF(matrix_D_1),
+						  .ready(game_logic_flag));
 
+	assign shift_sum_wl = 2'b11;
 
 	assign sel = Q[1] & Q[0];
 
 	mux_2MtoM m2MtoM (clk, matrix_D_0, matrix_D_1, sel, matrix_mux);
 	assign matrix_D = rst ? zero_mat : matrix_mux;
 
-	mux_2NtoN m2NtoN (clk, other_wl, game_logic_wl, sel, wl);
+	mux_2NtoN m2NtoN (clk, checked_wl, shift_sum_wl, sel, wl);
 
 endmodule

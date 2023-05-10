@@ -35,9 +35,9 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .enable(enable),
 									   .initial_matrix(matrix),
 									   .D(D),
-									   .matrix_D(matrix_D), //borrar
+									   .matrix_D(matrix_D),
 									   .Q(Q),
-									   .matrix_Q(matrix_Q)); // borrar
+									   .matrix_Q(matrix_Q));
 	
 	/* Next State */
 	next_state_logic 	   next_state (.clk(clk),
@@ -49,21 +49,13 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 
 
 	// Movement
-	/*
-	movement_fsm  move (.clk(clk),
-						.rst(rst),
-						.enable(enable),
-						.direction(direction),
-						.matrix(matrix_Q),
-						.matrix_D(moved_matrix),
-						.r(M));*/
 	movement move (.clk(clk),
 				   .enable(enable),
 				   .direction(direction),
 				   .matrix(matrix_Q), 
 				   .moved_matrix(moved_matrix), 
 				   .ready(M));
-	
+
 	// Summation
 	summation_fsm  sum (.clk(clk),
 						.rst(rst),
@@ -82,11 +74,11 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 						.W(W),
 						.L(L));
 	
+	
 
 	/* Outputs */
 	
 	// matrix
-	
 	mux_4MtoM m4MtoM (clk,
 					  moved_matrix,
 					  summed_matrix,
