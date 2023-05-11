@@ -1,5 +1,5 @@
 module count_zeros(
-  input logic [11:0] matrix[3:0][3:0],
+  input  logic [11:0] matrix[3:0][3:0],
   output logic [3:0] zero_count
 );
 

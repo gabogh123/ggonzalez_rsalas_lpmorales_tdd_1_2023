@@ -24,7 +24,7 @@ module summation_fsm (clk, rst, enable, outer_state, direction, matrix, matrix_D
 	logic moved_r;
 	
 	logic mux_sel;
-
+/*
 	// assign module_enable = outer_state[1] & !outer_state[0];
 	module_enable_summation mes (outer_state, module_enable);
 
@@ -78,6 +78,6 @@ module summation_fsm (clk, rst, enable, outer_state, direction, matrix, matrix_D
 	// Outputs Logic
 	outputs_summation outputs (.Q(Q),
 							   .ms(mux_sel));
-
+*/
 
 endmodule

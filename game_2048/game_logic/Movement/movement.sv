@@ -11,26 +11,26 @@ output:
 	- flag para saber si esta lista o se tiene que reacomodar
 
 */
-module movement(clk, enable, direction, matrix, moved_matrix, ready);
+module movement(/*clk,*/ enable, direction, matrix, moved_matrix, ready);
 
-	input  logic 		clk, enable;
+	//input  logic 		clk;
+	input  logic 		enable;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix 		 [3:0][3:0];
 	output logic [11:0] moved_matrix [3:0][3:0];
 	output logic 		ready;
 	
 	logic [11:0] temp_matrix [3:0][3:0];
-	
 	logic [11:0] adjusted_matrix [3:0][3:0];
 	
 	
 	// initial begin
-	always_ff @ (posedge clk) begin
+	//always_ff @ (posedge clk) begin
+	always_comb begin
 
+		if (enable) begin
 		
 	/***********************************************Initial Direction Adjust***********************************************************/
-		
-		if (enable) begin
 
 			/*
 			Se acomodara la matriz para hacer los movimientos correspondientes con
@@ -212,6 +212,11 @@ module movement(clk, enable, direction, matrix, moved_matrix, ready);
 			
 		/**********************************************Reverse Direction Adjust***********************************************************/
 			
+		end else begin
+
+			ready = 0;
+			moved_matrix = matrix;
+
 		end
 	end
 

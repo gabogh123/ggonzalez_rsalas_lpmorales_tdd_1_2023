@@ -248,10 +248,6 @@ set_global_assignment -name SYSTEMVERILOG_FILE update_matrix_tb.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_2048_tb2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic_2.sv
 set_global_assignment -name SYSTEMVERILOG_FILE update_matrix_2.sv
-set_global_assignment -name SYSTEMVERILOG_FILE new_tile_check.sv
-set_global_assignment -name SYSTEMVERILOG_FILE new_tile_check_tb.sv
-set_global_assignment -name SYSTEMVERILOG_FILE next_state_new_tile_check.sv
-set_global_assignment -name SYSTEMVERILOG_FILE current_state_new_tile_check.sv
 set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_2MtoM_tb.sv
 set_global_assignment -name EDA_TEST_BENCH_NAME mux_2MtoM_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id mux_2MtoM_tb
@@ -260,6 +256,8 @@ set_global_assignment -name SYSTEMVERILOG_FILE game_logic/mux_4MtoM_tb.sv
 set_global_assignment -name EDA_TEST_BENCH_NAME mux_4MtoM_tb -section_id eda_simulation
 set_global_assignment -name EDA_DESIGN_INSTANCE_NAME NA -section_id mux_4MtoM_tb
 set_global_assignment -name EDA_TEST_BENCH_MODULE_NAME mux_4MtoM_tb -section_id mux_4MtoM_tb
+set_global_assignment -name SYSTEMVERILOG_FILE new_tile_gen_tb.sv
+set_global_assignment -name SYSTEMVERILOG_FILE game_logic/game_logic_3.sv
 set_global_assignment -name EDA_TEST_BENCH_FILE clock_divider_tb.sv -section_id clock_divider_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE lfsr_tb.sv -section_id lfsr_tb
 set_global_assignment -name EDA_TEST_BENCH_FILE count_zeros_tb.sv -section_id count_zeros_tb

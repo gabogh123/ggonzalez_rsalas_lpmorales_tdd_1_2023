@@ -2,9 +2,8 @@
 MUX 2:1
 */
 
-module mux_2MtoM(clk, M0, M1, S, OM);
+module mux_2MtoM(M0, M1, S, OM);
 	  
-	input  logic        clk;  
 	input  logic [11:0] M0 		 [3:0][3:0];
 	input  logic [11:0] M1 		 [3:0][3:0];
 	input  logic        S; 

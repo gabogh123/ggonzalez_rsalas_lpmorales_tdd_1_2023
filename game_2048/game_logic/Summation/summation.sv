@@ -10,12 +10,12 @@ output:
 	- flag para saber si esta lista o se tiene que reacomodar
 		(ready sera la variable que entra en for_sum de 'movement' si es igual a 0)
 */
-module summation(clk, enable, direction, matrix, summed_matrix, ready);
+module summation(/*clk,*/ enable, direction, matrix, summed_matrix, ready);
 
-	input  logic 		clk, enable;
+	//input  logic 		clk;
+	input  logic 		enable;
 	input  logic [3:0]  direction;
 	input  logic [11:0] matrix 		  [3:0][3:0];
-	
 	output logic [11:0] summed_matrix [3:0][3:0];
 	output logic		ready;
 	
@@ -25,7 +25,8 @@ module summation(clk, enable, direction, matrix, summed_matrix, ready);
 										
 	
 	// initial begin
-	always_ff @ (posedge clk) begin
+	//always_ff @ (posedge clk) begin
+	always_comb begin
 		
 	/***********************************************Initial Direction Adjust***********************************************************/
 
@@ -133,6 +134,8 @@ module summation(clk, enable, direction, matrix, summed_matrix, ready);
 				end
 				
 			end
+
+		ready = 1; // Ahora es solo para saber que termina
 			
 	/**************************************************Matrix Summations***************************************************************/
 

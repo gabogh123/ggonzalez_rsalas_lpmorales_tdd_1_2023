@@ -28,8 +28,8 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 
 	logic mux_sel;
 
-	
-	/* Current State */
+	/*
+	/* Current State *
 	current_state_logic current_state (.clk(clk),
 									   .rst(rst),
 									   .enable(enable),
@@ -39,7 +39,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 									   .Q(Q),
 									   .matrix_Q(matrix_Q));
 	
-	/* Next State */
+	/* Next State *
 	next_state_logic 	   next_state (.clk(clk),
 									   .enable(enable),
 									   .Q(Q),
@@ -76,7 +76,7 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	
 	
 
-	/* Outputs */
+	/* Outputs *
 	
 	// matrix
 	mux_4MtoM m4MtoM (clk,
@@ -99,5 +99,5 @@ module game_logic (clk, rst, enable, goal, direction, matrix, matrix_D, wl);
 	outputs_summation outputs (.Q(Q),
 							   .ms(mux_sel));
 	
-
+*/
 endmodule

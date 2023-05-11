@@ -17,10 +17,8 @@ module game_2048(
 	
 	logic [1:0] wl;
 
-	logic trigger; //, won, los;
-
-	//assign won = 0;
-	//assign lost = 0;
+	logic trigger; //, won, lost;
+	
 
 	// senses for any button to be pushed
     or_n_inputs #(4) or_buttons (~buttons, any_button);

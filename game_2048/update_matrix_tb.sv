@@ -8,7 +8,7 @@ module update_matrix_tb();
     logic [11:0] matrix_Q [3:0][3:0];
     logic [11:0] matrix_D [3:0][3:0];
     logic [1:0]  wl;
-    logic en_new_tile;
+    logic en_check;
     logic en_game_logic;
 
     logic sel_mux;
@@ -21,19 +21,19 @@ module update_matrix_tb();
 
 		clk = 0;
 		Q = 3'b000;
-        goal = 4'b0100;
+    goal = 4'b0100;
 		direction = 4'b0000;
-        buttons = 0;
+    buttons = 0;
 		matrix_Q = '{'{12'd0, 12'd0, 12'd0, 12'd0},
-				     '{12'd0, 12'd0, 12'd0, 12'd0},
-				     '{12'd0, 12'd0, 12'd0, 12'd0},
-				     '{12'd0, 12'd0, 12'd0, 12'd0}};
+				         '{12'd0, 12'd0, 12'd0, 12'd0},
+				         '{12'd0, 12'd0, 12'd0, 12'd0},
+				         '{12'd0, 12'd0, 12'd0, 12'd0}};
 	end
 
     always begin
 		#10 clk = !clk;
         sel_mux = uut.sel;
-        en_new_tile = uut.en_new_tile;
+        en_check = uut.en_check;
         en_game_logic = uut.en_game_logic;
 
     end
@@ -59,7 +59,9 @@ module update_matrix_tb();
 
        
 
-        #40;
+        #40
+        buttons = 0;
+        #40
 
         Q = 3'b001;
         buttons = 1;
@@ -74,6 +76,8 @@ module update_matrix_tb();
         #40
         buttons = 0;
         #40
+
+
 
         Q = 3'b010;
         buttons = 1;

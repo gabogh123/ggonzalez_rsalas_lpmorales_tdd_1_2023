@@ -9,7 +9,7 @@ module update_matrix (
 		output logic [1:0]  wl
 		);
 	
-
+	/*
 	logic [3:0] rand_pos, seed;
     logic en_new_tile; //enable new tile generation
 	logic [11:0] zero_mat [3:0][3:0] = '{'{12'd0, 12'd0, 12'd0, 12'd0}, 
@@ -45,7 +45,7 @@ module update_matrix (
 						.direction(direction),
 						.matrix(matrix_Q),
 						.matrix_D(matrix_D_1),
-						.wl(game_logic_wl)); /* Aqui saldrian won, lost */
+						.wl(game_logic_wl)); /* Aqui saldrian won, lost *
 
 
 	assign sel = Q[1] & Q[0];
@@ -54,5 +54,5 @@ module update_matrix (
 	assign matrix_D = rst ? zero_mat : matrix_mux;
 
 	mux_2NtoN m2NtoN (clk, other_wl, game_logic_wl, sel, wl);
-
+	*/
 endmodule
