@@ -1,5 +1,6 @@
 module game_2048(
 		input logic clk, rst_game, rst_vga,
+		input logic won, lost,
 		input logic [3:0] buttons, // [3] left, [2] down, [1] up, [0] right
 		input logic [3:0] switches,
 		output logic vgaclk, // 25 MHz VGA clock
@@ -14,16 +15,13 @@ module game_2048(
 	logic [11:0] matrix_D [3:0][3:0]; // next state matrix
 	logic [11:0] matrix_Q [3:0][3:0]; // current state matrix
 	
-	logic trigger, won, los;
-
-	assign won = 0;
-	assign lost = 0;
+	logic trigger;
 
 	// senses for any button to be pushed
     or_n_inputs #(4) or_buttons (~buttons, any_button);
 
 	always_comb begin
-        trigger = any_button; //| ~won | ~lost;
+        trigger = any_button | ~won | ~lost ;
     end
 	
 	// handle FSM's current and next state logic 
