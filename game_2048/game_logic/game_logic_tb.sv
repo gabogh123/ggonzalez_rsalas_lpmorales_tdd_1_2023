@@ -182,7 +182,7 @@ module game_logic_tb();
 				   '{12'd16, 12'd16,   12'd0,   12'd2}};
         #40
 
-        direction = 4'b0100;
+        direction = 4'b0010;
         #40
 
         enable = 1;

@@ -1,0 +1,49 @@
+module direction_adjuster(direction, matrix, adjusted_matrix);
+
+	input  logic [3:0] direction;
+	input  logic [11:0] matrix 		[3:0][3:0];
+	output logic [11:0] adjusted_matrix [3:0][3:0];
+	
+	logic [11:0] temp_matrix [3:0][3:0];
+
+	
+	initial begin
+
+	if (direction == 4'1000) begin // left
+	
+		temp_matrix = matrix
+	
+	end else if (direction == 4'0100) begin // down
+	
+		temp_matrix = matrix
+	
+	end else if (direction == 4'0010) begin // up
+	
+		temp_matrix = matrix
+	
+	end else if (direction == 4'0001) begin // right
+	
+		for (int i = 0; i < $size(matrix); i++)
+		
+			for (int j = 0; j < $size(matrix); j++)
+		
+				temp_matrix[i][j] = matrix[j][3-i]
+		
+			end
+		
+		end
+	
+	end else begin
+	
+		temp_matrix = matrix
+	
+	end
+	
+	adjusted_matrix = temp_matrix
+	
+	end
+	
+	
+
+
+endmodule

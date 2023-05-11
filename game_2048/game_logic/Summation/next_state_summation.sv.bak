@@ -1,0 +1,16 @@
+/*
+Next State for Summation FSM
+*/
+module next_state_summation(Q, r, D);
+
+	input  logic [2:0] D;
+	input  logic 		 r;
+	output logic [2:0] Q;
+	
+	// FALTA
+
+	assign D[0] = Q[0];
+	assign D[1] = Q[1];
+	assign D[2] = Q[2];
+
+endmodule

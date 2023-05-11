@@ -1,0 +1,17 @@
+module game_logic(enable, clk, rst, matrix_Q, matrix_D, W, L);
+
+	input  logic clk, rst;
+	input  logic [11:0] matrix_Q [3:0][3:0];
+	output logic [11:0] matrix_D [3:0][3:0];
+	output logic 		  W;
+	output logic 		  L;
+	
+
+	// Aqui irira la logica de todas las FSM de la logica
+	
+	// movement_fsm
+	// summation_fsm
+	// check_fsm
+	
+
+endmodule

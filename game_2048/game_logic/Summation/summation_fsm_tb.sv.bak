@@ -1,0 +1,60 @@
+module summation_fsm_tb();
+
+	logic clk, rst;
+	logic [3:0]  direction;
+	logic [11:0] matrix_Q [3:0][3:0];
+	logic [11:0] matrix_D [3:0][3:0];
+	logic 		 r;
+	
+
+	// summation_fsm fsmut (clk, rst, direction, matrix_Q, matrix_D, r);
+	FSMTest maquina_estados(clk, rst, x, a, b);
+
+	initial begin
+		$display("Inicia sistema");
+		clk = 0;
+		rst = 0;
+		direction = 4'b0000;
+		matrix_Q = '{ '{12'd0, 12'd0, 12'd0, 12'd0},
+						  '{12'd0, 12'd0, 12'd0, 12'd0},
+						  '{12'd0, 12'd0, 12'd0, 12'd0},
+						  '{12'd0, 12'd0, 12'd0, 12'd0}  
+					    };
+
+	end
+
+	always
+		#10 clk = !clk;
+		
+	initial begin
+		#20 rst = 1;
+		#10 rst = 0;
+		
+		#200 
+		
+		
+		matrix_Q = '{ '{12'd2, 12'd2, 12'd4, 12'd4},
+						  '{12'd2, 12'd8, 12'd8, 12'd8},
+						  '{12'd0, 12'd8, 12'd8, 12'd16},
+						  '{12'd0, 12'd0, 12'd0, 12'd16}  
+					    };
+						 
+		direction = 4'b1000;
+		
+		#20
+		direction = 4'b0100;
+		
+		#20
+		direction = 4'b0010;
+		
+		#20
+		direction = 4'b0001;
+		
+		
+		#20;
+	end
+	
+	initial
+	#1000 $finish;
+
+endmodule

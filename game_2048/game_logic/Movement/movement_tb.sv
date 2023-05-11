@@ -3,20 +3,20 @@ Movement FSM Test Bench
 */
 module movement_tb();
 
-	logic 		 clk;
+	//logic 		 clk;
 	logic 		 enable;
 	logic [3:0]  direction;
 	logic [11:0] matrix [3:0][3:0];
 	logic [11:0] moved_matrix [3:0][3:0];
 	logic		 ready;
 
-	movement uut (clk, enable, direction, matrix, moved_matrix, ready);
+	movement uut (/*clk,*/ enable, direction, matrix, moved_matrix, ready);
 	
 	initial begin
 		$display("Inicia sistema");
 
 		
-		clk = 0;
+		//clk = 0;
 		enable = 0;
 		direction = 4'b0000;
 		matrix = '{'{12'd0, 12'd0, 12'd0, 12'd0},
@@ -25,10 +25,10 @@ module movement_tb();
 				   '{12'd0, 12'd0, 12'd0, 12'd0}};
 
 	end
-
+	/*
 	always
 		#10 clk = !clk;
-		
+	*/
 	initial begin
 
 		$display("Inicio again ..");
@@ -37,11 +37,16 @@ module movement_tb();
 
 		enable = 1;
 	
-		#20
+		#20/*
 		matrix = '{'{12'd0, 12'd0, 12'd0, 12'd0},
 				   '{12'd0, 12'd4, 12'd2, 12'd0},
 				   '{12'd0, 12'd8, 12'd8, 12'd0},
-				   '{12'd0, 12'd0, 12'd0, 12'd0}};
+				   '{12'd0, 12'd0, 12'd0, 12'd0}};*/
+
+		matrix = '{'{12'd2,   12'd0,   12'd0,   12'd0},
+				   '{12'd4,   12'd4, 12'd128, 12'd128},
+				   '{12'd8,   12'd0,   12'd8,   12'd0},
+				   '{12'd16, 12'd16,   12'd0,   12'd2}};
 		
 
 		#80

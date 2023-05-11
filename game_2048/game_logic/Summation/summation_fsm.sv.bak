@@ -1,0 +1,16 @@
+module summation_fsm(clk, rst, direction, matrix, moved_matrix);
+
+	logic [2:0]  Q;
+	logic [11:0] matrix_Q [3:0][3:0];
+
+	logic [2:0]  D;
+	logic [11:0] matrix_D [3:0][3:0];
+	
+	logic r;
+	
+		
+	//current_state_summation current_state (clk, rst, Q, matrix_Q, D, matrix_D);
+
+
+
+endmodule

@@ -1,7 +1,7 @@
 
-module check (clk, enable, goal, matrix, checked_matrix, W, L);
+module check (/*clk,*/ enable, goal, matrix, checked_matrix, W, L);
 
-	input  logic 		clk;
+	//input  logic 		clk;
 	input  logic        enable;
 	input  logic [3:0]  goal;
 	input  logic [11:0] matrix [3:0][3:0];

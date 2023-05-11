@@ -7,11 +7,16 @@
 # do not ignore dir (needed due to the above bullet point)
 !/game_2048
 # ignore files and sub dirs in the directory
-/game_2048/*
+/game_2048/db
+/game_2048/incremental_db
+/game_2048/output_files
+/game_2048/simulation
 
 # but do not ignore .sv and .txt files
 !/game_2048/*.sv
 !/game_2048/*.txt
+!/game_2048/game_logic/*.sv
+!/game_2048/game_logic/*.txt
 
 # do not ignore dir (needed due to the above bullet point)
 !/'Laboratorio 2'/*

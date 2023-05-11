@@ -1,0 +1,8 @@
+module movement_posibility_checker(matrix, L);
+
+	input  logic [11:0] matrix [3:0][3:0];
+	output logic 		  L;
+	
+	
+
+endmodule
