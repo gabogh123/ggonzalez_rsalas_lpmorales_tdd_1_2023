@@ -18,6 +18,8 @@ module game_2048(
 	logic [1:0] wl;
 
 	logic trigger; //, won, lost;
+
+	logic [3:0]  rand_pos, seed;
 	
 
 	// senses for any button to be pushed
@@ -33,8 +35,12 @@ module game_2048(
 	next_state n_state(Q, trigger, wl[1], wl[0], rst_game, D);
 	/* Aqui entran el won, lost que viene de update_matrix*/
 
+	// generate random position for new tile
+	//counter_4_bits counter (clk, rst, seed); //dynamic seed
+	//lfsr random_position (buttons, Q, seed, rand_pos);
+
 	// handle matrix changes
-	update_matrix_2 update_mat(clk, Q, ~switches, ~buttons, any_button, matrix_Q, matrix_D, wl);
+	update_matrix_2 update_mat(clk, Q, switches, ~buttons, any_button, matrix_Q, matrix_D, wl);
 	/* se agregaron switches y buttons, necesarios para game_logic*/
 	/* won, lost salen de aqui no? */
 

@@ -10,11 +10,11 @@ module lfsr (
 
   assign rst = ~Q[2] & ~Q[1] & Q[0]; // reset in state 001 
 
-  always @(posedge trigger) begin
+  always_comb begin
     if (rst) begin
       lfsr_reg <= seed;
     end else begin
-      lfsr_reg <= {lfsr_reg[2:0], lfsr_reg[3] ^ lfsr_reg[2]};
+      lfsr_reg <= {seed[2:0], seed[3] ^ seed[2]};
     end
   end
 

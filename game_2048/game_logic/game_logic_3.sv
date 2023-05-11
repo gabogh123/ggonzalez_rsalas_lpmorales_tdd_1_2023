@@ -44,5 +44,4 @@ module game_logic_3 (/*clk, rst,*/ enable, rand_pos, direction, matrix, matrix_D
     assign ready = M & S & F;
 
 
-
 endmodule

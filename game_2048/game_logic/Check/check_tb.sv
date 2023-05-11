@@ -1,6 +1,6 @@
 module check_tb;
 
-	logic clk;
+	logic enable;
     logic [3:0] goal;
 	logic [11:0] matrix [3:0][3:0];
 	logic [11:0] checked_matrix [3:0][3:0];
@@ -8,53 +8,53 @@ module check_tb;
 	logic L;
 
 														  
-	check uut (clk, goal, matrix, checked_matrix, W, L);
+	check uut (enable, goal, matrix, checked_matrix, W, L);
 	
 	
 	initial begin
-		$display("Inicia sistema");/*
-		$monitor("goal: %b\nmatrix:\n%p\n%p\n%p\n%p\nchecked_matrix:\n%p\n%p\n%p\n%p\nW: %b - L: %b",
-					uut.goal,
-					uut.matrix[0][3:0], uut.matrix[1][3:0],
-					uut.matrix[2][3:0], uut.matrix[3][3:0],
-					uut.checked_matrix[0][3:0], uut.checked_matrix[1][3:0],
-					uut.checked_matrix[2][3:0], uut.checked_matrix[3][3:0],
-					uut.W, uut.L);*/
+		$display("Inicia sistema");
 
-		clk = 0;
+		enable = 0;
 		goal = 4'b0000;
-		matrix = '{'{12'd0, 12'd0, 12'd0, 12'd0},
+		matrix = '{ '{12'd0, 12'd0, 12'd0, 12'd0},
 				    '{12'd0, 12'd0, 12'd0, 12'd0},
 				    '{12'd0, 12'd0, 12'd0, 12'd0},
 				    '{12'd0, 12'd0, 12'd0, 12'd0}};
 	end
-
-	always begin
-		#10 clk = !clk;
-	end
 		
 	initial begin
 		
 		#40
+		enable = 1;
+		#40
 		goal = 4'b1000;
 		#100
-		matrix = '{'{12'd2, 12'd2, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0},
-				   '{12'd4, 12'd0, 12'd0, 12'd0}};
+		matrix = '{'{  12'd2,   12'd2,  12'd0, 12'd32},
+				   '{12'd258, 12'd516, 12'd16, 12'd16},
+				   '{12'd516,   12'd0,  12'd4,  12'd0}, 
+				   '{  12'd0, 12'd128,  12'd4,  12'd2}};
 		#40
-		$display("\nW: %b - L: %b", W, L);
+		/* W: = 00 */
+		$display("\n\n\nmatrix:\n%p\n%p\n%p\n%p\n", matrix[3][3:0], matrix[2][3:0],
+											   matrix[1][3:0], matrix[0][3:0],
+				 "W: %b - L: %b", W, L);
+		
+		assert(W === 0 & L === 0) $display ("OK. WL = 00"); else $error("WL = 00: failed");
 		#10
 
 
-		goal = 4'b0011;
+		goal = 4'b0100;
 		#100
-		matrix = '{'{12'd2,  12'd2, 12'd32, 12'd0},
-				   '{12'd4, 12'd16, 12'd16, 12'd0},
-				   '{12'd4,  12'd2,  12'd8, 12'd8},
-				   '{12'd4,  12'd0,  12'd0, 12'd0}};
+		matrix = '{'{ 12'd4,  12'd0, 12'd32, 12'd0},
+				   '{ 12'd0, 12'd64, 12'd32, 12'd2},
+				   '{12'd16,  12'd0,  12'd0, 12'd4},
+				   '{ 12'd8,  12'd8,  12'd2, 12'd0}};
 		#40
-		$display("\nW: %b - L: %b", W, L);
+		/* WL = 10 */
+		$display("\n\n\nmatrix:\n%p\n%p\n%p\n%p\n", matrix[3][3:0], matrix[2][3:0],
+											   matrix[1][3:0], matrix[0][3:0],
+				 "W: %b - L: %b", W, L);
+		assert(W === 1 & L === 0) $display ("OK. WL = 10"); else $error("WL = 10: failed");
 		#10
 
 
@@ -68,7 +68,11 @@ module check_tb;
 		#100;
 
 		#40
-		$display("\nW: %b - L: %b", W, L);
+		/* WL = 01 */
+		$display("\n\n\nmatrix:\n%p\n%p\n%p\n%p\n", matrix[3][3:0], matrix[2][3:0],
+											   matrix[1][3:0], matrix[0][3:0],
+				 "W: %b - L: %b", W, L);
+		assert(W === 0 & L === 1) $display ("OK. WL = 01"); else $error("WL = 01: failed");
 		#10;
 
 	end
