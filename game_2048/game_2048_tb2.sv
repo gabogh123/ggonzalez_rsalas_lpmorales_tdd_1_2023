@@ -27,15 +27,12 @@ module game_2048_tb2();
 
     initial begin
 
-        $monitor("\ngoal: %b\ndirection: %b\nActual State: %b\nmatrix_Q:\n%p\n%p\n%p\n%p\nNext State: %b\nmatrix_D:\n%p\n%p\n%p\n%p\nW: %b - L: %b\n",
-				~goal, ~direction,
-                Q,
-				matrix_Q[3][3:0],   matrix_Q[2][3:0],
-				matrix_Q[1][3:0],   matrix_Q[0][3:0],
-                D,
-                matrix_D[3][3:0],   matrix_D[2][3:0],
-				matrix_D[1][3:0],   matrix_D[0][3:0],
-				wl[1], wl[0]);
+        $monitor("\nGoal: %b\nDirection: %b\n",   goal, direction,
+                    "matrix_Q:\n%p\n%p\n%p\n%p\n", matrix_Q[3][3:0], matrix_Q[2][3:0],
+											                      matrix_Q[1][3:0], matrix_Q[0][3:0],
+			 		   "matrix_D:\n%p\n%p\n%p\n%p\n", matrix_D[3][3:0], matrix_D[2][3:0],
+												  	 	              matrix_D[1][3:0], matrix_D[0][3:0],
+			 		   "W: %b - L: %b\n\n\n", wl[1], wl[0]);
 
         clk = 0;
         rst_game = 0;
@@ -66,24 +63,44 @@ module game_2048_tb2();
         #40 rst_game = 1;
 		#20 rst_game = 0;
 
+        
+
         #30
-        goal = ~1010; #20 
-        direction = ~4'b0001; #40
+        goal = 1010;
+        #30
+        
+        
+        
+        
+        #20 
+        direction = !4'b0001; #40
         $display("\ntime: %d ps", t);
-        direction = ~4'b0000; #80
+        direction = 4'b0000; #80
 
-        direction = ~4'b0010; #40
+        direction = !4'b0010; #40
         $display("\ntime: %d ps", t);
-        direction = ~4'b0000; #80
+        direction = 4'b0000; #80
 
-        direction = ~4'b0100; #40
+        direction = !4'b0100; #40
         $display("\ntime: %d ps", t);
-        direction = ~4'b0000; #80;
+        direction = !4'b0000; #80
+
+        direction = !4'b1000; #40
+        $display("\ntime: %d ps", t);
+        direction = !4'b0000; #80
+
+        direction = !4'b0010; #40
+        $display("\ntime: %d ps", t);
+        direction = !4'b0000; #80
+
+        direction = !4'b0100; #40
+        $display("\ntime: %d ps", t);
+        direction = !4'b0000; #80;
 
     end
 
     initial
-	#1000 $finish;
+	#2000 $finish;
 		 
 
 endmodule

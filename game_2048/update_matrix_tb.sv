@@ -69,7 +69,7 @@ module update_matrix_tb();
 
         Q = 3'b010;
         goal = 4'b0100;
-        direction = 4'b0100;
+        direction = 4'b0001;
         buttons = 1;
 
         matrix_Q = temp_matrix;

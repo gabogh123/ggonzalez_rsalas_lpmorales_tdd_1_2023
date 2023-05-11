@@ -36,7 +36,7 @@ module game_logic_3 (/*clk, rst,*/ enable, rand_pos, direction, matrix, matrix_D
 						    .moved_matrix(moved_again_matrix), 
 						    .ready(F));
 
-	new_tile_gen new_tile  (.enable(enable),
+	new_tile_gen new_tile  (.Q(3'b111),
                             .rand_pos(rand_pos),
 						    .matrix_Q(moved_again_matrix),
 						    .matrix_D(matrix_D));

@@ -17,7 +17,9 @@ module update_matrix_2 (
 
 	logic ready;
 
-	logic [11:0] game_matrix [3:0][3:0]; // game_logic matrix
+	logic [11:0] start_matrix [3:0][3:0]; // game_logic matrix
+	logic [11:0] game_matrix  [3:0][3:0]; // game_logic matrix
+
 
 	//assign rst = ~Q[2] & ~Q[1] & ~Q[0];
 
@@ -26,7 +28,11 @@ module update_matrix_2 (
 	
 	
 	// game logic where movements & summations is 011
-	//assign en_game_logic = ~Q[2] & Q[1] & Q[0];
+	
+	new_tile_gen new_tile_g (.Q(Q),
+                            .rand_pos(rand_pos),
+						    .matrix_Q(matrix_Q),
+						    .matrix_D(start_matrix));
 
 	//  game_logic_3
 	game_logic_3 g_logic (/*.clk(clk),
@@ -35,7 +41,7 @@ module update_matrix_2 (
 						  .rand_pos(rand_pos),
 						  .direction(direction),
 						  .matrix(matrix_Q),
-						  .matrix_D(matrix_D),
+						  .matrix_D(game_matrix),
 						  .ready(ready));
 
 	// game logic where movements & summations is 011
@@ -45,7 +51,7 @@ module update_matrix_2 (
 	check cck (//.clk(clk),
 			   .enable(en_check),
 			   .goal(goal),
-			   .matrix(matrix_D),
+			   .matrix(game_matrix),
 			   .W(wl[1]),
 			   .L(wl[0]));
 
@@ -55,6 +61,6 @@ module update_matrix_2 (
 	//assign playing_wl = 2'b11;
 	//assign sel = Q[1] & Q[0];
 
-	//mux_2NtoN m2NtoN (checked_wl, playing_wl, sel, wl);
+	mux_2MtoM m2MtoM (start_matrix, game_matrix, en_check, matrix_D);
 
 endmodule
