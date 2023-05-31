@@ -1,7 +1,7 @@
 # ARMv4 Processor
 
 ### Image Processing
-To run the Python script that decodes the image's pixels into RGB and executes the histogram equalizer, run the following:
+To run the Python script that decodes the image's pixels into RGB values array (gray scale) and executes the histogram equalizer, run the following:
 
 1) Create a virtual environment inside `Proyecto Final/image_processing` folder:
 ```
