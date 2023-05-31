@@ -1,5 +1,4 @@
-# ignore everything (dirs, files, sub-dirs, sub-files)
-/*
+
 # but do not ignore the .gitignore file
 !.gitignore
 !README.md
