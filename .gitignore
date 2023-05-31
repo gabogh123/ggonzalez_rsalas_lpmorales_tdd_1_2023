@@ -18,17 +18,17 @@
 !/Laboratorio\ 3/*/*.sv
 
 # do not ignore dir (needed due to the above bullet point)
-!/game_2048
-!game_2048/game_logic
+!/Laboratorio\ 4
+!Laboratorio\ 4/game_logic
 # ignore files and sub dirs in the directory
-/game_2048/db
-/game_2048/incremental_db
-/game_2048/output_files
-/game_2048/simulation
+/Laboratorio\ 4/db
+/Laboratorio\ 4/incremental_db
+/Laboratorio\ 4/output_files
+/Laboratorio\ 4/simulation
+/Laboratorio\ 4/game_logic/*.bak
 # but do not ignore .sv and .txt files
-!/game_2048/*.sv
-!/game_2048/*.txt
-
+!/Laboratorio\ 4/*.sv
+!/Laboratorio\ 4/*.txt
 # do not ignore dir (needed due to the above bullet point)
 !/Proyecto
 !/Proyecto/Memory
