@@ -18,3 +18,8 @@ source venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
+4) Run program:
+```
+python equalize_img.py
+```
+
