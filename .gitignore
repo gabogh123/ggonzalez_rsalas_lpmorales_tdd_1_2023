@@ -22,15 +22,10 @@
 !/game_2048
 !game_2048/game_logic
 # ignore files and sub dirs in the directory
-<<<<<<< Updated upstream
-/game_2048/*
-
-=======
 /game_2048/db
 /game_2048/incremental_db
 /game_2048/output_files
 /game_2048/simulation
->>>>>>> Stashed changes
 # but do not ignore .sv and .txt files
 !/game_2048/*.sv
 !/game_2048/*.txt
