@@ -3,21 +3,21 @@
 !.gitignore
 !README.md
 
-# do not ignore dir (needed due to the above bullet point)
+# do not ignore dir
 !/Laboratorio\ 2/*
 # ignore files and sub dirs in the directory
 /Laboratorio\ 2/*/*
 # but do not ignore .sv files
 !/Laboratorio\ 2/*/*.sv
 
-# do not ignore dir (needed due to the above bullet point)
+# do not ignore dir 
 !/Laboratorio\ 3/*
 # ignore files and sub dirs in the directory
 /Laboratorio\ 3/*/*
 # but do not ignore .sv files
 !/Laboratorio\ 3/*/*.sv
 
-# do not ignore dir (needed due to the above bullet point)
+# do not ignore dir 
 !/Laboratorio\ 4
 !Laboratorio\ 4/game_logic
 # ignore files and sub dirs in the directory
@@ -30,12 +30,13 @@
 !/Laboratorio\ 4/*.sv
 !/Laboratorio\ 4/*.txt
 
-# do not ignore dir (needed due to the above bullet point)
+# do not ignore dir
 !/Proyecto\ Final
-!Proyecto\ Final/Memory
-!Proyecto\ Final/Processor
-!Proyecto\ Final/VGA
+!/Proyecto\ Final/Memory
+!/Proyecto\ Final/Processor
+!/Proyecto\ Final/VGA
 # ignore files and sub dirs in the directory
+/Proyecto\ Final/*.bak
 /Proyecto\ Final/*.qsf
 /Proyecto\ Final/*.qpf
 /Proyecto\ Final/*.qws
@@ -43,6 +44,9 @@
 /Proyecto\ Final/incremental_db
 /Proyecto\ Final/output_files
 /Proyecto\ Final/simulation
+/Proyecto\ Final/Processor/*.bak
 # but do not ignore .sv and .txt files
 !/Proyecto\ Final/*.sv
 !/Proyecto\ Final/*.txt
+!/Proyecto\ Final/Processor/*.sv
+!/Proyecto\ Final/Processor/*.txt
