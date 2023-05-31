@@ -29,16 +29,20 @@
 # but do not ignore .sv and .txt files
 !/Laboratorio\ 4/*.sv
 !/Laboratorio\ 4/*.txt
+
 # do not ignore dir (needed due to the above bullet point)
-!/Proyecto
-!/Proyecto/Memory
-!/Proyecto/Processor
-!/Proyecto/VGA
+!/Proyecto\ Final
+!Proyecto\ Final/Memory
+!Proyecto\ Final/Processor
+!Proyecto\ Final/VGA
 # ignore files and sub dirs in the directory
-/Proyecto/db
-/Proyecto/incremental_db
-/Proyecto/output_files
-/Proyecto/simulation
+/Proyecto\ Final/*.qsf
+/Proyecto\ Final/*.qpf
+/Proyecto\ Final/*.qws
+/Proyecto\ Final/db
+/Proyecto\ Final/incremental_db
+/Proyecto\ Final/output_files
+/Proyecto\ Final/simulation
 # but do not ignore .sv and .txt files
-!/Proyecto/*.sv
-!/Proyecto/*.txt
+!/Proyecto\ Final/*.sv
+!/Proyecto\ Final/*.txt
