@@ -22,4 +22,7 @@ python -m pip install -r requirements.txt
 ```
 python equalize_img.py
 ```
-
+5) When finished, deactivate virtual environment:
+```
+deactivate
+```
