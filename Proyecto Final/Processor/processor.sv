@@ -1,6 +1,9 @@
 /*
 
-Representa el procesador ARM
+Procesador ARM
+Hecho a base de la Figura 7.13 Procesador uniciclo completo
+del libro Digital Design and Computer Architecture ARM Editon
+de Sarah L. Harries & David Money Harries. 
 
 */
 module processor(
@@ -46,25 +49,24 @@ module processor(
 	wire [31:0]				 result;
 
 	
-	/* PC_MUX */
+	/* PC_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) pc_mux (.I0(pc_plus_4),
 								 .I1(result),
 								 .S(pc_src),
 								 .O(next_pc_address));
 	
-	/* PC Register -> (.N(32)) */
+	/* PC Register */
 	register # (.N(32)) program_counter (.clk(clk),
 										 .rst(rst),
 										 .D(next_pc_address),
 										 .Q(pc));
 
-	/* PCPlus4_Adder -> 2 x (.N(32)) */
+	/* PCPlus4_Adder */
 	adder # (.N(32)) pc_plus_4_adder (.A(pc),
 									  .B(32'b100),
 									  .Y(pc_plus_4));
 	
-
-	// Control_Unit
+	/* Control_Unit */
 	control_unit cont_unit (.clk(clk),
 							.rst(rst),
 							.cond(instruction[31:28]),
@@ -82,18 +84,18 @@ module processor(
 							.reg_src(reg_src));
 
 	
-	/* PCPlus8_Adder -> 2 x (.N(32)) */
+	/* PCPlus8_Adder */ /* tb done */
 	adder # (.N(32)) pc_plus_8_adder (.A(pc_plus_4),
 									  .B(32'b100),
 									  .Y(pc_plus_8));
 	
-	/* RN_MUX */
+	/* RN_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rn_mux (.I0(instruction[19:16]),
 								.I1(4'b1111),
 								.S(reg_src),
 								.O(r_a1));
 	
-	/* RM_RD_MUX */
+	/* RM_RD_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rm_rd_mux (.I0(instruction[3:0]),
 								   .I1(instruction[15:12]),
 								   .S(reg_src),
@@ -110,9 +112,8 @@ module processor(
 							.we_3(reg_write),
 							.rd_1(src_a),
 							.rd_2(write_data));
-
 	
-	/* Extend -> (.N(24)) */
+	/* Extend */
 	extend # (.N(24)) extender (.A(instruction[23:0]),
 								.S(imm_src),
 						   		.Y(ext_imm));
@@ -123,14 +124,14 @@ module processor(
 								  .S(alu_src),
 								  .O(src_b));
 	
-	// ALU -> 2 x (.N(32))
+	/* ALU */
 	alu the_alu (.A(src_a),
 				 .B(src_b),
 				 .func(alu_control),
 				 .Y(alu_result),
 				 .flags(alu_flags));
 	
-	/* Data_MUX */
+	/* Data_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) data_mux (.I0(alu_result),
 								   .I1(read_data),
 								   .S(mem_to_reg),

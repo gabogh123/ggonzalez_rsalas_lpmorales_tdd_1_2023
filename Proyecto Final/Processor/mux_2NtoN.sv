@@ -10,8 +10,8 @@ module mux_2NtoN
 	input  logic 		  S;
 	output logic [N-1:0]  O;
 
-	
-	assign O = S ? I0 : I1;
+
+	assign O = S ? I1 : I0;
 	
 	
 endmodule
