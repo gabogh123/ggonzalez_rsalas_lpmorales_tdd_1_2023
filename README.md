@@ -1,2 +1,28 @@
-# ggonzalez_rsalas_tdd_1_2023
-Repositorio del curso taller de diseño digital 
+# ARMv4 Processor
+
+### Image Processing
+To run the Python script that decodes the image's pixels into RGB values array (gray scale) and executes the histogram equalizer, run the following:
+
+1) Create a virtual environment inside `Proyecto Final/image_processing` folder:
+```
+cd Proyecto\ Final/image_processing/ && python3 -m venv venv
+```
+
+2) Activate virtual environment:
+```
+source venv/bin/activate
+```
+
+3) Install dependencies freezed in `requirements.txt`
+```
+python -m pip install -r requirements.txt
+```
+
+4) Run program:
+```
+python equalize_img.py
+```
+5) When finished, deactivate virtual environment:
+```
+deactivate
+```
