@@ -28,7 +28,7 @@ module register_tb;
 	end
 
     initial	begin
-	
+
 		#100
 
         rst = 1;
@@ -46,7 +46,7 @@ module register_tb;
         assert((Q === 32'b0)) else $error("Failed");
 
         #75
-		
+        
 		assert((Q === 32'b11100001101000000010000010100010)) else $error("Failed");
 		
 		#100

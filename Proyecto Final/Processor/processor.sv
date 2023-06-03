@@ -31,8 +31,8 @@ module processor(
 	wire 					 pc_src;
 	wire 					reg_src;
 	wire				  reg_write;
-	wire 					imm_src;
-	wire 					alu_src;
+	wire  [1:0]				imm_src;
+	wire     				alu_src;
 	wire  [3:0] 		alu_control;
 	wire 				 mem_to_reg;
 
@@ -83,7 +83,6 @@ module processor(
 							.reg_write(reg_write),
 							.reg_src(reg_src));
 
-	
 	/* PCPlus8_Adder */ /* tb done */
 	adder # (.N(32)) pc_plus_8_adder (.A(pc_plus_4),
 									  .B(32'b100),
@@ -118,7 +117,7 @@ module processor(
 								.S(imm_src),
 						   		.Y(ext_imm));
 	
-	/* ALU_MUX */
+	/* ALU_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) alu_mux (.I0(write_data),
 								  .I1(ext_imm),
 								  .S(alu_src),
@@ -136,5 +135,5 @@ module processor(
 								   .I1(read_data),
 								   .S(mem_to_reg),
 								   .O(result));
-
+	
 endmodule

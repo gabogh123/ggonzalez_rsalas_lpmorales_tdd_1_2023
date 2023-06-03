@@ -1,6 +1,6 @@
 /*
 
-Top module para el euclaizador de histogramas
+Top module para el ecualizador de histogramas
 
 */
 module histogram_equalizer(clk, rst, Y);
@@ -27,5 +27,13 @@ module histogram_equalizer(clk, rst, Y);
 				   .mem_write(mem_write),
 				   .alu_result(alu_result),
 				   .write_data(write_data));
+
+	// mux ();
+
+	// memoria_rom (alu_result, );
+
+	// memoria_ram_pro (alu_result, );
+
+	// memoria_ram_vga (alu_result, );
 
 endmodule

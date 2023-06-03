@@ -21,7 +21,7 @@ module control_unit(
     output logic         mem_write;
     output logic [3:0] alu_control;
     output logic           alu_src;
-    output logic           imm_src;
+    output logic [1:0]     imm_src;
     output logic         reg_write;
     output logic           reg_src;
 
