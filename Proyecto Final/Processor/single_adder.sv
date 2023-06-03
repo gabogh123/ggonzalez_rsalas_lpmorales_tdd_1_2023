@@ -3,7 +3,7 @@
 Adder
 
 */
-module adder
+module single_adder
     # (parameter N = 32)
 	  (A, B, Y);
 

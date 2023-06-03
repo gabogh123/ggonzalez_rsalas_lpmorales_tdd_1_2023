@@ -61,10 +61,10 @@ module processor(
 										 .D(next_pc_address),
 										 .Q(pc));
 
-	/* PCPlus4_Adder */
-	adder # (.N(32)) pc_plus_4_adder (.A(pc),
-									  .B(32'b100),
-									  .Y(pc_plus_4));
+	/* PCPlus4_Adder */ /* tb done */
+	single_adder # (.N(32)) pc_plus_4_adder (.A(pc),
+									  		 .B(32'b100),
+									  		 .Y(pc_plus_4));
 	
 	/* Control_Unit */
 	control_unit cont_unit (.clk(clk),
@@ -84,9 +84,9 @@ module processor(
 							.reg_src(reg_src));
 
 	/* PCPlus8_Adder */ /* tb done */
-	adder # (.N(32)) pc_plus_8_adder (.A(pc_plus_4),
-									  .B(32'b100),
-									  .Y(pc_plus_8));
+	single_adder # (.N(32)) pc_plus_8_adder (.A(pc_plus_4),
+									  		 .B(32'b100),
+									  		 .Y(pc_plus_8));
 	
 	/* RN_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rn_mux (.I0(instruction[19:16]),
@@ -112,7 +112,7 @@ module processor(
 							.rd_1(src_a),
 							.rd_2(write_data));
 	
-	/* Extend */
+	/* Extend */ /* tb done */
 	extend # (.N(24)) extender (.A(instruction[23:0]),
 								.S(imm_src),
 						   		.Y(ext_imm));

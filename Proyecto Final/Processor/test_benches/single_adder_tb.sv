@@ -1,4 +1,4 @@
-module adder_tb;
+module single_adder_tb;
 
     parameter integer N = 32;
 
@@ -6,12 +6,12 @@ module adder_tb;
 	logic [N-1:0] B;
 	logic [N-1:0] Y;
 
-    adder # (.N(N)) uut (.A(A),
+    single_adder # (.N(N)) uut (.A(A),
                          .B(B),
                          .Y(Y));
 
     initial begin
-		$display("adder Test Bench:\n");
+		$display("single_adder Test Bench:\n");
 
 		A = 0;
         B = 0;
