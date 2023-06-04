@@ -57,10 +57,15 @@ if __name__ == "__main__":
     cuf = np.cumsum(f_i, axis=0) # cummulative frequency
     feq = dist_cum_freq(cuf) #distribute uniformly the cummulative frequency
     cu_feq = np.cumsum(feq, axis = 0) # cummulative frequency
-
+    
     mapped_pixels = map_pixels(i, cuf, cu_feq)
     new_img = create_new_img(img, mapped_pixels)
     print(new_img)
+
+    n_pixels = np.concatenate(new_img, axis=0)
+    n_pixels = n_pixels[:,0] # use only one integer to describe RGB pixel
+    print(n_pixels)
+
     # display image
     cv2.imshow("output", new_img)
     cv2.imwrite("output.png", new_img)
