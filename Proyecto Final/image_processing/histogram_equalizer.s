@@ -1,38 +1,100 @@
 .global _start
-.equ white, 255
-.equ len, 25
+.equ white, 7 //255
+.equ len, 25 //357604
 
 _start:
-
+	mov sp, #0 //init sp
 	ldr r12, =original //register R12 stores pointer to original image data
 	mov r0, #0 // init i
 	ldr r1, =white
-	push {r0}
-	mov r11, sp //register R13 stores beginning of image_colors
+	//push {r0}
+	sub sp, sp, #4
+	str r0, [sp]
+	
+	mov r11, sp //register R11 stores beginning of image_colors
 	bl image_colors
+	
+	mov r10, sp //register R10 stores beginning of frequency_dist
+	bl frequency_dist
 	b exit
 	
-// for (i = 0; i <= 255; i++)	
+// for (i = 0; i <= 255; i++)
+//	image_colors[i] = i
 image_colors:
 	add r0, r0, #1
 	
 	cmp r0, r1
 	bgt return_image_colors
 	
-	push {r0}
+	//push {r0}
+	sub sp, sp, #4
+	str r0, [sp]
+	
 	ble image_colors	
 	
-	bl division
 
 return_image_colors:
-	bx lr
+	mov pc, lr
+
+//for color in image_colors:
+//	fr = image_colors.count(color)
+//	frequency_dist[color] = fr
+//------------------------------
+// r0 = i
+// r1 = j
+// r2 = counter
+frequency_dist:
+	mov r0, #0 //init r0 to first color
+	sub r0, r0, #1
+	ldr r3, =white // stop condition (max color)
+	ldr r4, =len //stop condition (max pixel)
+	
+freq_dist_loop_i:
+	add r0, r0, #1 //increase color iterator 
+	cmp r0, r3 // check if color iterator is greater than 255
+	bgt return_frequency_dist
+	
+	mov r2, #0 // init counter of frequency
+	mov r6, #0 //init counter of pixel
+	mov r1, r12 // reset pointer to original
+	
+freq_dist_loop_j:
+	cmp r4, r6 // check if reached last pixel
+	beq load_freq
+	
+	ldr r5, [r1] //get image pixel
+	cmp r0, r5 //compare color
+	bne next_pixel
+	add r2, r2, #1 //inc counter of freq
+	
+next_pixel:
+	add r1, r1, #4 //inc address of pixel
+	add r6, r6, #1 //inc counter of pixel
+	b freq_dist_loop_j
+
+load_freq:
+	//push {r2}
+	sub sp, sp, #4
+	str r2, [sp]
+	b freq_dist_loop_i
+	
+return_frequency_dist:
+	mov pc, lr
+	
 	
 // division parameters: R0 = dividend , R1 = divisor
 // results: R2 = quotient, R0 = remainder
 division:
-	push {r0}
-	push {r1}
-	push {lr}
+	//push {r0}
+	sub sp, sp, #4
+	str r0, [sp]
+	//push {r1}
+	sub sp, sp, #4
+	str r1, [sp]
+	//push {lr}
+	sub sp, sp, #4
+	str lr, [sp]
+	
 	mov r2, #0	//Initialize quotient register R2
 
 division_loop:
@@ -44,8 +106,11 @@ division_loop:
 	bge sub_ge 	// If dividend >= divisor, subtract divisor from dividend
 	
 	// At this point, the quotient is in r2 and remainder is in r0
-	pop {lr}
-	bx lr //return 
+	//pop {lr}
+	ldr lr, [sp]
+	add sp, sp, #4
+	
+	mov pc, lr //return 
 	
 	mov lr, pc
 	bge add_ge // Increment by 1 quotient register
@@ -54,15 +119,17 @@ division_loop:
 	bgt division_loop //; If dividend > 0, continue looping
 	
 	// At this point, the quotient is in r2 and remainder is zero
-	pop {lr}
-	bx lr //return 
+	//pop {lr}
+	ldr lr, [sp]
+	add sp, sp, #4
+	mov pc, lr //return 
 	
 sub_ge:
 	sub r0, r0, r1
-	bx lr
+	mov pc, lr
 add_ge:
 	add r2, r2, #1
-	bx lr
+	mov pc, lr
 	
 exit:
 
