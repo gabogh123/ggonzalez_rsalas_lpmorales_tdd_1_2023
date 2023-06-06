@@ -7,8 +7,8 @@ module single_adder_tb;
 	logic [N-1:0] Y;
 
     single_adder # (.N(N)) uut (.A(A),
-                         .B(B),
-                         .Y(Y));
+                                .B(B),
+                                .Y(Y));
 
     initial begin
 		$display("single_adder Test Bench:\n");

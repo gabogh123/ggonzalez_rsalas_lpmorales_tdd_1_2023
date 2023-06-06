@@ -55,9 +55,10 @@ module processor(
 								 .S(pc_src),
 								 .O(next_pc_address));
 	
-	/* PC Register */
+	/* PC Register */ /* tb done */
 	register # (.N(32)) program_counter (.clk(clk),
 										 .rst(rst),
+										 .en(1'b1),
 										 .D(next_pc_address),
 										 .Q(pc));
 
@@ -123,7 +124,7 @@ module processor(
 								  .S(alu_src),
 								  .O(src_b));
 	
-	/* ALU */
+	/* ALU */ /* tb done - (div, mod, shift_l, shift_r) */
 	alu the_alu (.A(src_a),
 				 .B(src_b),
 				 .func(alu_control),
