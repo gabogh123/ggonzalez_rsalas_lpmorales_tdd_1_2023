@@ -4,6 +4,7 @@
 
 _start:
 	mov sp, #0 //init sp
+	
 	ldr r12, =original //register R12 stores pointer to original image data
 	mov r0, #0 // init i
 	ldr r1, =white
@@ -15,7 +16,13 @@ _start:
 	bl image_colors
 	
 	mov r10, sp //register R10 stores beginning of frequency_dist
+	sub r10, r10, #4
 	bl frequency_dist
+	
+	mov r9, sp //register R9 stores beginning of cumulative_freq
+	sub r9, r9, #4
+	bl cumulative_freq
+	
 	b exit
 	
 // for (i = 0; i <= 255; i++)
@@ -81,6 +88,31 @@ load_freq:
 return_frequency_dist:
 	mov pc, lr
 	
+//cont = 0
+//for (i = 0; i <= 255; i++):
+//	cont += f[i]
+//	cuf[i] = cont
+cumulative_freq:
+	mov r0, r10 //i
+	mov r1, #0 //cont
+	
+cum_freq_loop:
+	cmp r0, r9 //stop condition: reached beginning of cumulative_freq array
+	beq return_cum_freq
+	
+	ldr r2, [r0] //get freq_dist[i]
+	add r1, r1, r2 // cont += freq_dist[i]
+	
+	//push {r2}
+	sub sp, sp, #4
+	str r1, [sp]	
+	
+	sub r0, r0, #4 //i++
+	b cum_freq_loop
+	
+return_cum_freq:
+	mov pc, lr
+		
 	
 // division parameters: R0 = dividend , R1 = divisor
 // results: R2 = quotient, R0 = remainder
