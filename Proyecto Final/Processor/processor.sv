@@ -1,10 +1,8 @@
 /*
-
 Procesador ARM
 Hecho a base de la Figura 7.13 Procesador uniciclo completo
 del libro Digital Design and Computer Architecture ARM Editon
 de Sarah L. Harries & David Money Harries. 
-
 */
 module processor(
 	clk, rst, instruction, read_data,
@@ -29,7 +27,7 @@ module processor(
 	wire [31:0]     	  pc_plus_8;
 
 	wire 					 pc_src;
-	wire 					reg_src;
+	wire  [1:0]				reg_src;
 	wire				  reg_write;
 	wire  [1:0]				imm_src;
 	wire     				alu_src;
@@ -92,16 +90,16 @@ module processor(
 	/* RN_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rn_mux (.I0(instruction[19:16]),
 								.I1(4'b1111),
-								.S(reg_src),
+								.S(reg_src[1]),
 								.O(r_a1));
 	
 	/* RM_RD_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rm_rd_mux (.I0(instruction[3:0]),
 								   .I1(instruction[15:12]),
-								   .S(reg_src),
+								   .S(reg_src[0]),
 								   .O(r_a2));
 
-	/* Register File */
+	/* Register File */ /* tb done */
 	register_file reg_file (.clk(clk),
 							.rst(rst),
 							.a_1(r_a1),

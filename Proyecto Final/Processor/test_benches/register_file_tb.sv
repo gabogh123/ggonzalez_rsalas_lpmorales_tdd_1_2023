@@ -42,7 +42,8 @@ module register_file_tb;
 		$monitor("rst=%b we_3=%b\n",       rst, reg_write,
                  "a_1=%b a_2=%b a_3=%b\n", r_a1, r_a2, rd,
                  "wd_3=%b r_15=%b\n",      result, pc_plus_8,
-                 "rd_1=%b rd_2=%b\n",      src_a, write_data);
+                 "rd_1=%b rd_2=%b\n",      src_a, write_data,
+                 "PC+8=%b",                pcp8);
 	end
 
     always begin
