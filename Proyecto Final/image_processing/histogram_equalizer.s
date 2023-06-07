@@ -26,6 +26,10 @@ _start:
 	mov r8, sp
 	sub r8, r8, #4 //register R8 stores beginning of dist_cum_freq
 	bl dist_cum_freq
+	
+	mov r7, sp
+	sub r7, r7, #4 //register R7 stores beginning of cu_feq
+	bl cu_feq
 
 	b exit
 	
@@ -205,6 +209,31 @@ sub_ge:
 add_ge:
 	add r2, r2, #1
 	mov pc, lr
+
+//cont = 0
+//for (i = 0; i <= 255; i++):
+//      cont += dist_cum_f[i]
+//      cu_feq[i] = cont
+cu_feq:
+        mov r0, r8 //i
+        mov r1, #0 //cont
+
+cu_feq_loop:
+        cmp r0, r7 //stop condition: reached beginning of cu_feq array
+        beq return_cu_feq
+
+        ldr r2, [r0] //get freq_dist[i]
+        add r1, r1, r2 // cont += freq_dist[i]
+
+        //push {r2}
+        sub sp, sp, #4
+        str r1, [sp]
+
+        sub r0, r0, #4 //i++
+        b cu_feq_loop
+
+return_cu_feq:
+        mov pc, lr
 	
 exit:
 
