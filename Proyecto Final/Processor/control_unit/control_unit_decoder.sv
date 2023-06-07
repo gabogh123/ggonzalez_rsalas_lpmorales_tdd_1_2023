@@ -22,7 +22,7 @@ module control_unit_decoder(op, funct, rd,
     output logic           alu_src;
     output logic [1:0]     imm_src;
     output logic [1:0]     reg_src;
-    output logic [3:0] alu_control;
+    output logic [1:0] alu_control;
 
     wire w_branch;
     wire w_alu_op;

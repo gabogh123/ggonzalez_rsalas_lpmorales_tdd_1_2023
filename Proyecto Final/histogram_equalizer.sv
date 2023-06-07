@@ -36,4 +36,6 @@ module histogram_equalizer(clk, rst, Y);
 
 	// memoria_ram_vga (alu_result, );
 
+	assign Y = 1;
+
 endmodule

@@ -12,7 +12,7 @@ module control_unit(
     input  logic               rst;
 
     input  logic [3:0]        cond;
-    input  logic [4:0]       flags;
+    input  logic [3:0]       flags;
 
     input  logic [1:0]          op;
     input  logic [5:0]       funct;
@@ -26,7 +26,7 @@ module control_unit(
     output logic           alu_src;
     output logic [1:0]     imm_src;
     output logic [1:0]     reg_src;
-    output logic [3:0] alu_control;
+    output logic [1:0] alu_control;
 
     wire         [1:0]    w_flag_w;
     wire                     w_pcs;

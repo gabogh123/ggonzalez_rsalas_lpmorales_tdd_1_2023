@@ -4,10 +4,8 @@ Hecho a base de la Figura 7.13 Procesador uniciclo completo
 del libro Digital Design and Computer Architecture ARM Editon
 de Sarah L. Harries & David Money Harries. 
 */
-module processor(
-	clk, rst, instruction, read_data,
-	pc, mem_write, alu_result, write_data
-	);
+module processor(clk, rst, instruction, read_data,
+				 pc, mem_write, alu_result, write_data);
 
 	input  logic  				clk;
 	input  logic  				rst;
@@ -31,7 +29,7 @@ module processor(
 	wire				  reg_write;
 	wire  [1:0]				imm_src;
 	wire     				alu_src;
-	wire  [3:0] 		alu_control;
+	wire  [1:0] 		alu_control;
 	wire 				 mem_to_reg;
 
 	wire  [3:0]				   r_a1;
@@ -42,7 +40,7 @@ module processor(
 
 	wire [31:0]				ext_imm;
 
-	wire  [4:0]			  alu_flags;
+	wire  [3:0]			  alu_flags;
 
 	wire [31:0]				 result;
 
@@ -122,12 +120,12 @@ module processor(
 								  .S(alu_src),
 								  .O(src_b));
 	
-	/* ALU */ /* tb done - (div, mod, shift_l, shift_r) */
-	alu the_alu (.A(src_a),
-				 .B(src_b),
-				 .func(alu_control),
-				 .Y(alu_result),
-				 .flags(alu_flags));
+	/* ALU */
+	alu_p alu (.A(src_a),
+			   .B(src_b),
+			   .func(alu_control),
+			   .Y(alu_result),
+			   .flags(alu_flags));
 	
 	/* Data_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) data_mux (.I0(alu_result),
