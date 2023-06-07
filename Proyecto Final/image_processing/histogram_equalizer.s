@@ -23,6 +23,10 @@ _start:
 	sub r9, r9, #4
 	bl cumulative_freq
 	
+	mov r8, sp
+	sub r8, r8, #4 //register R8 stores beginning of dist_cum_freq
+	bl dist_cum_freq
+
 	b exit
 	
 // for (i = 0; i <= 255; i++)
@@ -112,17 +116,55 @@ cum_freq_loop:
 	
 return_cum_freq:
 	mov pc, lr
-		
+
+dist_cum_freq:
+	ldr r0, [sp] //get last item in cumulative frequencies array
+	ldr r1, =white
+	add r1, r1, #1 //amount of colors (256)
 	
+	//push {lr}
+	sub sp, sp, #4
+	str lr, [sp]
+
+	//r0 // r1 = r2
+	//r0 % r1 = r0
+	bl division
+
+	//pop {lr}
+	ldr lr, [sp]
+	add sp, sp, #4
+	
+	mov r3, r0 // remainder
+	mov r0, #0 //init i
+	mov r1, r2
+	add r1, r1, #1 //quotient + 1
+	ldr r4, =white
+
+dist_cum_freq_loop:
+	cmp r0, r4
+	bgt return_dist_cum_freq //i > 255
+	
+	cmp r0, r3
+	bge str_r2 // if i >= remainder: add quotient	
+str_r1:
+	//push {r1}
+	sub sp, sp, #4
+	str r1, [sp] //store q+1
+	b inc_r0
+str_r2:
+	//push {r2}	
+	sub sp, sp, #4
+	str r2, [sp] //store q
+inc_r0:
+	add r0, r0, #1
+	b dist_cum_freq_loop
+
+return_dist_cum_freq:
+	mov pc, lr
+		
 // division parameters: R0 = dividend , R1 = divisor
 // results: R2 = quotient, R0 = remainder
 division:
-	//push {r0}
-	sub sp, sp, #4
-	str r0, [sp]
-	//push {r1}
-	sub sp, sp, #4
-	str r1, [sp]
 	//push {lr}
 	sub sp, sp, #4
 	str lr, [sp]
@@ -133,7 +175,7 @@ division_loop:
 	cmp r0, r1	// Compare dividend with divisor
 	
 	mov r3, pc
-	add r3, r3, #16
+	add r3, r3, #20
 	mov lr, r3
 	bge sub_ge 	// If dividend >= divisor, subtract divisor from dividend
 	
@@ -154,6 +196,7 @@ division_loop:
 	//pop {lr}
 	ldr lr, [sp]
 	add sp, sp, #4
+	
 	mov pc, lr //return 
 	
 sub_ge:
