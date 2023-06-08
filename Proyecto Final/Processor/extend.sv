@@ -23,6 +23,8 @@ module extend
                            A[23:0],
                            2'b00};
 
+            /* 2'b11 : caso para rotar el inmediato en MOV */
+
             default: Y = 32'b1111111111111111111111111111;
 
         endcase

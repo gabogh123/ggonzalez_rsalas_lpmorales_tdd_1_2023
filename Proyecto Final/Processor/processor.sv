@@ -120,7 +120,7 @@ module processor(clk, rst, instruction, read_data,
 								  .S(alu_src),
 								  .O(src_b));
 	
-	/* ALU */
+	/* ALU */ /* tb done */
 	alu_p alu (.A(src_a),
 			   .B(src_b),
 			   .func(alu_control),

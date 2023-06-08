@@ -4,15 +4,15 @@ Diseño basado en la figura 7.16 (c) del libro
 Digital Design and Computer Architecture ARM Editon
 de Sarah L. Harries & David Money Harries.
 */
-module conditional_logic
-       (clk, rst, cond, alu_flags,
-        flag_w, pcs, reg_w, mem_w, no_write,
-        pc_src, reg_write, mem_write);
+module conditional_logic(clk, rst, cond, alu_flags,
+                         flag_w, pcs, reg_w, mem_w, no_write,
+                         pc_src, reg_write, mem_write);
 
     input  logic             clk;
     input  logic             rst;
+
     input  logic [3:0]      cond;
-    input  logic [3:0] alu_flags;
+    input  logic [3:0] alu_flags; // N Z C V
 
     input  logic [1:0]    flag_w;
     input  logic             pcs;
