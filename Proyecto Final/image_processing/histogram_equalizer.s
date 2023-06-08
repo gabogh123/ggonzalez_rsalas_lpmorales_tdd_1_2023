@@ -1,6 +1,6 @@
 .global _start
-.equ white, 7 //255
-.equ len, 25 //357604
+//.equ white, 7 //255
+//.equ len, 25 //357604
 
 _start:
 	mov sp, #0 //init sp
@@ -8,6 +8,8 @@ _start:
 	ldr r12, =original //register R12 stores pointer to original image data
 	mov r0, #0 // init i
 	ldr r1, =white
+	ldr r1, [r1] //r1 = 255
+
 	//push {r0}
 	sub sp, sp, #4
 	str r0, [sp]
@@ -30,6 +32,11 @@ _start:
 	mov r7, sp
 	sub r7, r7, #4 //register R7 stores beginning of cu_feq
 	bl cu_feq
+	
+	//R11 -> image_colors
+	//R10 -> cuf
+	//R9 -> cu_feq
+	bl map_colors
 
 	b exit
 	
@@ -61,8 +68,10 @@ return_image_colors:
 frequency_dist:
 	mov r0, #0 //init r0 to first color
 	sub r0, r0, #1
-	ldr r3, =white // stop condition (max color)
-	ldr r4, =len //stop condition (max pixel)
+	ldr r3, =white 
+	ldr r3, [r3] // stop condition (max color)
+	ldr r4, =len 
+	ldr r4, [r4] //stop condition (max pixel)
 	
 freq_dist_loop_i:
 	add r0, r0, #1 //increase color iterator 
@@ -124,6 +133,7 @@ return_cum_freq:
 dist_cum_freq:
 	ldr r0, [sp] //get last item in cumulative frequencies array
 	ldr r1, =white
+	ldr r1, [r1]
 	add r1, r1, #1 //amount of colors (256)
 	
 	//push {lr}
@@ -143,6 +153,7 @@ dist_cum_freq:
 	mov r1, r2
 	add r1, r1, #1 //quotient + 1
 	ldr r4, =white
+	ldr r4, [r4]
 
 dist_cum_freq_loop:
 	cmp r0, r4
@@ -234,9 +245,26 @@ cu_feq_loop:
 
 return_cu_feq:
         mov pc, lr
-	
+
+//for(i = 0; i < len; i++):
+//	new_color = get_new_color(i)
+//	image_colors[i] = new_color
+//---------------------------------
+//params:
+// r0 = image_colors
+// r1 = cuf
+// r2 = cu_feq
+map_colors:
+	mov r3, #0 // i = 0 (first color)
+	ldr r4, =len
+	ldr r4, [r4]
+		
 exit:
 
 .data
 original:
 	.word 4, 4, 4, 4, 4, 3, 4, 5, 4, 3, 3, 5, 5, 5, 3, 3, 4, 5, 4, 3, 4, 4, 4, 4, 4
+white:
+	.word 7 //255
+len:
+	.word 25 //357604
