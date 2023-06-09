@@ -12,11 +12,10 @@ module control_unit(
     input  logic               rst;
 
     input  logic [3:0]        cond;
-    input  logic [3:0]       flags;
-
     input  logic [1:0]          op;
     input  logic [5:0]       funct;
     input  logic [3:0]          rd;
+    input  logic [3:0]       flags;
 
     output logic            pc_src;
     output logic         reg_write;

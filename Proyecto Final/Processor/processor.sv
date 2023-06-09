@@ -52,6 +52,7 @@ module processor(clk, rst, instruction, read_data,
 	mux_2NtoN # (.N(32)) pc_mux (.I0(pc_plus_4),
 								 .I1(result),
 								 .S(pc_src),
+								 .enable(1'b1),
 								 .O(next_pc_address));
 	
 	/* PC Register */ /* tb done */
@@ -93,12 +94,14 @@ module processor(clk, rst, instruction, read_data,
 	mux_2NtoN # (.N(4)) rn_mux (.I0(instruction[19:16]),
 								.I1(4'b1111),
 								.S(reg_src[1]),
+								.enable(1'b1),
 								.O(r_a1));
 	
 	/* RM_RD_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rm_rd_mux (.I0(instruction[3:0]),
 								   .I1(instruction[15:12]),
 								   .S(reg_src[0]),
+								   .enable(1'b1),
 								   .O(r_a2));
 
 	/* Register File */ /* tb done */
@@ -124,25 +127,28 @@ module processor(clk, rst, instruction, read_data,
 	mux_2NtoN # (.N(32)) src_a_mux (.I0(rd1_data),
 								    .I1(32'b0),
 								    .S(alu_src_a),
+									.enable(1'b1),
 								    .O(src_a));
 
 	/* ALUSrcB_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) src_b_mux (.I0(write_data),
 								    .I1(ext_imm),
 								    .S(alu_src_b),
+									.enable(1'b1),
 								    .O(src_b));
 	
 	/* ALU */ /* tb done */
-	alu_p alu (.A(src_a),
-			   .B(src_b),
-			   .func(alu_control),
-			   .Y(alu_result),
-			   .flags(alu_flags));
+	alu_p # (.N(32)) alu (.A(src_a),
+						  .B(src_b),
+						  .func(alu_control),
+						  .Y(alu_result),
+						  .flags(alu_flags));
 	
 	/* Data_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) data_mux (.I0(alu_result),
 								   .I1(read_data),
 								   .S(mem_to_reg),
+								   .enable(1'b1),
 								   .O(result));
 	
 endmodule

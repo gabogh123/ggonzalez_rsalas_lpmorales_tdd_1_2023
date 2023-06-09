@@ -401,7 +401,8 @@ module register_file(clk, rst, a_1, a_2, a_3, wd_3, r_15, we_3, rd_1, rd_2);
                                       .I30(q_r_30),
                                       .I31(q_r_31),
                                       .S({1'b0, a_1}),
-                                      .enable(re),
+                                      //.enable(re),
+                                      .enable(1'b1),
                                       .O(rd_1));
 
     mux_32NtoN #(.N(32)) read_data_2 (.I00(q_r_00),
@@ -437,7 +438,8 @@ module register_file(clk, rst, a_1, a_2, a_3, wd_3, r_15, we_3, rd_1, rd_2);
                                       .I30(q_r_30),
                                       .I31(q_r_31),
                                       .S({1'b0, a_2}),
-                                      .enable(re),
+                                      //.enable(re),
+                                      .enable(1'b1),
                                       .O(rd_2));
 
 
