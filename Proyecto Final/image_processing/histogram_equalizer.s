@@ -3,6 +3,7 @@
 //.equ len, 25 //357604
 
 _start:
+	
 	mov sp, #0 //init sp
 	
 	ldr r12, =original //register R12 stores pointer to original image data
@@ -15,28 +16,42 @@ _start:
 	str r0, [sp]
 	
 	mov r11, sp //register R11 stores beginning of image_colors
-	bl image_colors
-	
+	//bl image_colors
+	mov lr, pc
+	b image_colors
+
 	mov r10, sp //register R10 stores beginning of frequency_dist
 	sub r10, r10, #4
-	bl frequency_dist
-	
+	//bl frequency_dist
+	mov lr, pc
+	b frequency_dist
+
 	mov r9, sp //register R9 stores beginning of cumulative_freq
 	sub r9, r9, #4
-	bl cumulative_freq
-	
+	//bl cumulative_freq
+	mov lr, pc
+	b cumulative_freq
+
 	mov r8, sp
 	sub r8, r8, #4 //register R8 stores beginning of dist_cum_freq
-	bl dist_cum_freq
+	//bl dist_cum_freq
+	mov lr, pc
+	b dist_cum_freq 
 	
 	mov r7, sp
 	sub r7, r7, #4 //register R7 stores beginning of cu_feq
-	bl cu_feq
+	//bl cu_feq
+	mov lr, pc
+	b cu_feq
 	
 	//R11 -> image_colors
 	//R10 -> cuf
 	//R9 -> cu_feq
-	bl map_colors
+	mov r10, r9
+	mov r9, r7
+	//bl map_colors
+	mov lr, pc
+	b map_colors
 
 	b exit
 	
@@ -57,7 +72,7 @@ image_colors:
 
 return_image_colors:
 	mov pc, lr
-
+	
 //for color in image_colors:
 //	fr = image_colors.count(color)
 //	frequency_dist[color] = fr
@@ -142,7 +157,9 @@ dist_cum_freq:
 
 	//r0 // r1 = r2
 	//r0 % r1 = r0
-	bl division
+	//bl division
+	mov lr, pc
+	b division
 
 	//pop {lr}
 	ldr lr, [sp]
@@ -250,15 +267,114 @@ return_cu_feq:
 //	new_color = get_new_color(i)
 //	image_colors[i] = new_color
 //---------------------------------
-//params:
 // r0 = image_colors
 // r1 = cuf
 // r2 = cu_feq
 map_colors:
+	mov r0, r11
+	mov r1, r10
+	mov r2, r9
+	
 	mov r3, #0 // i = 0 (first color)
-	ldr r4, =len
-	ldr r4, [r4]
-		
+	mov r12, r0 // address to color 
+	ldr r4, =white
+	ldr r4, [r4] //r4  = 255
+	
+	//push {lr}
+        sub sp, sp, #4
+        str lr, [sp]
+
+map_colors_loop:
+	cmp r3, r4
+	bgt return_map_colors
+	
+	//r5 = cuf[i]
+	//bl get_cuf_i
+	mov lr, pc
+	b get_cuf_i
+	
+	//r6
+	//bl nearest_cu_feq
+	mov lr, pc
+	b nearest_cu_feq
+
+	//r7
+	//bl nearest_i
+	mov lr, pc
+	b nearest_i
+	str r7, [r12]
+
+	add r3, r3, #1
+	sub r12, r12, #4
+	b map_colors_loop
+
+return_map_colors:
+        //pop {lr}
+        ldr lr, [sp]
+        add sp, sp, #4
+	mov pc, lr
+
+get_cuf_i:
+	mov r5, r1 //cuf[0]
+	mov r6, #0 //cont
+
+get_cuf_i_loop:
+	cmp r6, r3
+	beq return_cuf_i
+	
+	add r6, r6, #1
+	sub r5, r5, #4
+	b get_cuf_i_loop
+
+return_cuf_i:	
+	ldr r5, [r5]
+	mov pc, lr		
+
+nearest_cu_feq:
+	mov r6, r2 //*cu_feq
+	mov r7, r2
+	sub r7, r7, #4 //*cu_feq + 1
+nearest_cu_feq_loop:
+	ldr r8, [r6] //cu_feq[i] 
+	ldr r9, [r7] //cu_feq[i+1]
+
+	cmp r5, r9
+	bgt next_cu_feq 
+	beq return_n_cu_feq_top
+	blt get_nearest
+
+next_cu_feq:
+	sub r6, r6, #4
+	sub r7, r7, #4
+	b nearest_cu_feq_loop
+
+get_nearest:
+	sub r10, r5, r8
+	sub r11, r9, r5
+	cmp r10, r11
+	blt return_n_cu_feq_bttm
+	bge return_n_cu_feq_top
+
+return_n_cu_feq_top:
+	mov r6, r7
+	mov pc, lr
+return_n_cu_feq_bttm:
+	mov pc, lr
+
+//r6 = nearest cu_feq address
+nearest_i:
+	mov r7, #0 // iterator
+	mov r8, r2 //cu_feq adress
+nearest_i_loop:
+	cmp r8, r6
+	beq return_nearest_i
+	
+	add r7, r7, #1
+	sub r8, r8, #4
+	b nearest_i_loop
+
+return_nearest_i:
+	mov pc, lr	
 exit:
 
 .data
