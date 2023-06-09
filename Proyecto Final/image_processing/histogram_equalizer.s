@@ -53,6 +53,10 @@ _start:
 	mov lr, pc
 	b map_colors
 
+	//bl map_pixels
+	mov lr, pc
+	b map_pixels
+
 	b exit
 	
 // for (i = 0; i <= 255; i++)
@@ -375,12 +379,54 @@ nearest_i_loop:
 
 return_nearest_i:
 	mov pc, lr	
+
+map_pixels:
+	ldr r0, =original //pointer to original pixels array address
+	mov r1, r12 // pointer to adress in stack for new image storage
+	ldr r2, =len
+	ldr r2, [r2] //len = 357604
+	mov r3, #0 //iterator
+map_pixels_loop:
+	cmp r3, r2
+	beq return_map_pixels
+	
+	ldr r4, [r0] //original pixel
+	b get_pixel	
+assign_pixel:
+	str r5, [r1]
+
+	add r0, r0, #4
+	sub r1, r1, #4
+	add r3, r3, #1
+	b map_pixels_loop
+	
+return_map_pixels:
+	mov pc, lr
+
+get_pixel:
+	mov r6, #0 //iterator
+	mov r5, #0 //address of image_colors
+	sub r5, r5, #4
+
+get_pixel_loop:
+	cmp r6, r4
+	beq return_pixel
+
+	add r6, r6, #1
+	sub r5, r5, #4
+	b get_pixel_loop
+
+return_pixel:
+	ldr r5, [r5]
+	b assign_pixel
+	
+
 exit:
 
 .data
-original:
-	.word 4, 4, 4, 4, 4, 3, 4, 5, 4, 3, 3, 5, 5, 5, 3, 3, 4, 5, 4, 3, 4, 4, 4, 4, 4
 white:
 	.word 7 //255
 len:
 	.word 25 //357604
+original:
+        .word 4, 4, 4, 4, 4, 3, 4, 5, 4, 3, 3, 5, 5, 5, 3, 3, 4, 5, 4, 3, 4, 4, 4, 4, 4
