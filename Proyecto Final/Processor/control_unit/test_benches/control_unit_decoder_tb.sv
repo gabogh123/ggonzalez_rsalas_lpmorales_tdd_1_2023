@@ -16,7 +16,8 @@ module control_unit_decoder_tb;
     logic          no_write;
 
     logic        mem_to_reg;
-    logic           alu_src;
+    logic         alu_src_a;
+    logic         alu_src_b;
     logic [1:0]     imm_src;
     logic [1:0]     reg_src;
     logic [1:0] alu_control;
@@ -33,7 +34,8 @@ module control_unit_decoder_tb;
                               .mem_w(mem_w),
                               .no_write(no_write),
                               .mem_to_reg(mem_to_reg),
-                              .alu_src(alu_src),
+                              .alu_src_a(alu_src_a),
+                              .alu_src_b(alu_src_b),
                               .imm_src(imm_src),
                               .reg_src(reg_src),
                               .alu_control(alu_control));
@@ -60,7 +62,8 @@ module control_unit_decoder_tb;
                  "no_write=%b\n",       no_write,
                  "Control_unit's Processor Outputs:    ",
                  "mem_to_reg=%b ",      mem_to_reg,
-                 "alu_src=%b ",         alu_src,
+                 "alu_src_a=%b ",       alu_src_a,
+                 "alu_src_b=%b ",       alu_src_b,
                  "imm_src=%b ",         imm_src,
                  "reg_src=%b ",         reg_src,
                  "alu_control=%b\n",    alu_control);

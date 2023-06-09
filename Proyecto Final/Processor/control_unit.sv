@@ -6,7 +6,7 @@ de Sarah L. Harries & David Money Harries.
 */
 module control_unit(
     clk, rst, cond, op, funct, rd, flags,
-    pc_src, mem_to_reg, mem_write, alu_control, alu_src, imm_src, reg_write, reg_src);
+    pc_src, mem_to_reg, mem_write, alu_control, alu_src_a, alu_src_b, imm_src, reg_write, reg_src);
 
     input  logic               clk;
     input  logic               rst;
@@ -23,7 +23,8 @@ module control_unit(
     output logic         mem_write;
 
     output logic        mem_to_reg;
-    output logic           alu_src;
+    output logic         alu_src_a;
+    output logic         alu_src_b;
     output logic [1:0]     imm_src;
     output logic [1:0]     reg_src;
     output logic [1:0] alu_control;
@@ -43,7 +44,8 @@ module control_unit(
                                   .mem_w(w_mem_w),
                                   .no_write(w_no_write),
                                   .mem_to_reg(mem_to_reg),
-                                  .alu_src(alu_src),
+                                  .alu_src_a(alu_src_a),
+                                  .alu_src_b(alu_src_b),
                                   .imm_src(imm_src),
                                   .reg_src(reg_src),
                                   .alu_control(alu_control));

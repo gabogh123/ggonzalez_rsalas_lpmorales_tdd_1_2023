@@ -28,12 +28,15 @@ module processor(clk, rst, instruction, read_data,
 	wire  [1:0]				reg_src;
 	wire				  reg_write;
 	wire  [1:0]				imm_src;
-	wire     				alu_src;
+	wire     			  alu_src_a;
+	wire     			  alu_src_b;
 	wire  [1:0] 		alu_control;
 	wire 				 mem_to_reg;
 
 	wire  [3:0]				   r_a1;
 	wire  [3:0]				   r_a2;
+
+	wire [31:0]			   rd1_data;
 
 	wire [31:0]				  src_a;
 	wire [31:0]				  src_b;
@@ -75,7 +78,8 @@ module processor(clk, rst, instruction, read_data,
 							.mem_to_reg(mem_to_reg),
 							.mem_write(mem_write),
 							.alu_control(alu_control),
-							.alu_src(alu_src),
+							.alu_src_a(alu_src_a),
+							.alu_src_b(alu_src_b),
 							.imm_src(imm_src),
 							.reg_write(reg_write),
 							.reg_src(reg_src));
@@ -106,7 +110,7 @@ module processor(clk, rst, instruction, read_data,
 							.wd_3(result),
 							.r_15(pc_plus_8),
 							.we_3(reg_write),
-							.rd_1(src_a),
+							.rd_1(rd1_data),
 							.rd_2(write_data));
 	
 	/* Extend */ /* tb done */
@@ -114,11 +118,19 @@ module processor(clk, rst, instruction, read_data,
 								.S(imm_src),
 						   		.Y(ext_imm));
 	
-	/* ALU_MUX */ /* tb done */
-	mux_2NtoN # (.N(32)) alu_mux (.I0(write_data),
-								  .I1(ext_imm),
-								  .S(alu_src),
-								  .O(src_b));
+	
+
+	/* ALUSrcA_MUX */ /* tb done */
+	mux_2NtoN # (.N(32)) src_a_mux (.I0(rd1_data),
+								    .I1(32'b0),
+								    .S(alu_src_a),
+								    .O(src_a));
+
+	/* ALUSrcB_MUX */ /* tb done */
+	mux_2NtoN # (.N(32)) src_b_mux (.I0(write_data),
+								    .I1(ext_imm),
+								    .S(alu_src_b),
+								    .O(src_b));
 	
 	/* ALU */ /* tb done */
 	alu_p alu (.A(src_a),

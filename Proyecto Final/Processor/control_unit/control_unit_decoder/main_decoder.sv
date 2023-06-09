@@ -14,7 +14,7 @@ de Sarah L. Harries & David Money Harries.
 | 10 |     X     |     X     |   B    | |    1   |     0    |   0  |    1   |   10   |   0  |   X1   |   0   |
 |------------------------------------------------------------------------------------------------------------|
 */
-module main_decoder(op, funct, branch, reg_w, mem_w, mem_to_reg, alu_src, imm_src, reg_src, alu_op);
+module main_decoder(op, funct, branch, reg_w, mem_w, mem_to_reg, alu_src_b, imms, reg_src, alu_op);
 
     input  logic [1:0]          op;
     input  logic [5:0]       funct;
@@ -23,10 +23,11 @@ module main_decoder(op, funct, branch, reg_w, mem_w, mem_to_reg, alu_src, imm_sr
     output logic             reg_w;
     output logic             mem_w;
     output logic        mem_to_reg;
-    output logic           alu_src;
-    output logic [1:0]     imm_src;
+    output logic         alu_src_b;
+    output logic [1:0]        imms;
     output logic [1:0]     reg_src;
     output logic            alu_op;
+
 
     // Branch = A B'
     assign branch = (op[1] & ~op[0]);
@@ -38,15 +39,15 @@ module main_decoder(op, funct, branch, reg_w, mem_w, mem_to_reg, alu_src, imm_sr
     assign mem_w = (~op[1] & op[0] & ~funct[0]);
 
     // ALUSrc = A' C + A' B + A B'
-    assign alu_src = (~op[1] & funct[5]) |
-                     (~op[1] &    op[0]) |
-                     ( op[1] &   ~op[0]) ;
+    assign alu_src_b = (~op[1] & funct[5]) |
+                       (~op[1] &    op[0]) |
+                       ( op[1] &   ~op[0]) ;
 
     // ImmSrc[1] = A B'
-    assign imm_src[1] = (op[1] & ~op[0]);
+    assign imms[1] = (op[1] & ~op[0]);
 
     // ImmSrc[0] = A' B
-    assign imm_src[0] = (~op[1] & op[0]);
+    assign imms[0] = (~op[1] & op[0]);
 
     // RegW = A' B' + A' D
     assign reg_w = (~op[1] &   ~op[0]) |

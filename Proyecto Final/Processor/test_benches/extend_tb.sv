@@ -30,7 +30,8 @@ module extend_tb;
 
         #100
         	
-		assert((Y === 32'b00000000000000000000000010011010)) else $error("Failed");
+		assert((Y === 32'b00000000000000000000000010011010))
+        else $error("Failed with funct[23:0]=%b and ImmSrc=%b", A[23:0], S);
 	
 		#100
 
@@ -39,7 +40,8 @@ module extend_tb;
 
         #100
         	
-		assert((Y === 32'b00000000000000000000100010011010)) else $error("Failed");
+		assert((Y === 32'b00000000000000000000100010011010))
+        else $error("Failed with funct[23:0]=%b and ImmSrc=%b", A[23:0], S);
 	
 		#100
 
@@ -48,8 +50,29 @@ module extend_tb;
 
         #100
         	
-		assert((Y === 32'b11111111101010000110001001101000)) else $error("Failed");
-	
+		assert((Y === 32'b11111111101010000110001001101000))
+        else $error("Failed with funct[23:0]=%b and ImmSrc=%b", A[23:0], S);
+
+        #100
+                
+        A <= 24'b101000001011000010110011;
+		S <= 2'b11;
+
+        #100
+        	
+		assert((Y === 32'b00000000000000000000000010110011))
+        else $error("Failed with funct[23:0]=%b and ImmSrc=%b", A[23:0], S);
+
+        #100
+
+        A <= 24'b101000001100100000000101;
+		S <= 2'b11;
+
+        #100
+        	
+		assert((Y === 32'b00000000000001010000000000000000))
+        else $error("Failed with funct[23:0]=%b and ImmSrc=%b", A[23:0], S);
+                          
 		#100;
 
         // Done
