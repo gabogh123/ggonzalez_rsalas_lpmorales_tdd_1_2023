@@ -38,10 +38,10 @@ module main_decoder(op, funct, branch, reg_w, mem_w, mem_to_reg, alu_src_b, imms
     // MemW = A' B D'
     assign mem_w = (~op[1] & op[0] & ~funct[0]);
 
-    // ALUSrc = A' C + A' B + A B'
-    assign alu_src_b = (~op[1] & funct[5]) |
-                       (~op[1] &    op[0]) |
-                       ( op[1] &   ~op[0]) ;
+    // ALUSrc = C + B + A
+    assign alu_src_b = (funct[5]) |
+                        (  op[1]) |
+                       (   op[0]) ;
 
     // ImmSrc[1] = A B'
     assign imms[1] = (op[1] & ~op[0]);

@@ -1,7 +1,7 @@
 /*
-Test bench del processor
+
 */
-module processor_tb;
+module cmp_b_bne_beq_tb;
 
     // Inputs
     logic  				 clk;
@@ -178,7 +178,7 @@ module processor_tb;
 		#50
 
 		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "1. Instruction: MOV R0, #10 (0xe3a0000a)");
+				 "1. Instruction: MOV R0, #10 (0x)");
 		instruction = 32'b11100011101000000000000000001010;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
@@ -187,10 +187,24 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 0) &
+                    (reg_src[0] === 0) &
+                  //(reg_src[1] === 0) &
+                     (reg_write === 1) &
+                    (imm_src[1] === 1) &
+                    (imm_src[0] === 1) &
+                     (alu_src_a === 1) &
+                     (alu_src_b === 1) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 0) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
 				 "2. Instruction: MOV R1, R0 (0xe1a01000)");
 		instruction = 32'b11100001101000000001000000000000;
 		#100
@@ -201,11 +215,25 @@ module processor_tb;
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
 
-        #100
+        assert (        (pc_src === 0) &
+                    (reg_src[0] === 0) &
+                    (reg_src[1] === 0) &
+                     (reg_write === 1) &
+                  //(imm_src[1] === 0) &
+                  //(imm_src[0] === 0) &
+                     (alu_src_a === 1) &
+                     (alu_src_b === 0) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 0) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "3. Instruction: ADD R2, R0, R1 (0xe0802001)");
-		instruction = 32'b11100000100000000010000000000001;
+        //#100
+
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+				 "3. Instruction: B 0xd9b (0xea000362)");
+		instruction = 32'b11101010000000000000001101100010;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
@@ -213,12 +241,26 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 1) &
+                    (reg_src[0] === 1) &
+                  //(reg_src[1] === 0) &
+                     (reg_write === 0) &
+                    (imm_src[1] === 1) &
+                    (imm_src[0] === 0) &
+                     (alu_src_a === 0) &
+                     (alu_src_b === 1) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 0) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "4. Instruction: ADD R3, R2, #15 (0xe282300f)");
-		instruction = 32'b11100010100000100011000000001111;
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+				 "4. Instruction: CMP R1, #69 (0xe3510045)");
+		instruction = 32'b11100011010100010000000001000101;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
@@ -226,12 +268,26 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 0) &
+                    (reg_src[0] === 0) &
+                  //(reg_src[1] === 0) &
+                     (reg_write === 0) &
+                    (imm_src[1] === 0) &
+                    (imm_src[0] === 0) &
+                     (alu_src_a === 0) &
+                     (alu_src_b === 1) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 1) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "5. Instruction: SUB R4, R0, R1 (0xe0404001)");
-		instruction = 32'b11100000010000000100000000000001;
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+				 "5. Instruction: BNE 0x28 (0x1a000004)");
+		instruction = 32'b00011010000000000000000000000100;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
@@ -239,12 +295,26 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 1) &
+                    (reg_src[0] === 1) &
+                  //(reg_src[1] === 0) &
+                     (reg_write === 0) &
+                    (imm_src[1] === 1) &
+                    (imm_src[0] === 0) &
+                     (alu_src_a === 0) &
+                     (alu_src_b === 1) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 0) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "6. Instruction: SUB R5, R3, #30 (0xe243501e)");
-		instruction = 32'b11100010010000110101000000011110;
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+				 "6. Instruction: CMP R1, R0 (0Xe1510000)");
+		instruction = 32'B11100001010100010000000000000000;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
@@ -252,12 +322,26 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 0) &
+                    (reg_src[0] === 0) &
+                    (reg_src[1] === 0) &
+                     (reg_write === 0) &
+                  //(imm_src[1] === 0) &
+                  //(imm_src[0] === 0) &
+                     (alu_src_a === 0) &
+                     (alu_src_b === 0) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 1) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "7. Instruction: CMP R3, R5 (0xe1530005)");
-		instruction = 32'b11100001010100110000000000000101;
+        $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
+				 "7. Instruction: BEQ 0x28 (0x0a000002)");
+		instruction = 32'b00001010000000000000000000000010;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
@@ -265,76 +349,29 @@ module processor_tb;
 				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
 				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
 				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+        
+        assert (        (pc_src === 1) &
+                    (reg_src[0] === 1) &
+                  //(reg_src[1] === 0) &
+                     (reg_write === 0) &
+                    (imm_src[1] === 1) &
+                    (imm_src[0] === 0) &
+                     (alu_src_a === 0) &
+                     (alu_src_b === 1) &
+                (alu_control[1] === 0) &
+                (alu_control[0] === 0) &
+                     (mem_write === 0) &
+                    (mem_to_reg === 0) )
+		else $error("Failed @ instruction=%b", instruction);
 
-        #100
+        //#100
 
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "8. Instruction: BGT 0x94 (0xca00001c)");
-		instruction = 32'b11001010000000000000000000011100;
-		#100
-		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
-				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
-				   "| R02 | : | %b |\n", 	 uut.reg_file.R2.Q,
-				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
-				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
-				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
-
-        #100
-
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "9. Instruction: CMP R1, #10 (0xe351000a)");
-		instruction = 32'b11100011010100010000000000001010;
-		#100
-		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
-				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
-				   "| R02 | : | %b |\n", 	 uut.reg_file.R2.Q,
-				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
-				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
-				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
-
-        #100
-
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "10. Instruction: BEQ 0xec (0x0a000030)");
-		instruction = 32'b00001010000000000000000000110000;
-		#100
-		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
-				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
-				   "| R02 | : | %b |\n", 	 uut.reg_file.R2.Q,
-				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
-				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
-				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
-
-        #100
-
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "11. Instruction: CMP R4, R2 (0xe1540002)");
-		instruction = 32'b11100001010101000000000000000010;
-		#100
-		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
-				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
-				   "| R02 | : | %b |\n", 	 uut.reg_file.R2.Q,
-				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
-				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
-				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
-
-        #100
-
-		$display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
-				 "11. Instruction: BLT 0x2d0 (0xba0000a7)");
-		instruction = 32'b10111010000000000000000010100111;
-		#100
-		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
-				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
-				   "| R02 | : | %b |\n", 	 uut.reg_file.R2.Q,
-				   "| R03 | : | %b |\n", 	 uut.reg_file.R3.Q,
-				   "| R04 | : | %b |\n", 	 uut.reg_file.R4.Q,
-				   "| R05 | : | %b |\n\n\n", uut.reg_file.R5.Q);
+       
 
 
         #100;
 
-		// Done
+		//
 
     end
 

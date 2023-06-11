@@ -3,12 +3,15 @@
 Top module para el ecualizador de histogramas
 
 */
-module histogram_equalizer(clk, rst, Y);
+module histogram_equalizer(clk, rst, btn, Y);
 
 	input  logic clk;
 	input  logic rst;
+	input  logic btn;
 	output logic   Y;
 
+	logic enable;
+	logic eclk;
 
 	wire [31:0] instruction;
 	wire [31:0]   read_data;
@@ -18,8 +21,19 @@ module histogram_equalizer(clk, rst, Y);
 	wire [31:0]  alu_result;
 	wire [31:0]  write_data;
 
+	always @ (negedge btn) begin
 
-	processor arm (.clk(clk),
+		if (~btn)
+			enable = 1;
+		else
+			enable = 0;
+
+	end
+
+	assign eclk = clk & enable;
+
+
+	processor arm (.clk(eclk),
 				   .rst(rst),
 				   .instruction(instruction),
 				   .read_data(read_data),
