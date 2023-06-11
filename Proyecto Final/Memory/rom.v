@@ -37,28 +37,26 @@
 // synopsys translate_off
 `timescale 1 ps / 1 ps
 // synopsys translate_on
-module rom (
-	address,
-	clock,
-	q);
+module rom (clk, address_20bits, q_8bits);
 
-	input	[7:0]  address;
-	input	  clock;
-	output	[31:0]  q;
+	input	  			    clk;
+	input [19:0] address_20bits;
+	output [7:0]  		q_8bits;
+
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_off
 `endif
-	tri1	  clock;
+	tri1	  clk;
 `ifndef ALTERA_RESERVED_QIS
 // synopsys translate_on
 `endif
 
-	wire [31:0] sub_wire0;
-	wire [31:0] q = sub_wire0[31:0];
+	wire [7:0] sub_wire0;
+	wire [7:0] q_8bits = sub_wire0[7:0];
 
 	altsyncram	altsyncram_component (
-				.address_a (address),
-				.clock0 (clock),
+				.address_a (address_20bits),
+				.clock0 (clk),
 				.q_a (sub_wire0),
 				.aclr0 (1'b0),
 				.aclr1 (1'b0),
@@ -72,7 +70,7 @@ module rom (
 				.clocken1 (1'b1),
 				.clocken2 (1'b1),
 				.clocken3 (1'b1),
-				.data_a ({32{1'b1}}),
+				.data_a ({8{1'b1}}),
 				.data_b (1'b1),
 				.eccstatus (),
 				.q_b (),
@@ -84,16 +82,16 @@ module rom (
 		altsyncram_component.address_aclr_a = "NONE",
 		altsyncram_component.clock_enable_input_a = "BYPASS",
 		altsyncram_component.clock_enable_output_a = "BYPASS",
-		altsyncram_component.init_file = "ram.mif",
+		altsyncram_component.init_file = "./ram.mif",
 		altsyncram_component.intended_device_family = "Cyclone V",
 		altsyncram_component.lpm_hint = "ENABLE_RUNTIME_MOD=NO",
 		altsyncram_component.lpm_type = "altsyncram",
-		altsyncram_component.numwords_a = 256,
+		altsyncram_component.numwords_a = 655360,
 		altsyncram_component.operation_mode = "ROM",
 		altsyncram_component.outdata_aclr_a = "NONE",
-		altsyncram_component.outdata_reg_a = "CLOCK0",
-		altsyncram_component.widthad_a = 8,
-		altsyncram_component.width_a = 32,
+		altsyncram_component.outdata_reg_a = "UNREGISTERED",
+		altsyncram_component.widthad_a = 20,
+		altsyncram_component.width_a = 8,
 		altsyncram_component.width_byteena_a = 1;
 
 
@@ -119,42 +117,42 @@ endmodule
 // Retrieval info: PRIVATE: JTAG_ENABLED NUMERIC "0"
 // Retrieval info: PRIVATE: JTAG_ID STRING "NONE"
 // Retrieval info: PRIVATE: MAXIMUM_DEPTH NUMERIC "0"
-// Retrieval info: PRIVATE: MIFfilename STRING "ram.mif"
-// Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "256"
+// Retrieval info: PRIVATE: MIFfilename STRING "../ram.mif"
+// Retrieval info: PRIVATE: NUMWORDS_A NUMERIC "655360"
 // Retrieval info: PRIVATE: RAM_BLOCK_TYPE NUMERIC "0"
 // Retrieval info: PRIVATE: RegAddr NUMERIC "1"
-// Retrieval info: PRIVATE: RegOutput NUMERIC "1"
+// Retrieval info: PRIVATE: RegOutput NUMERIC "0"
 // Retrieval info: PRIVATE: SYNTH_WRAPPER_GEN_POSTFIX STRING "0"
 // Retrieval info: PRIVATE: SingleClock NUMERIC "1"
 // Retrieval info: PRIVATE: UseDQRAM NUMERIC "0"
-// Retrieval info: PRIVATE: WidthAddr NUMERIC "8"
-// Retrieval info: PRIVATE: WidthData NUMERIC "32"
+// Retrieval info: PRIVATE: WidthAddr NUMERIC "20"
+// Retrieval info: PRIVATE: WidthData NUMERIC "8"
 // Retrieval info: PRIVATE: rden NUMERIC "0"
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: CONSTANT: ADDRESS_ACLR_A STRING "NONE"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_INPUT_A STRING "BYPASS"
 // Retrieval info: CONSTANT: CLOCK_ENABLE_OUTPUT_A STRING "BYPASS"
-// Retrieval info: CONSTANT: INIT_FILE STRING "ram.mif"
+// Retrieval info: CONSTANT: INIT_FILE STRING "../ram.mif"
 // Retrieval info: CONSTANT: INTENDED_DEVICE_FAMILY STRING "Cyclone V"
 // Retrieval info: CONSTANT: LPM_HINT STRING "ENABLE_RUNTIME_MOD=NO"
 // Retrieval info: CONSTANT: LPM_TYPE STRING "altsyncram"
-// Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "256"
+// Retrieval info: CONSTANT: NUMWORDS_A NUMERIC "655360"
 // Retrieval info: CONSTANT: OPERATION_MODE STRING "ROM"
 // Retrieval info: CONSTANT: OUTDATA_ACLR_A STRING "NONE"
-// Retrieval info: CONSTANT: OUTDATA_REG_A STRING "CLOCK0"
-// Retrieval info: CONSTANT: WIDTHAD_A NUMERIC "8"
-// Retrieval info: CONSTANT: WIDTH_A NUMERIC "32"
+// Retrieval info: CONSTANT: OUTDATA_REG_A STRING "UNREGISTERED"
+// Retrieval info: CONSTANT: WIDTHAD_A NUMERIC "20"
+// Retrieval info: CONSTANT: WIDTH_A NUMERIC "8"
 // Retrieval info: CONSTANT: WIDTH_BYTEENA_A NUMERIC "1"
-// Retrieval info: USED_PORT: address 0 0 8 0 INPUT NODEFVAL "address[7..0]"
+// Retrieval info: USED_PORT: address 0 0 20 0 INPUT NODEFVAL "address[19..0]"
 // Retrieval info: USED_PORT: clock 0 0 0 0 INPUT VCC "clock"
-// Retrieval info: USED_PORT: q 0 0 32 0 OUTPUT NODEFVAL "q[31..0]"
-// Retrieval info: CONNECT: @address_a 0 0 8 0 address 0 0 8 0
+// Retrieval info: USED_PORT: q 0 0 8 0 OUTPUT NODEFVAL "q[7..0]"
+// Retrieval info: CONNECT: @address_a 0 0 20 0 address 0 0 20 0
 // Retrieval info: CONNECT: @clock0 0 0 0 0 clock 0 0 0 0
-// Retrieval info: CONNECT: q 0 0 32 0 @q_a 0 0 32 0
+// Retrieval info: CONNECT: q 0 0 8 0 @q_a 0 0 8 0
 // Retrieval info: GEN_FILE: TYPE_NORMAL rom.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rom.inc FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rom.cmp FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rom.bsf FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL rom_inst.v TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL rom_inst.v FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL rom_bb.v TRUE
 // Retrieval info: LIB_FILE: altera_mf

@@ -314,7 +314,7 @@ module cmp_b_bne_beq_tb;
 
         $display("\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n",
 				 "6. Instruction: CMP R1, R0 (0Xe1510000)");
-		instruction = 32'B11100001010100010000000000000000;
+		instruction = 32'b11100001010100010000000000000000;
 		#100
 		$display("\n| R00 | : | %b |\n", 	 uut.reg_file.R0.Q, 
 				   "| R01 | : | %b |\n", 	 uut.reg_file.R1.Q,
