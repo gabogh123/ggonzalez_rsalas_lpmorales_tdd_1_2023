@@ -1,0 +1,326 @@
+print_mem.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <_start>:
+   0:	e3a0d000 	mov	sp, #0
+   4:	e59fc370 	ldr	ip, [pc, #880]	; 37c <exit>
+   8:	e3a00000 	mov	r0, #0
+   c:	e59f136c 	ldr	r1, [pc, #876]	; 380 <exit+0x4>
+  10:	e5911000 	ldr	r1, [r1]
+  14:	e24dd004 	sub	sp, sp, #4
+  18:	e58d0000 	str	r0, [sp]
+  1c:	e1a0b00d 	mov	fp, sp
+  20:	e1a0e00f 	mov	lr, pc
+  24:	ea000016 	b	84 <image_colors>
+  28:	e1a0a00d 	mov	sl, sp
+  2c:	e24aa004 	sub	sl, sl, #4
+  30:	e1a0e00f 	mov	lr, pc
+  34:	ea000019 	b	a0 <frequency_dist>
+  38:	e1a0900d 	mov	r9, sp
+  3c:	e2499004 	sub	r9, r9, #4
+  40:	e1a0e00f 	mov	lr, pc
+  44:	ea00002e 	b	104 <cumulative_freq>
+  48:	e1a0800d 	mov	r8, sp
+  4c:	e2488004 	sub	r8, r8, #4
+  50:	e1a0e00f 	mov	lr, pc
+  54:	ea000035 	b	130 <dist_cum_freq>
+  58:	e1a0700d 	mov	r7, sp
+  5c:	e2477004 	sub	r7, r7, #4
+  60:	e1a0e00f 	mov	lr, pc
+  64:	ea000063 	b	1f8 <cu_feq>
+  68:	e1a0a009 	mov	sl, r9
+  6c:	e1a09007 	mov	r9, r7
+  70:	e1a0e00f 	mov	lr, pc
+  74:	ea00006a 	b	224 <map_colors>
+  78:	e1a0e00f 	mov	lr, pc
+  7c:	ea0000a5 	b	318 <map_pixels>
+  80:	ea0000bd 	b	37c <exit>
+
+00000084 <image_colors>:
+  84:	e2800001 	add	r0, r0, #1
+  88:	e1500001 	cmp	r0, r1
+  8c:	ca000002 	bgt	9c <return_image_colors>
+  90:	e24dd004 	sub	sp, sp, #4
+  94:	e58d0000 	str	r0, [sp]
+  98:	dafffff9 	ble	84 <image_colors>
+
+0000009c <return_image_colors>:
+  9c:	e1a0f00e 	mov	pc, lr
+
+000000a0 <frequency_dist>:
+  a0:	e3a00000 	mov	r0, #0
+  a4:	e2400001 	sub	r0, r0, #1
+  a8:	e59f32d0 	ldr	r3, [pc, #720]	; 380 <exit+0x4>
+  ac:	e5933000 	ldr	r3, [r3]
+  b0:	e59f42cc 	ldr	r4, [pc, #716]	; 384 <exit+0x8>
+  b4:	e5944000 	ldr	r4, [r4]
+
+000000b8 <freq_dist_loop_i>:
+  b8:	e2800001 	add	r0, r0, #1
+  bc:	e1500003 	cmp	r0, r3
+  c0:	ca00000e 	bgt	100 <return_frequency_dist>
+  c4:	e3a02000 	mov	r2, #0
+  c8:	e3a06000 	mov	r6, #0
+  cc:	e1a0100c 	mov	r1, ip
+
+000000d0 <freq_dist_loop_j>:
+  d0:	e1540006 	cmp	r4, r6
+  d4:	0a000006 	beq	f4 <load_freq>
+  d8:	e5915000 	ldr	r5, [r1]
+  dc:	e1500005 	cmp	r0, r5
+  e0:	1a000000 	bne	e8 <next_pixel>
+  e4:	e2822001 	add	r2, r2, #1
+
+000000e8 <next_pixel>:
+  e8:	e2811004 	add	r1, r1, #4
+  ec:	e2866001 	add	r6, r6, #1
+  f0:	eafffff6 	b	d0 <freq_dist_loop_j>
+
+000000f4 <load_freq>:
+  f4:	e24dd004 	sub	sp, sp, #4
+  f8:	e58d2000 	str	r2, [sp]
+  fc:	eaffffed 	b	b8 <freq_dist_loop_i>
+
+00000100 <return_frequency_dist>:
+ 100:	e1a0f00e 	mov	pc, lr
+
+00000104 <cumulative_freq>:
+ 104:	e1a0000a 	mov	r0, sl
+ 108:	e3a01000 	mov	r1, #0
+
+0000010c <cum_freq_loop>:
+ 10c:	e1500009 	cmp	r0, r9
+ 110:	0a000005 	beq	12c <return_cum_freq>
+ 114:	e5902000 	ldr	r2, [r0]
+ 118:	e0811002 	add	r1, r1, r2
+ 11c:	e24dd004 	sub	sp, sp, #4
+ 120:	e58d1000 	str	r1, [sp]
+ 124:	e2400004 	sub	r0, r0, #4
+ 128:	eafffff7 	b	10c <cum_freq_loop>
+
+0000012c <return_cum_freq>:
+ 12c:	e1a0f00e 	mov	pc, lr
+
+00000130 <dist_cum_freq>:
+ 130:	e59d0000 	ldr	r0, [sp]
+ 134:	e59f1244 	ldr	r1, [pc, #580]	; 380 <exit+0x4>
+ 138:	e5911000 	ldr	r1, [r1]
+ 13c:	e2811001 	add	r1, r1, #1
+ 140:	e24dd004 	sub	sp, sp, #4
+ 144:	e58de000 	str	lr, [sp]
+ 148:	e1a0e00f 	mov	lr, pc
+ 14c:	ea000013 	b	1a0 <division>
+ 150:	e59de000 	ldr	lr, [sp]
+ 154:	e28dd004 	add	sp, sp, #4
+ 158:	e1a03000 	mov	r3, r0
+ 15c:	e3a00000 	mov	r0, #0
+ 160:	e1a01002 	mov	r1, r2
+ 164:	e2811001 	add	r1, r1, #1
+ 168:	e59f4210 	ldr	r4, [pc, #528]	; 380 <exit+0x4>
+ 16c:	e5944000 	ldr	r4, [r4]
+
+00000170 <dist_cum_freq_loop>:
+ 170:	e1500004 	cmp	r0, r4
+ 174:	ca000008 	bgt	19c <return_dist_cum_freq>
+ 178:	e1500003 	cmp	r0, r3
+ 17c:	aa000002 	bge	18c <str_r2>
+
+00000180 <str_r1>:
+ 180:	e24dd004 	sub	sp, sp, #4
+ 184:	e58d1000 	str	r1, [sp]
+ 188:	ea000001 	b	194 <inc_r0>
+
+0000018c <str_r2>:
+ 18c:	e24dd004 	sub	sp, sp, #4
+ 190:	e58d2000 	str	r2, [sp]
+
+00000194 <inc_r0>:
+ 194:	e2800001 	add	r0, r0, #1
+ 198:	eafffff4 	b	170 <dist_cum_freq_loop>
+
+0000019c <return_dist_cum_freq>:
+ 19c:	e1a0f00e 	mov	pc, lr
+
+000001a0 <division>:
+ 1a0:	e24dd004 	sub	sp, sp, #4
+ 1a4:	e58de000 	str	lr, [sp]
+ 1a8:	e3a02000 	mov	r2, #0
+
+000001ac <division_loop>:
+ 1ac:	e1500001 	cmp	r0, r1
+ 1b0:	e1a0300f 	mov	r3, pc
+ 1b4:	e2833014 	add	r3, r3, #20
+ 1b8:	e1a0e003 	mov	lr, r3
+ 1bc:	aa000009 	bge	1e8 <sub_ge>
+ 1c0:	e59de000 	ldr	lr, [sp]
+ 1c4:	e28dd004 	add	sp, sp, #4
+ 1c8:	e1a0f00e 	mov	pc, lr
+ 1cc:	e1a0e00f 	mov	lr, pc
+ 1d0:	aa000006 	bge	1f0 <add_ge>
+ 1d4:	e3500000 	cmp	r0, #0
+ 1d8:	cafffff3 	bgt	1ac <division_loop>
+ 1dc:	e59de000 	ldr	lr, [sp]
+ 1e0:	e28dd004 	add	sp, sp, #4
+ 1e4:	e1a0f00e 	mov	pc, lr
+
+000001e8 <sub_ge>:
+ 1e8:	e0400001 	sub	r0, r0, r1
+ 1ec:	e1a0f00e 	mov	pc, lr
+
+000001f0 <add_ge>:
+ 1f0:	e2822001 	add	r2, r2, #1
+ 1f4:	e1a0f00e 	mov	pc, lr
+
+000001f8 <cu_feq>:
+ 1f8:	e1a00008 	mov	r0, r8
+ 1fc:	e3a01000 	mov	r1, #0
+
+00000200 <cu_feq_loop>:
+ 200:	e1500007 	cmp	r0, r7
+ 204:	0a000005 	beq	220 <return_cu_feq>
+ 208:	e5902000 	ldr	r2, [r0]
+ 20c:	e0811002 	add	r1, r1, r2
+ 210:	e24dd004 	sub	sp, sp, #4
+ 214:	e58d1000 	str	r1, [sp]
+ 218:	e2400004 	sub	r0, r0, #4
+ 21c:	eafffff7 	b	200 <cu_feq_loop>
+
+00000220 <return_cu_feq>:
+ 220:	e1a0f00e 	mov	pc, lr
+
+00000224 <map_colors>:
+ 224:	e1a0000b 	mov	r0, fp
+ 228:	e1a0100a 	mov	r1, sl
+ 22c:	e1a02009 	mov	r2, r9
+ 230:	e3a03000 	mov	r3, #0
+ 234:	e1a0c000 	mov	ip, r0
+ 238:	e59f4140 	ldr	r4, [pc, #320]	; 380 <exit+0x4>
+ 23c:	e5944000 	ldr	r4, [r4]
+ 240:	e24dd004 	sub	sp, sp, #4
+ 244:	e58de000 	str	lr, [sp]
+
+00000248 <map_colors_loop>:
+ 248:	e1530004 	cmp	r3, r4
+ 24c:	ca000009 	bgt	278 <return_map_colors>
+ 250:	e1a0e00f 	mov	lr, pc
+ 254:	ea00000a 	b	284 <get_cuf_i>
+ 258:	e1a0e00f 	mov	lr, pc
+ 25c:	ea000011 	b	2a8 <nearest_cu_feq>
+ 260:	e1a0e00f 	mov	lr, pc
+ 264:	ea000023 	b	2f8 <nearest_i>
+ 268:	e58c7000 	str	r7, [ip]
+ 26c:	e2833001 	add	r3, r3, #1
+ 270:	e24cc004 	sub	ip, ip, #4
+ 274:	eafffff3 	b	248 <map_colors_loop>
+
+00000278 <return_map_colors>:
+ 278:	e59de000 	ldr	lr, [sp]
+ 27c:	e28dd004 	add	sp, sp, #4
+ 280:	e1a0f00e 	mov	pc, lr
+
+00000284 <get_cuf_i>:
+ 284:	e1a05001 	mov	r5, r1
+ 288:	e3a06000 	mov	r6, #0
+
+0000028c <get_cuf_i_loop>:
+ 28c:	e1560003 	cmp	r6, r3
+ 290:	0a000002 	beq	2a0 <return_cuf_i>
+ 294:	e2866001 	add	r6, r6, #1
+ 298:	e2455004 	sub	r5, r5, #4
+ 29c:	eafffffa 	b	28c <get_cuf_i_loop>
+
+000002a0 <return_cuf_i>:
+ 2a0:	e5955000 	ldr	r5, [r5]
+ 2a4:	e1a0f00e 	mov	pc, lr
+
+000002a8 <nearest_cu_feq>:
+ 2a8:	e1a06002 	mov	r6, r2
+ 2ac:	e1a07002 	mov	r7, r2
+ 2b0:	e2477004 	sub	r7, r7, #4
+
+000002b4 <nearest_cu_feq_loop>:
+ 2b4:	e5968000 	ldr	r8, [r6]
+ 2b8:	e5979000 	ldr	r9, [r7]
+ 2bc:	e1550009 	cmp	r5, r9
+ 2c0:	ca000001 	bgt	2cc <next_cu_feq>
+ 2c4:	0a000008 	beq	2ec <return_n_cu_feq_top>
+ 2c8:	ba000002 	blt	2d8 <get_nearest>
+
+000002cc <next_cu_feq>:
+ 2cc:	e2466004 	sub	r6, r6, #4
+ 2d0:	e2477004 	sub	r7, r7, #4
+ 2d4:	eafffff6 	b	2b4 <nearest_cu_feq_loop>
+
+000002d8 <get_nearest>:
+ 2d8:	e045a008 	sub	sl, r5, r8
+ 2dc:	e049b005 	sub	fp, r9, r5
+ 2e0:	e15a000b 	cmp	sl, fp
+ 2e4:	ba000002 	blt	2f4 <return_n_cu_feq_bttm>
+ 2e8:	aaffffff 	bge	2ec <return_n_cu_feq_top>
+
+000002ec <return_n_cu_feq_top>:
+ 2ec:	e1a06007 	mov	r6, r7
+ 2f0:	e1a0f00e 	mov	pc, lr
+
+000002f4 <return_n_cu_feq_bttm>:
+ 2f4:	e1a0f00e 	mov	pc, lr
+
+000002f8 <nearest_i>:
+ 2f8:	e3a07000 	mov	r7, #0
+ 2fc:	e1a08002 	mov	r8, r2
+
+00000300 <nearest_i_loop>:
+ 300:	e1580006 	cmp	r8, r6
+ 304:	0a000002 	beq	314 <return_nearest_i>
+ 308:	e2877001 	add	r7, r7, #1
+ 30c:	e2488004 	sub	r8, r8, #4
+ 310:	eafffffa 	b	300 <nearest_i_loop>
+
+00000314 <return_nearest_i>:
+ 314:	e1a0f00e 	mov	pc, lr
+
+00000318 <map_pixels>:
+ 318:	e59f005c 	ldr	r0, [pc, #92]	; 37c <exit>
+ 31c:	e1a0100c 	mov	r1, ip
+ 320:	e59f205c 	ldr	r2, [pc, #92]	; 384 <exit+0x8>
+ 324:	e5922000 	ldr	r2, [r2]
+ 328:	e3a03000 	mov	r3, #0
+
+0000032c <map_pixels_loop>:
+ 32c:	e1530002 	cmp	r3, r2
+ 330:	0a000006 	beq	350 <return_map_pixels>
+ 334:	e5904000 	ldr	r4, [r0]
+ 338:	ea000005 	b	354 <get_pixel>
+
+0000033c <assign_pixel>:
+ 33c:	e5815000 	str	r5, [r1]
+ 340:	e2800004 	add	r0, r0, #4
+ 344:	e2411004 	sub	r1, r1, #4
+ 348:	e2833001 	add	r3, r3, #1
+ 34c:	eafffff6 	b	32c <map_pixels_loop>
+
+00000350 <return_map_pixels>:
+ 350:	e1a0f00e 	mov	pc, lr
+
+00000354 <get_pixel>:
+ 354:	e3a06000 	mov	r6, #0
+ 358:	e3a05000 	mov	r5, #0
+ 35c:	e2455004 	sub	r5, r5, #4
+
+00000360 <get_pixel_loop>:
+ 360:	e1560004 	cmp	r6, r4
+ 364:	0a000002 	beq	374 <return_pixel>
+ 368:	e2866001 	add	r6, r6, #1
+ 36c:	e2455004 	sub	r5, r5, #4
+ 370:	eafffffa 	b	360 <get_pixel_loop>
+
+00000374 <return_pixel>:
+ 374:	e5955000 	ldr	r5, [r5]
+ 378:	eaffffef 	b	33c <assign_pixel>
+
+0000037c <exit>:
+ 37c:	00000008 	.word	0x00000008
+ 380:	00000000 	.word	0x00000000
+ 384:	00000004 	.word	0x00000004

@@ -1,0 +1,61 @@
+-- Copyright (C) 2022  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions 
+-- and other software and tools, and any partner logic 
+-- functions, and any output files from any of the foregoing 
+-- (including device programming or simulation files), and any 
+-- associated documentation or information are expressly subject 
+-- to the terms and conditions of the Intel Program License 
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details, at
+-- https://fpgasoftware.intel.com/eula.
+
+-- Quartus Prime generated Memory Initialization File (.mif)
+
+WIDTH=8;
+DEPTH=256;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+	000  :   FF;
+	001  :   0E;
+	002  :   56;
+	003  :   34;
+	004  :   65;
+	005  :   56;
+	006  :   AC;
+	007  :   78;
+	008  :   00;
+	009  :   56;
+	00A  :   80;
+	00B  :   56;
+	[00C..00D]  :   07;
+	00E  :   FB;
+	00F  :   2A;
+	010  :   05;
+	011  :   06;
+	012  :   76;
+	013  :   00;
+	014  :   DE;
+	015  :   02;
+	016  :   E1;
+	017  :   B0;
+	018  :   56;
+	019  :   8E;
+	01A  :   BF;
+	01B  :   3A;
+	01C  :   21;
+	01D  :   33;
+	01E  :   B6;
+	01F  :   C1;
+	020  :   00;
+	021  :   34;
+	022  :   5B;
+	023  :   BB;
+	[024..0FF]  :   00;
+END;

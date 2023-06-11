@@ -4,6 +4,9 @@ import numpy as np
 
 RGB_MAX = 256
 
+FILE = './original_data.txt'
+FILE2 = './new_data.txt'
+
 def dist_freq(values : np.array, pixels : np.array):
     """
     Compute distribution frecuencies of the colors present
@@ -44,6 +47,22 @@ def create_new_img(img, mapped_pixels):
             new_img[i][j] = [c, c, c]
     return new_img
 
+def write_original_data(data):
+    content = 'original:\n\t.word '
+    for pixel in data:
+        content += str(pixel) + ", "
+    content = content[:-2:]
+    with open(FILE, 'w') as file:
+        file.write(content)
+
+def write_new_data(data):
+    content = ''
+    for pixel in data:
+        content += str(hex(pixel)) + "\n"
+    content = content[:-2:]
+    with open(FILE2, 'w') as file:
+        file.write(content)
+
 if __name__ == "__main__":
 
     img = cv2.imread('original.jpeg')
@@ -51,6 +70,9 @@ if __name__ == "__main__":
 
     pixels = np.concatenate(img, axis=0)
     pixels = pixels[:,0] # use only one integer to describe RGB pixel
+
+    write_original_data(pixels)
+    print(len(pixels))
 
     i = np.arange(RGB_MAX)
     f_i = dist_freq(i, pixels) # frequency distribution of each color
@@ -60,11 +82,12 @@ if __name__ == "__main__":
     
     mapped_pixels = map_pixels(i, cuf, cu_feq)
     new_img = create_new_img(img, mapped_pixels)
-    print(new_img)
+    # print(new_img)
 
     n_pixels = np.concatenate(new_img, axis=0)
     n_pixels = n_pixels[:,0] # use only one integer to describe RGB pixel
-    print(n_pixels)
+
+    write_new_data(n_pixels)
 
     # display image
     cv2.imshow("output", new_img)
