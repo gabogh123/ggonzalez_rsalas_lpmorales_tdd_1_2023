@@ -1,4 +1,6 @@
-file_path = './bytecode.txt'  # Replace with the actual file path
+file_bytes = './bytecode.txt'
+file_data = './original_data_bytecode.txt'
+mif_file = './mem.mif'
 HEX = 16
 BYTES = 4 #bytes in word
 lines = []  # Empty list to store the lines
@@ -26,16 +28,10 @@ def split_word(addr, word):
         splited_word.append([addr_i, byte_i])
     return splited_word
 
-# Print the lines
-# for line in lines:
-#     print(line)
-
-# print(len(lines))
-
 if __name__ == "__main__":
     # Read the file line by line
-    with open(file_path, 'r') as file:
-        for line in file:
+    with open(file_bytes, 'r') as bytecode:
+        for line in bytecode:
             line = line.strip()  # Remove leading/trailing whitespace and newlines
             line = line.split(':\t')
             if (len(line) > 1):
@@ -44,5 +40,25 @@ if __name__ == "__main__":
                 splitted_word = split_word(addr, word)
                 lines += splitted_word
     
-    for line in lines:
-        print(line)
+    with open(file_data, 'r') as data:
+        for line in data:
+            addr = lines[-1][0]
+            addr = int(addr, HEX)
+            addr += 1
+            line = line.strip()
+            line = line[2:]
+            line = line.zfill(8)
+            splitted_data = split_word(hex(addr), line)
+            lines += splitted_data
+
+    
+    with open(mif_file, 'a') as mif:
+        for line in lines:
+            mif.write('\t' + line[0].upper() + "  :   " + line[1] + ";\n")
+        
+        next_addr = int(lines[-1][0], HEX) + 1
+        next_addr = hex(next_addr)
+        last_addr = '9FFFF'
+        mif.write('\t[' + next_addr[2:].upper() + ".." + last_addr + "]  :   AA;\n")
+        mif.write('END;')
+

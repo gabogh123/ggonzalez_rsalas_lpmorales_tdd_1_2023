@@ -4,7 +4,8 @@ import numpy as np
 
 RGB_MAX = 256
 
-FILE = './original_data.txt'
+FILE0 = './original_data_asm.txt'
+FILE1 = './original_data_bytecode.txt'
 FILE2 = './new_data.txt'
 
 def dist_freq(values : np.array, pixels : np.array):
@@ -47,19 +48,27 @@ def create_new_img(img, mapped_pixels):
             new_img[i][j] = [c, c, c]
     return new_img
 
-def write_original_data(data):
+def write_original_data_asm(data):
     content = 'original:\n\t.word '
     for pixel in data:
         content += str(pixel) + ", "
     content = content[:-2:]
-    with open(FILE, 'w') as file:
+    with open(FILE0, 'w') as file:
+        file.write(content)
+
+def write_original_data_b(data):
+    content = ''
+    for pixel in data:
+        content += str(hex(pixel)) + "\n"
+    content = content[:-1:]
+    with open(FILE1, 'w') as file:
         file.write(content)
 
 def write_new_data(data):
     content = ''
     for pixel in data:
         content += str(hex(pixel)) + "\n"
-    content = content[:-2:]
+    content = content[:-1:]
     with open(FILE2, 'w') as file:
         file.write(content)
 
@@ -71,7 +80,8 @@ if __name__ == "__main__":
     pixels = np.concatenate(img, axis=0)
     pixels = pixels[:,0] # use only one integer to describe RGB pixel
 
-    write_original_data(pixels)
+    write_original_data_asm(pixels)
+    write_original_data_b(pixels)
     print(len(pixels))
 
     i = np.arange(RGB_MAX)

@@ -4,7 +4,8 @@
 
 _start:
 	
-	mov sp, #0 //init sp
+	ldr sp, =mapped_img_addr
+	ldr sp, [sp] //init sp
 	
 	ldr r12, =original //register R12 stores pointer to original image data
 	mov r0, #0 // init i
@@ -428,6 +429,8 @@ white:
 	.word 255 //7
 len:
 	.word 65536//25
+mapped_img_addr:
+	.word 0x000a0000
 //original:
         //.word 4, 4, 4, 4, 4, 3, 4, 5, 4, 3, 3, 5, 5, 5, 3, 3, 4, 5, 4, 3, 4, 4, 4, 4, 4
 original:
