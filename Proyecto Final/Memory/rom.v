@@ -40,7 +40,7 @@
 module rom (clk, address_20bits, q_8bits);
 
 	input	  			    clk;
-	input [19:0] address_20bits;
+	input [18:0] address_20bits;
 	output [7:0]  		q_8bits;
 
 `ifndef ALTERA_RESERVED_QIS
@@ -86,11 +86,11 @@ module rom (clk, address_20bits, q_8bits);
 		altsyncram_component.intended_device_family = "Cyclone V",
 		altsyncram_component.lpm_hint = "ENABLE_RUNTIME_MOD=NO",
 		altsyncram_component.lpm_type = "altsyncram",
-		altsyncram_component.numwords_a = 655360,
+		altsyncram_component.numwords_a = 393216,//327680, //655360,
 		altsyncram_component.operation_mode = "ROM",
 		altsyncram_component.outdata_aclr_a = "NONE",
 		altsyncram_component.outdata_reg_a = "UNREGISTERED",
-		altsyncram_component.widthad_a = 20,
+		altsyncram_component.widthad_a = 19, //20,
 		altsyncram_component.width_a = 8,
 		altsyncram_component.width_byteena_a = 1;
 
