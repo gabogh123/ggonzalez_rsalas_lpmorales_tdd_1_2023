@@ -79,3 +79,20 @@ sudo ssh pi@127.0.0.1 -p 5022
 ```
 
 9. Enter password: `raspberry`
+10. Now your're connected to the Raspberry via SSH. Create your assembly script using the terminal.
+11. Assembly script:
+```
+as helloworld.s -o helloworld.o
+```
+12. Generate executable file:
+```
+ld helloworld.o -o helloworld
+```
+13. To print bytecode:
+```
+objdump -d helloworld.o
+```
+14. To run script:
+```
+./helloworld
+```
