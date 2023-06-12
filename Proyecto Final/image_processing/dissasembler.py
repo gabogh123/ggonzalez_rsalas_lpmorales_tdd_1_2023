@@ -58,7 +58,7 @@ if __name__ == "__main__":
         
         next_addr = int(lines[-1][0], HEX) + 1
         next_addr = hex(next_addr)
-        last_addr = '9FFFF'
+        last_addr = '5FFFF'
         mif.write('\t[' + next_addr[2:].upper() + ".." + last_addr + "]  :   AA;\n")
         mif.write('END;')
 
