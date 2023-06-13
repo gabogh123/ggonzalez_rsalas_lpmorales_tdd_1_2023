@@ -42,6 +42,7 @@ module alu_p
 							           .I2(y_and),
 							           .I3(y_or),
 							           .enable(1'b1),
+                                       .rst(rst),
 							           .S(func),
 							           .O(Y));
 
@@ -51,6 +52,7 @@ module alu_p
 							          .I2(4'b0000),
 							          .I3(4'b0000),
 							          .enable(1'b1),
+                                      .rst(rst),
 							          .S(func),
 							          .O(flags));                             
 

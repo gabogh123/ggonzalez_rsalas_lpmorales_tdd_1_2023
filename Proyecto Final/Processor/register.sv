@@ -1,7 +1,5 @@
 /*
-
 Registro parametrizable para N bits
-
 */
 module register
 	 # (parameter N = 32)
@@ -13,10 +11,10 @@ module register
 	input  logic [N-1:0]   D;
 	output logic [N-1:0]   Q;
 
-	always_ff @ (posedge clk or posedge rst) begin
+	always_ff @ (negedge clk or posedge rst) begin
 		
 		if (rst)
-			Q <= '0;
+			Q <= 0;
 
 		else if (en)
 			Q <= D;

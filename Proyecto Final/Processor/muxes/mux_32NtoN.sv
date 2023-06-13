@@ -7,7 +7,7 @@ module mux_32NtoN
         I08, I09, I10, I11, I12, I13, I14, I15,
         I16, I17, I18, I19, I20, I21, I22, I23,
         I24, I25, I26, I27, I28, I29, I30, I31,
-        S, enable, O);
+        rst, S, enable, O);
 
     input  logic [N-1:0] I00;
     input  logic [N-1:0] I01;
@@ -42,6 +42,7 @@ module mux_32NtoN
     input  logic [N-1:0] I30;
     input  logic [N-1:0] I31;
 
+    input  logic         rst;
     input  logic   [4:0]   S;
     input  logic      enable;
     output logic [N-1:0]   O;
@@ -73,6 +74,7 @@ module mux_32NtoN
                                   .I6(I06),
                                   .I7(I07),
                                   .enable(enable_0),
+                                  .rst(rst),
                                   .S(S[2:0]),
                                   .O(O_0));
 
@@ -88,6 +90,7 @@ module mux_32NtoN
                                   .I6(I14),
                                   .I7(I15),
                                   .enable(enable_1),
+                                  .rst(rst),
                                   .S(S[2:0]),
                                   .O(O_1));
 
@@ -103,6 +106,7 @@ module mux_32NtoN
                                   .I6(I22),
                                   .I7(I23),
                                   .enable(enable_2),
+                                  .rst(rst),
                                   .S(S[2:0]),
                                   .O(O_2));
 
@@ -118,6 +122,7 @@ module mux_32NtoN
                                   .I6(I30),
                                   .I7(I31),
                                   .enable(enable_3),
+                                  .rst(rst),
                                   .S(S[2:0]),
                                   .O(O_3));
 

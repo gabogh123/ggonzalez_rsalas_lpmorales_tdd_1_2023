@@ -20,6 +20,7 @@ module processor(clk, rst, instruction, read_data,
 
 
 	wire [31:0]  	next_pc_address;
+	//wire [31:0]		actual_pc_address;
 
 	wire [31:0]     	  pc_plus_4;
 	wire [31:0]     	  pc_plus_8;
@@ -51,9 +52,11 @@ module processor(clk, rst, instruction, read_data,
 	/* PC_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) pc_mux (.I0(pc_plus_4),
 								 .I1(result),
+								 .rst(rst),
 								 .S(pc_src),
 								 .enable(1'b1),
 								 .O(next_pc_address));
+
 	
 	/* PC Register */ /* tb done */
 	register # (.N(32)) program_counter (.clk(clk),
@@ -93,14 +96,16 @@ module processor(clk, rst, instruction, read_data,
 	/* RN_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rn_mux (.I0(instruction[19:16]),
 								.I1(4'b1111),
-								.S(reg_src[1]),
+								.rst(rst),
+								.S(reg_src[0]),
 								.enable(1'b1),
 								.O(r_a1));
 	
 	/* RM_RD_MUX */ /* tb done */
 	mux_2NtoN # (.N(4)) rm_rd_mux (.I0(instruction[3:0]),
 								   .I1(instruction[15:12]),
-								   .S(reg_src[0]),
+								   .rst(rst),
+								   .S(reg_src[1]),
 								   .enable(1'b1),
 								   .O(r_a2));
 
@@ -120,12 +125,11 @@ module processor(clk, rst, instruction, read_data,
 	extend # (.N(24)) extender (.A(instruction[23:0]),
 								.S(imm_src),
 						   		.Y(ext_imm));
-	
-	
 
 	/* ALUSrcA_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) src_a_mux (.I0(rd1_data),
 								    .I1(32'b0),
+									.rst(rst),
 								    .S(alu_src_a),
 									.enable(1'b1),
 								    .O(src_a));
@@ -133,6 +137,7 @@ module processor(clk, rst, instruction, read_data,
 	/* ALUSrcB_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) src_b_mux (.I0(write_data),
 								    .I1(ext_imm),
+									.rst(rst),
 								    .S(alu_src_b),
 									.enable(1'b1),
 								    .O(src_b));
@@ -147,6 +152,7 @@ module processor(clk, rst, instruction, read_data,
 	/* Data_MUX */ /* tb done */
 	mux_2NtoN # (.N(32)) data_mux (.I0(alu_result),
 								   .I1(read_data),
+								   .rst(rst),
 								   .S(mem_to_reg),
 								   .enable(1'b1),
 								   .O(result));

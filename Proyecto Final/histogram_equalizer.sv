@@ -1,9 +1,10 @@
 /*
-
 Top module para el ecualizador de histogramas
-
 */
 module histogram_equalizer(clk, rst, btn, Y);
+
+	timeunit 1ps;
+    timeprecision 1ps;
 
 	input  logic clk;
 	input  logic rst;
@@ -12,21 +13,23 @@ module histogram_equalizer(clk, rst, btn, Y);
 
 	logic enable;
 	logic eclk;
+	logic dclk;
 
 	wire [31:0] instruction;
 	wire [31:0]   read_data;
 	
-	wire [31:0] 		 pc;
+	logic [31:0] 		 pc;
 	wire		  mem_write;
 	wire [31:0]  alu_result;
 	wire [31:0]  write_data;
+
+	logic [31:0] data_vga;
+	logic [31:0] vga_address;
 
 	/* Inicio del Procesador al presionar un boton */
 	always @ (negedge btn) begin
 		if (~btn)
 			enable = 1;
-		else
-			enable = 0;
 	end
 
 	/* Inicio del clock al presionar el boton */
@@ -43,22 +46,31 @@ module histogram_equalizer(clk, rst, btn, Y);
 				   .alu_result(alu_result),
 				   .write_data(write_data));
 
-	/* Instruction Memory (RAM) */
-	instruction_memory ram (.clk(clk),
-					   		.A(pc),
-					   		.RD(instruction));
+	/* RAM ROM */
+	memory ram_rom (.instruction_address(pc),
+					.data_address(alu_result),
+					.vga_address(vga_address),
+					.data_write(write_data),
+					.write_enable(mem_write),
+					.instruction_rd(instruction),
+					.data_rd(read_data),
+					.vga_rd(data_vga));
 
-	/* Data Memory (ROM) */
-	data_memory rom (.clk(clk),
+	/* Instruction Memory (ROM) *//*
+	instruction_memory rom (.clk(eclk),
+							.rst(rst),
+					   		.A(pc),
+					   		.RD(instruction));*/
+
+	/* Data Memory (RAM) *//*
+	data_memory ram (.clk(dclk),
+					 .rst(rst),
 					 .A(alu_result),
 					 .WD(write_data),
-					 .WE(write_enable),
-					 .RD(read_data));
+					 .WE(mem_write),
+					 .RD(read_data));*/
 
-
-	// mux ();
-
-	// memoria_ram_vga (alu_result, );
+	// vga (alu_result, );
 
 	assign Y = 1;
 
