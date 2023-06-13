@@ -49,6 +49,9 @@ def create_new_img(img, mapped_pixels):
     return new_img
 
 def write_original_data_asm(data):
+    """
+    Writes original_data_asm.txt file that has the original img data ready to copy and paste in assembly code 
+    """
     content = 'original:\n\t.word '
     for pixel in data:
         content += str(pixel) + ", "
@@ -57,6 +60,9 @@ def write_original_data_asm(data):
         file.write(content)
 
 def write_original_data_b(data):
+    """
+    Writes original_data_bytecode.txt that has the original image data as hexa
+    """
     content = ''
     for pixel in data:
         content += str(hex(pixel)) + "\n"
@@ -65,6 +71,9 @@ def write_original_data_b(data):
         file.write(content)
 
 def write_new_data(data):
+    """
+    Writes new_data.txt file that stores the data in hexa of the output image
+    """
     content = ''
     for pixel in data:
         content += str(hex(pixel)) + "\n"
