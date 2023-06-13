@@ -9,6 +9,7 @@ module current_address(
     always_ff @( posedge clk, posedge rst ) begin : ff_address
         if (rst) begin
             if (enable)
+                // regs <= 31'h3a4;
                 regs <= 31'h39c;
         end
         else if (clk) begin

@@ -8,7 +8,12 @@ module video_gen(
     logic en_addr;
 	logic [31:0] addr, d_addr, data, offset;
 
-    assign offset = is_output_img ? 32'h9fffc : 32'h39c; 
+    logic [31:0] original_offset, new_offset;
+    assign original_offset = 32'h3a4;
+    // assign original_offset = 32'h39c;
+    assign new_offset = 32'h5fbff;
+
+    assign offset = is_output_img ?  new_offset : original_offset; 
     gen_address get_address(is_output_img, x, y, offset, d_addr);
     address_enable addr_en(x, y, en_addr);
 

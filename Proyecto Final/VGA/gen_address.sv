@@ -5,11 +5,16 @@ module gen_address(
         output logic [31:0] addr
     );
 
+    logic [31:0] size, word_bytes;
+    // assign size = 32'hc8;
+    assign size = 32'h100;
+    assign word_bytes = 32'h4;
+
     always_comb begin : address_def
         if (en_equalizer)
-            addr = offset - 32'h4 * y * 32'h100 - 32'h4 * x;
+            addr = offset - word_bytes * y * size - word_bytes * x;
         else 
-            addr = 32'h4 * y * 32'h100 + 32'h4 * x + offset;
+            addr = word_bytes * y * size + word_bytes * x + offset;
     end
 
 

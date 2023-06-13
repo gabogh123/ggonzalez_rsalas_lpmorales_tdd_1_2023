@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 RGB_MAX = 256
-
+ORIG_IMG = './original200resized.jpeg'
 FILE0 = './original_data_asm.txt'
 FILE1 = './original_data_bytecode.txt'
 FILE2 = './new_data.txt'
@@ -83,7 +83,7 @@ def write_new_data(data):
 
 if __name__ == "__main__":
 
-    img = cv2.imread('original.jpeg')
+    img = cv2.imread(ORIG_IMG)
     print(img.shape)
 
     pixels = np.concatenate(img, axis=0)
@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
     write_original_data_asm(pixels)
     write_original_data_b(pixels)
-    print(len(pixels))
+    print(pixels)
 
     i = np.arange(RGB_MAX)
     f_i = dist_freq(i, pixels) # frequency distribution of each color

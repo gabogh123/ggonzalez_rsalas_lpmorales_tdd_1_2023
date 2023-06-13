@@ -26,12 +26,7 @@ module histogram_equalizer(clk, rst, btn, vgaclk, hsync, vsync, sync_b, blank_b,
 	wire [31:0]  write_data;
 
 	/* Inicio del Procesador al presionar un boton */
-	always @ (negedge btn) begin
-		if (~btn)
-			enable = 1;
-		else
-			enable = 0;
-	end
+	enable_proc en_processor(btn, rst, enable);
 
 	/* Inicio del clock al presionar el boton */
 	assign eclk = clk & enable;
@@ -64,6 +59,6 @@ module histogram_equalizer(clk, rst, btn, vgaclk, hsync, vsync, sync_b, blank_b,
 
 	// memoria_ram_vga (alu_result, );
 
-	vga vga_control(clk, rst, 0, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);
+	vga vga_control(clk, rst, enable, vgaclk, hsync, vsync, sync_b, blank_b, r, g, b);
 
 endmodule
