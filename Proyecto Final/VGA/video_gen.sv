@@ -11,7 +11,8 @@ module video_gen(
     logic [31:0] original_offset, new_offset;
     assign original_offset = 32'h3a4;
     // assign original_offset = 32'h39c;
-    assign new_offset = 32'h5fbff;
+    // assign new_offset = 32'h5fbff;
+    assign new_offset = 32'h274a0;
 
     assign offset = is_output_img ?  new_offset : original_offset; 
     gen_address get_address(is_output_img, x, y, offset, d_addr);
